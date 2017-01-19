@@ -1,0 +1,76 @@
+{
+  "name": "bitsharesjs",
+  "version": "1.0.0",
+  "description": "Pure JavaScript Bitshares library for node.js and browsers.",
+  "browser": {
+    "ws": false,
+    "crypto": false
+  },
+  "scripts": {
+    "test": "BABEL_ENV=test mocha --compilers js:babel-register --recursive",
+    "test:chain": "BABEL_ENV=test mocha --compilers js:babel-register ./test/chain --recursive",
+    "test:ecc": "BABEL_ENV=test mocha --compilers js:babel-register ./test/ecc --recursive",
+    "test:serializer": "BABEL_ENV=test mocha --compilers js:babel-register ./test/serializer --recursive",
+    "test:watch": "npm test -- --watch",
+    "clean": "rm -rf ./dist/* & rm -rf ./build/* & rm -rf ./es/*",
+    "prebuild": "npm run clean",
+    "build": "BABEL_ENV=cjs babel lib -d dist",
+    "build-es": "BABEL_ENV=es babel lib -d es",
+    "postbuild": "npm run build-es",
+    "build:watch": "babel lib -d dist --watch",
+    "prebrowserify": "rm -rf ./build/*",
+    "browserify": "browserify --full-paths dist/browser.js --standalone bitshares_js -o build/bitsharesjs.js -d",
+    "postbrowserify": "uglifyjs --compress --mangle --sequences --drop_console --output build/bitsharesjs.min.js -- build/bitsharesjs.js",
+    "prepublish": "npm run build",
+    "doc": "esdoc -c esdoc.json",
+    "example:transfer": "babel-node examples/transfer",
+    "example:chainStore": "babel-node examples/chainStore",
+    "example:privKey": "babel-node examples/privKey"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitshares/bitsharesjs.git"
+  },
+  "author": "Sigve Kvalsvik <bitsharesblocks@gmail.com> (https://github.com/svk31)",
+  "contributors": [
+    "James Calfee <james@jcalfee.info> (https://github.com/jcalfee/)",
+    "Daniel Larimer <dan@cryptonomex.com> (https://github.com/bytemaster/)",
+    "Valentine Zavgorodnev <valentine.zavgorodnev@gmail.com> (https://github.com/valzav/)"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bitshares/bitsharesjs/issues"
+  },
+  "engines": {
+    "node": ">= 6.0.0"
+  },
+  "main": "./dist/index.js",
+  "jsnext:main": "./es/index.js",
+  "dependencies": {
+    "bigi": "^1.4.1",
+    "bitsharesjs-ws": "^1.0.1",
+    "bs58": "^3.0.0",
+    "bytebuffer": "^5.0.0",
+    "create-hash": "^1.1.2",
+    "create-hmac": "^1.1.4",
+    "crypto-js": "^3.1.9-1",
+    "deep-equal": "^1.0.1",
+    "ecurve": "^1.0.2",
+    "event-emitter": "^0.3.4",
+    "immutable": "^3.7.6",
+    "secure-random": "^1.1.1"
+  },
+  "devDependencies": {
+    "assert": "^1.3.0",
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.21.0",
+    "babel-eslint": "^7.1.1",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-stage-1": "^6.16.0",
+    "browserify": "^13.1.0",
+    "esdoc": "^0.4.3",
+    "mocha": "^3.2.0",
+    "uglifyjs": "^2.4.10"
+  }
+}
