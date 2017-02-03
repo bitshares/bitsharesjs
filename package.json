@@ -70,6 +70,7 @@
     "babel-eslint": "^7.1.1",
     "browserify": "^13.1.0",
     "esdoc": "^0.4.3",
+    "eslint": "^3.14.1",
     "mocha": "^3.2.0",
     "uglifyjs": "^2.4.10"
   }
