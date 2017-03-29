@@ -1,6 +1,6 @@
 {
   "name": "gxbjs",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Pure JavaScript GXB library for node.js and browsers.",
   "browser": {
     "ws": false,
@@ -16,7 +16,7 @@
     "prebuild": "npm run clean",
     "build": "BABEL_ENV=cjs babel lib -d dist",
     "build-es": "BABEL_ENV=es babel lib -d es",
-    "postbuild": "npm run build-es",
+    "postbuild": "npm run browserify && npm run build-es",
     "build:watch": "babel lib -d dist --watch",
     "prebrowserify": "rm -rf ./build/*",
     "browserify": "browserify --full-paths dist/browser.js --standalone gxb_js -o build/gxbjs.js -d",
