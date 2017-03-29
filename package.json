@@ -1,6 +1,6 @@
 {
   "name": "gxbjs",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Pure JavaScript GXB library for node.js and browsers.",
   "browser": {
     "ws": false,
@@ -19,8 +19,8 @@
     "postbuild": "npm run build-es",
     "build:watch": "babel lib -d dist --watch",
     "prebrowserify": "rm -rf ./build/*",
-    "browserify": "browserify --full-paths dist/browser.js --standalone bitshares_js -o build/bitsharesjs.js -d",
-    "postbrowserify": "uglifyjs --compress --mangle --sequences --drop_console --output build/bitsharesjs.min.js -- build/bitsharesjs.js",
+    "browserify": "browserify --full-paths dist/browser.js --standalone gxb_js -o build/gxbjs.js -d",
+    "postbrowserify": "uglifyjs --compress --mangle --sequences --drop_console --output build/gxbjs.min.js -- build/gxbjs.js",
     "prepublish": "npm run build",
     "doc": "esdoc -c esdoc.json",
     "example:transfer": "babel-node examples/transfer",
@@ -29,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bitshares/bitsharesjs.git"
+    "url": "git+https://github.com/gxchain/gxbjs.git"
   },
   "author": "David Lan <lanhaoxiang@qq.com> (https://github.com/lanhaoxiang)",
   "contributors": [
