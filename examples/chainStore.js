@@ -1,4 +1,4 @@
-import {Apis} from "bitsharesjs-ws";
+import {Apis} from "gxbjs-ws";
 import {ChainStore} from "../lib";
 
 Apis.instance("wss://bitshares.openledger.info/ws", true).init_promise.then((res) => {

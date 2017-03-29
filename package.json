@@ -1,7 +1,7 @@
 {
-  "name": "bitsharesjs",
+  "name": "gxbjs",
   "version": "1.2.3",
-  "description": "Pure JavaScript Bitshares library for node.js and browsers.",
+  "description": "Pure JavaScript GXB library for node.js and browsers.",
   "browser": {
     "ws": false,
     "crypto": false
@@ -31,15 +31,16 @@
     "type": "git",
     "url": "git+https://github.com/bitshares/bitsharesjs.git"
   },
-  "author": "Sigve Kvalsvik <bitsharesblocks@gmail.com> (https://github.com/svk31)",
+  "author": "David Lan <lanhaoxiang@qq.com> (https://github.com/lanhaoxiang)",
   "contributors": [
     "James Calfee <james@jcalfee.info> (https://github.com/jcalfee/)",
     "Daniel Larimer <dan@cryptonomex.com> (https://github.com/bytemaster/)",
-    "Valentine Zavgorodnev <valentine.zavgorodnev@gmail.com> (https://github.com/valzav/)"
+    "Valentine Zavgorodnev <valentine.zavgorodnev@gmail.com> (https://github.com/valzav/)",
+    "David Lan <lanhaoxiang@qq.com> (https://github.com/lanhaoxiang/)"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bitshares/bitsharesjs/issues"
+    "url": "https://github.com/gxchain/gxbjs/issues"
   },
   "engines": {
     "node": ">= 6.0.0"
@@ -51,7 +52,7 @@
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-stage-1": "^6.16.0",
     "bigi": "^1.4.1",
-    "bitsharesjs-ws": "^1.1.3",
+    "gxbjs-ws": "^1.1.9",
     "bs58": "^3.0.0",
     "bytebuffer": "^5.0.0",
     "create-hash": "^1.1.2",

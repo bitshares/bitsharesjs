@@ -5,5 +5,5 @@
   "destination": "./out/esdoc",
   "index": "./README.md",
   "package": "./package.json",
-  "title": "BitsharesJS Docs"
+  "title": "GXBJS Docs"
 }

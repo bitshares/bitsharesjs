@@ -1,18 +1,18 @@
-# BitsharesJS (bitsharesjs)
+# GXBJS (gxbjs)
 
-Pure JavaScript Bitshares library for node.js and browsers. Can be used to construct, sign and broadcast transactions in JavaScript, and to easily obtain data from the blockchain via public apis.
+Pure JavaScript GXChain library for node.js and browsers. Can be used to construct, sign and broadcast transactions in JavaScript, and to easily obtain data from the blockchain via public apis.
 
 Most of this code was written by [jcalfee](https://github.com/jcalfee), my work was mostly just repackaging to a discrete npm package.
 
-[![npm version](https://img.shields.io/npm/v/bitsharesjs.svg?style=flat-square)](https://www.npmjs.com/package/bitsharesjs)
-[![npm downloads](https://img.shields.io/npm/dm/bitsharesjs.svg?style=flat-square)](https://www.npmjs.com/package/bitsharesjs)
+[![npm version](https://img.shields.io/npm/v/gxbjs.svg?style=flat-square)](https://www.npmjs.com/package/gxbjs)
+[![npm downloads](https://img.shields.io/npm/dm/gxbjs.svg?style=flat-square)](https://www.npmjs.com/package/gxbjs)
 
 
 ## Setup
 
 This library can be obtained through npm:
 ```
-npm install bitsharesjs
+npm install gxbjs
 ```
 
 ## Usage
@@ -55,8 +55,8 @@ The Chain library contains a complete state container called the ChainStore. The
 The ChainStore has several useful methods to retrieve, among other things, objects, assets and accounts using either object ids or asset/account names. These methods are synchronous and will return `undefined` to indicate fetching in progress, and `null` to indicate that the object does not exist.
 
 ```
-import {Apis} from "bitsharesjs-ws";
-var {ChainStore} = require("bitsharesjs");
+import {Apis} from "gxbjs-ws";
+var {ChainStore} = require("gxbjs");
 
 Apis.instance("wss://bitshares.openledger.info/ws", true).init_promise.then((res) => {
     console.log("connected to:", res[0].network);
@@ -80,7 +80,7 @@ The ECC library contains all the crypto functions for private and public keys as
 As a quick example, here's how to generate a new private key from a seed (a brainkey for example):
 
 ```
-var {PrivateKey, key} = require("bitsharesjs");
+var {PrivateKey, key} = require("gxbjs");
 
 let seed = "THIS IS A TERRIBLE BRAINKEY SEED WORD SEQUENCE";
 let pkey = PrivateKey.fromSeed( key.normalize_brainKey(seed) );

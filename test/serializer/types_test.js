@@ -7,7 +7,7 @@ import th from './test_helper';
 
 import { is } from "immutable";
 import { PublicKey, PrivateKey, types } from "../../lib";
-import { ChainConfig } from "bitsharesjs-ws";
+import { ChainConfig } from "gxbjs-ws";
 
 describe("types", function() {
 

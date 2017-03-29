@@ -1,4 +1,4 @@
-import {Apis} from "bitsharesjs-ws";
+import {Apis} from "gxbjs-ws";
 import {ChainStore, FetchChain, PrivateKey, TransactionHelper, Aes, TransactionBuilder} from "../lib";
 
 var privKey = "5KBuq5WmHvgePmB7w3onYsqLM8ESomM2Ae7SigYuuwg8MDHW7NN";
@@ -10,7 +10,7 @@ Apis.instance("wss://testnet.bitshares.eu/ws", true)
 
     ChainStore.init().then(() => {
 
-        let fromAccount = "bitsharesjs";
+        let fromAccount = "gxbjs";
         let memoSender = fromAccount;
         let memo = "Testing transfer from node.js";
 
