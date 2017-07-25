@@ -1,24 +1,24 @@
 import {Apis} from "gxbjs-ws";
 import {ChainStore, FetchChain, PrivateKey, TransactionHelper, Aes, TransactionBuilder} from "../lib";
 
-var privKey = "5KBuq5WmHvgePmB7w3onYsqLM8ESomM2Ae7SigYuuwg8MDHW7NN";
+var privKey = "";
 let pKey = PrivateKey.fromWif(privKey);
 
-Apis.instance("wss://testnet.bitshares.eu/ws", true)
+Apis.instance("ws://192.168.1.118:28090", true)
     .init_promise.then((res) => {
-    console.log("connected to:", res[0].network_name, "network");
+    // console.log("connected to:", res[0].network_name, "network");
 
     ChainStore.init().then(() => {
 
-        let fromAccount = "gxbjs";
+        let fromAccount = "gxb123";
         let memoSender = fromAccount;
         let memo = "Testing transfer from node.js";
 
-        let toAccount = "faucet";
+        let toAccount = "init0";
 
         let sendAmount = {
-            amount: 10000,
-            asset: "TEST"
+            amount: 1000000,
+            asset: "GXC"
         }
 
         Promise.all([
@@ -64,7 +64,7 @@ Apis.instance("wss://testnet.bitshares.eu/ws", true)
 
             tr.set_required_fees().then(() => {
                 tr.add_signer(pKey, pKey.toPublicKey().toPublicKeyString());
-                console.log("serialized transaction:", tr.serialize());
+                console.log("serialized transaction:", JSON.stringify(tr.serialize(),null,'\t'));
                 tr.broadcast();
             }, (ex)=> {
                 console.error(ex);
