@@ -1,16 +1,14 @@
 import {Apis} from "gxbjs-ws";
 import {ChainStore} from "../lib";
 
-Apis.instance("wss://bitshares.openledger.info/ws", true).init_promise.then((res) => {
-    console.log("connected to:", res[0].network);
+Apis.instance("wss://node5.gxb.io", true).init_promise.then((res) => {
     ChainStore.init().then(() => {
         ChainStore.subscribe(updateState);
+        dynamicGlobal = ChainStore.getObject("2.1.0");
     });
 });
 
 let dynamicGlobal = null;
 function updateState(object) {
-    dynamicGlobal = ChainStore.getObject("2.1.0");
-
     console.log("ChainStore object update\n", dynamicGlobal ? dynamicGlobal.toJS() : dynamicGlobal);
 }
