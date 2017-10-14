@@ -1,12 +1,16 @@
 import { Aes, PrivateKey, PublicKey, Signature, hash, key } from "../../lib";
 import assert from "assert";
 import {Long} from 'bytebuffer';
+import {ChainConfig} from "bitsharesjs-ws";
 
 import secureRandom from 'secure-random';
 
 import dictionary from "./dictionary";
 
 describe("ECC", function() {
+    before(function() {
+        ChainConfig.reset();
+    });
 
     describe("Crypto", function() {
 

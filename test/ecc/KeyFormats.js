@@ -1,8 +1,13 @@
 import { Aes, PrivateKey, PublicKey, Address } from "../../lib";
 import assert from "assert";
+import {ChainConfig} from "bitsharesjs-ws";
 
 var test = function(key) {
-    describe("ECC", function() {
+    describe("KeyFormats", function() {
+        before(function() {
+            ChainConfig.reset();
+        });
+
         describe("Key Formats", function() {
 
             it("Calculates public key from private key", function() {
