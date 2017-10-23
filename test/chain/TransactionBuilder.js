@@ -1,5 +1,5 @@
 import assert from "assert";
-import {Apis, ChainConfig} from "bitsharesjs-ws";
+import {Apis} from "bitsharesjs-ws";
 import { TransactionBuilder } from "../../lib";
 
 
@@ -31,6 +31,33 @@ describe("ChainStore", () => {
                 }
             });
         }, "This transfer should not throw");
+    });
+
+    it("Sets core required fees", () => {
+        return new Promise((resolve, reject) => {
+            let tr = new TransactionBuilder();
+            tr.add_type_operation( "transfer", {
+                fee: {
+                    amount: 0,
+                    asset_id: "1.3.0"
+                },
+                from: "1.2.1",
+                to: "1.2.2",
+                amount: { amount: 50000, asset_id: "1.3.0" },
+                memo: {
+                    from: "BTS1111111111111111111111111111111114T1Anm",
+                    to: "BTS1111111111111111111111111111111114T1Anm",
+                    nonce: 0,
+                    message: ""
+                }
+            });
+
+            tr.set_required_fees().then(() => {
+                assert.equal(tr.operations[0][1].fee.asset_id, "1.3.0");
+                assert(tr.operations[0][1].fee.amount > 0);
+                resolve();
+            }).catch(reject);
+        });
     });
 
     it("Sets required fees", () => {
