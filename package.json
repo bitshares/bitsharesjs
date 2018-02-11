@@ -1,6 +1,6 @@
 {
   "name": "bitsharesjs",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Pure JavaScript Bitshares library for node.js and browsers.",
   "browser": {
     "ws": false,
@@ -75,7 +75,6 @@
     "mkdirp": "^0.5.1",
     "mocha": "^3.2.0",
     "rimraf": "^2.6.1",
-    "uglify": "^0.1.5",
-    "uglifyjs": "^2.4.10"
+    "uglify-js": "^3.3.10"
   }
 }
