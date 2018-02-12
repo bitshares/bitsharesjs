@@ -129,10 +129,13 @@ describe("types", function() {
             "to_bigint64 MAX_VALUE mismatch"
         );
 
-        // Long.MAX_VALUE.toString() == 9223372036854775807
-        // Long.MAX_VALUE.toString() +1 9223372036854775808
+        // Long.MAX_VALUE.toString() = 9223372036854775807
+        // Long.MAX_VALUE.toString() +1 = 9223372036854775808
+        // Long.MAX_VALUE.toString() = 18446744073709551615
+        // Long.MAX_VALUE.toString() +1 = 18446744073709551616
+
         overflow(function(){ return p.to_bigint64(
-            '9223372036854775808', _precision = 0
+            "18446744073709551616", _precision = 0
         );
         });
 
@@ -140,7 +143,7 @@ describe("types", function() {
         assert.equal("00", p.to_string64(Long.ZERO, 1));
 
         overflow(function(){ return p.to_bigint64(
-            '92233720368547758075', _precision = 1
+            "184467440737095516155", _precision = 1
         );
         });
 
