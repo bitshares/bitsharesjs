@@ -26,6 +26,8 @@ let AllTypes = new Serializer("all_types", {
     set: set(uint8),
 
     public_key, address,
+    key_auths: map(public_key, uint16),
+    key_auths_2: map(public_key, uint16),
 
     time_optional: optional( time_point_sec ),
     time_point_sec1: time_point_sec,
@@ -46,6 +48,14 @@ let allTypes = {
     set: [2,1],
 
     public_key: PrivateKey.fromSeed("").toPublicKey().toString(),
+    key_auths: [
+       [ 'GPH6agpGeRkc1zHD9MTbHaK9CKR1Pt8aU4v2GTxF6tRtf3ZC3TnU6', 1],
+       [ 'GPH8DZinV1rFkdgs2sMMhUrk6wAyq1fTB8eLKQzcYihkgrjiv3tLn', 1]
+    ],
+    key_auths_2: [
+        [ 'GPH8DZinV1rFkdgs2sMMhUrk6wAyq1fTB8eLKQzcYihkgrjiv3tLn', 1],
+        [ 'GPH6agpGeRkc1zHD9MTbHaK9CKR1Pt8aU4v2GTxF6tRtf3ZC3TnU6', 1]
+     ],
     address: Address.fromPublic(PrivateKey.fromSeed("").toPublicKey()).toString(),
 
     time_optional: undefined,
