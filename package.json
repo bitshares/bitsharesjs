@@ -21,6 +21,7 @@
     "prebrowserify": "mkdirp build",
     "browserify": "cross-env NODE_ENV=production browserify --full-paths dist/browser.js --standalone bitshares_js -o build/bitsharesjs.js -d",
     "postbrowserify": "cross-env NODE_ENV=production uglifyjs --compress --mangle --sequences --drop_console --output build/bitsharesjs.min.js -- build/bitsharesjs.js",
+    "precommit": "pretty-quick --staged",
     "prepublish": "npm run build",
     "doc": "esdoc -c esdoc.json",
     "example:transfer": "babel-node examples/transfer",
@@ -74,6 +75,8 @@
     "eslint": "^3.14.1",
     "mkdirp": "^0.5.1",
     "mocha": "^3.2.0",
+    "prettier": "^1.11.1",
+    "pretty-quick": "^1.4.1",
     "rimraf": "^2.6.1",
     "uglify-js": "^3.3.10"
   }
