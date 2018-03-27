@@ -76,6 +76,25 @@ describe("ChainStore", () => {
             });
         });
 
+        it("Objects by vote id", function() {
+            const voteIds = ["1:26", "0:82"];
+            return new Promise(function(resolve) {
+                setInterval(function() {
+                    let objects = ChainStore.getObjectsByVoteIds(voteIds);
+                    if (objects.length && !!objects[0]) {
+                        assert(objects.length === voteIds.length);
+                        assert(!!objects[0]);
+                        assert(!!objects[1]);
+                        resolve();
+                    }
+                }, 50);
+                let objects = ChainStore.getObjectsByVoteIds(voteIds);
+                assert(objects.length === voteIds.length);
+                assert(objects[0] === null);
+                assert(objects[1] === null);
+            });
+        });
+
         it("Account by id", function() {
             return new Promise(function(resolve) {
                 ChainStore.subscribe(function() {
