@@ -20,7 +20,7 @@ describe("ChainStore", () => {
     // Unsubscribe everything after each test
     afterEach(function() {
         ChainStore.subscribers = new Set();
-        ChainStore.clearCache();
+        ChainStore.clearCache(false);
     });
 
     after(function() {
@@ -131,6 +131,42 @@ describe("ChainStore", () => {
                     }
                 });
                 assert(ChainStore.getAccountName("1.2.0") === undefined);
+            });
+        });
+
+        it("Non-existant account fetched by name returns null", function() {
+            return new Promise(function(resolve) {
+                ChainStore.subscribe(function() {
+                    let account = ChainStore.getAccount(
+                        "dalkzjdalzjfaozijroazinf"
+                    );
+                    if (account !== undefined) {
+                        assert(account === null);
+                        resolve();
+                    }
+                });
+                assert(
+                    ChainStore.getAccount("dalkzjdalzjfaozijroazinf") ===
+                        undefined
+                );
+            });
+        });
+
+        it("Non-existant account fetched by id returns null", function() {
+            return new Promise(function(resolve) {
+                ChainStore.subscribe(function() {
+                    let account = ChainStore.getAccount(
+                        "1.2.98798798798798798"
+                    );
+                    console.log("account:", account);
+                    if (account !== undefined) {
+                        assert(account === null);
+                        resolve();
+                    }
+                });
+                assert(
+                    ChainStore.getAccount("1.2.98798798798798798") === undefined
+                );
             });
         });
     });
