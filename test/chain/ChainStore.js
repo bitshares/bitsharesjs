@@ -158,7 +158,6 @@ describe("ChainStore", () => {
                     let account = ChainStore.getAccount(
                         "1.2.98798798798798798"
                     );
-                    console.log("account:", account);
                     if (account !== undefined) {
                         assert(account === null);
                         resolve();
