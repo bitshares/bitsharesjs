@@ -295,38 +295,55 @@ describe("TransactionBuilder", () => {
         });
     });
 
-    // it("Benefits from caching", function() {
-    //     return new Promise((resolve, reject) => {
-    //         let feePromises = [];
-    //         for (var i = 0; i < 11; i++) {
-    //             let tr = new TransactionBuilder();
-    //             tr.add_type_operation( "transfer", {
-    //                 fee: {
-    //                     amount: 0,
-    //                     asset_id: "1.3." + (111 + i)
-    //                 },
-    //                 from: "1.2.1",
-    //                 to: "1.2.2",
-    //                 amount: { amount: 50000, asset_id: "1.3.0" },
-    //                 memo: {
-    //                     from: "BTS1111111111111111111111111111111114T1Anm",
-    //                     to: "BTS1111111111111111111111111111111114T1Anm",
-    //                     nonce: 0,
-    //                     message: ""
-    //                 }
-    //             });
-    //
-    //             feePromises.push(tr.set_required_fees());
-    //         }
-    //         Promise.all(feePromises)
-    //         .then(() => {
-    //             console.log("All fees resolved");
-    //             resolve();
-    //
-    //         }).catch(reject);
-    //
-    //     });
-    // });
+    it("Benefits from pruning identical transactions", function() {
+        this.timeout = 5000;
+        function addOperations(tr, count) {
+            for (var i = 0; i < count; i++) {
+                tr.add_type_operation("transfer", {
+                    fee: {
+                        amount: 0,
+                        asset_id: "1.3.0" // + (111 + i)
+                    },
+                    from: "1.2.1",
+                    to: "1.2.2",
+                    amount: {amount: 50000, asset_id: "1.3.0"},
+                    memo: {
+                        from: "BTS1111111111111111111111111111111114T1Anm",
+                        to: "BTS1111111111111111111111111111111114T1Anm",
+                        nonce: 0,
+                        message: ""
+                    }
+                });
+            }
+        }
+        return new Promise((resolve, reject) => {
+            const opCount = 250;
+            let tr = new TransactionBuilder();
+            addOperations(tr, opCount);
+            let start = new Date().getTime();
+            tr
+                .set_required_fees() // Set fees with no pruning of identical transactions
+                .then(() => {
+                    let noPruneTime = new Date().getTime() - start;
+
+                    let tr2 = new TransactionBuilder();
+                    addOperations(tr2, opCount);
+                    start = new Date().getTime();
+                    tr2.set_required_fees().then(() => {
+                        let pruneTime = new Date().getTime() - start;
+                        for (var i = 0; i < tr.operations.length; i++) {
+                            assert.equal(
+                                tr.operations[i][1].fee.asset_id,
+                                tr2.operations[i][1].fee.asset_id
+                            );
+                        }
+                        assert(pruneTime < noPruneTime);
+                        resolve();
+                    });
+                })
+                .catch(reject);
+        });
+    });
 
     it("Asset create standard", () => {
         let tr = new TransactionBuilder();
