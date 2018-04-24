@@ -296,7 +296,7 @@ describe("TransactionBuilder", () => {
     });
 
     it("Benefits from pruning identical transactions", function() {
-        this.timeout = 5000;
+        this.timeout(5000);
         function addOperations(tr, count) {
             for (var i = 0; i < count; i++) {
                 tr.add_type_operation("transfer", {
@@ -329,7 +329,7 @@ describe("TransactionBuilder", () => {
                     let tr2 = new TransactionBuilder();
                     addOperations(tr2, opCount);
                     start = new Date().getTime();
-                    tr2.set_required_fees().then(() => {
+                    tr2.set_required_fees(undefined, true).then(() => {
                         let pruneTime = new Date().getTime() - start;
                         for (var i = 0; i < tr.operations.length; i++) {
                             assert.equal(
