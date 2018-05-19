@@ -5677,7 +5677,7 @@
     "__docId__": 294,
     "kind": "file",
     "name": "lib/ecc/src/address.js",
-    "content": "import assert from \"assert\";\nimport {ChainConfig} from \"bitsharesjs-ws\";\nimport {sha256, sha512, ripemd160} from \"./hash\";\nimport {encode, decode} from \"bs58\";\nimport deepEqual from \"deep-equal\";\nconst Buffer = require(\"safe-buffer\").Buffer;\n\n/** Addresses are shortened non-reversable hashes of a public key.  The full PublicKey is preferred.\n    @deprecated\n*/\nclass Address {\n    constructor(addy) {\n        this.addy = addy;\n    }\n\n    static fromBuffer(buffer) {\n        var _hash = sha512(buffer);\n        var addy = ripemd160(_hash);\n        return new Address(addy);\n    }\n\n    static fromString(string, address_prefix = ChainConfig.address_prefix) {\n        var prefix = string.slice(0, address_prefix.length);\n        assert.equal(\n            address_prefix,\n            prefix,\n            `Expecting key to begin with ${address_prefix}, instead got ${prefix}`\n        );\n        var addy = string.slice(address_prefix.length);\n        addy = new Buffer(decode(addy), \"binary\");\n        var checksum = addy.slice(-4);\n        addy = addy.slice(0, -4);\n        var new_checksum = ripemd160(addy);\n        new_checksum = new_checksum.slice(0, 4);\n        var isEqual = deepEqual(checksum, new_checksum); //, 'Invalid checksum'\n        if (!isEqual) {\n            throw new Error(\"Checksum did not match\");\n        }\n        return new Address(addy);\n    }\n\n    /** @return Address - Compressed PTS format (by default) */\n    static fromPublic(public_key, compressed = true, version = 56) {\n        var sha2 = sha256(public_key.toBuffer(compressed));\n        var rep = ripemd160(sha2);\n        var versionBuffer = Buffer.alloc(1);\n        versionBuffer.writeUInt8(0xff & version, 0);\n        var addr = Buffer.concat([versionBuffer, rep]);\n        var check = sha256(addr);\n        check = sha256(check);\n        var buffer = Buffer.concat([addr, check.slice(0, 4)]);\n        return new Address(ripemd160(buffer));\n    }\n\n    toBuffer() {\n        return this.addy;\n    }\n\n    toString(address_prefix = ChainConfig.address_prefix) {\n        var checksum = ripemd160(this.addy);\n        var addy = Buffer.concat([this.addy, checksum.slice(0, 4)]);\n        return address_prefix + encode(addy);\n    }\n}\n\nexport default Address;\n",
+    "content": "import assert from \"assert\";\nimport {ChainConfig} from \"bitsharesjs-ws\";\nimport {sha256, sha512, ripemd160} from \"./hash\";\nimport {encode, decode} from \"bs58\";\nimport deepEqual from \"deep-equal\";\nconst Buffer = require(\"safe-buffer\").Buffer;\n\n/** Addresses are shortened non-reversable hashes of a public key.  The full PublicKey is preferred.\n */\nclass Address {\n    constructor(addy) {\n        this.addy = addy;\n    }\n\n    static fromBuffer(buffer) {\n        var _hash = sha512(buffer);\n        var addy = ripemd160(_hash);\n        return new Address(addy);\n    }\n\n    static fromString(string, address_prefix = ChainConfig.address_prefix) {\n        var prefix = string.slice(0, address_prefix.length);\n        assert.equal(\n            address_prefix,\n            prefix,\n            `Expecting key to begin with ${address_prefix}, instead got ${prefix}`\n        );\n        var addy = string.slice(address_prefix.length);\n        addy = new Buffer(decode(addy), \"binary\");\n        var checksum = addy.slice(-4);\n        addy = addy.slice(0, -4);\n        var new_checksum = ripemd160(addy);\n        new_checksum = new_checksum.slice(0, 4);\n        var isEqual = deepEqual(checksum, new_checksum); //, 'Invalid checksum'\n        if (!isEqual) {\n            throw new Error(\"Checksum did not match\");\n        }\n        return new Address(addy);\n    }\n\n    /** @return Address - Compressed PTS format (by default) */\n    static fromPublic(public_key, compressed = true, version = 56) {\n        var sha2 = sha256(public_key.toBuffer(compressed));\n        var rep = ripemd160(sha2);\n        var versionBuffer = Buffer.alloc(1);\n        versionBuffer.writeUInt8(0xff & version, 0);\n        var addr = Buffer.concat([versionBuffer, rep]);\n        var check = sha256(addr);\n        check = sha256(check);\n        var buffer = Buffer.concat([addr, check.slice(0, 4)]);\n        return new Address(ripemd160(buffer));\n    }\n\n    toBuffer() {\n        return this.addy;\n    }\n\n    toString(address_prefix = ChainConfig.address_prefix) {\n        var checksum = ripemd160(this.addy);\n        var addy = Buffer.concat([this.addy, checksum.slice(0, 4)]);\n        return address_prefix + encode(addy);\n    }\n}\n\nexport default Address;\n",
     "static": true,
     "longname": "/home/sigve/Dev/Bitshares/bitsharesjs/lib/ecc/src/address.js",
     "access": "public",
@@ -5717,8 +5717,7 @@
     "importPath": "bitsharesjs/lib/ecc/src/address.js",
     "importStyle": "Address",
     "description": "Addresses are shortened non-reversable hashes of a public key.  The full PublicKey is preferred.",
-    "lineNumber": 11,
-    "deprecated": true,
+    "lineNumber": 10,
     "interface": false
   },
   {
@@ -5732,7 +5731,7 @@
     "longname": "lib/ecc/src/address.js~Address#constructor",
     "access": "public",
     "description": null,
-    "lineNumber": 12,
+    "lineNumber": 11,
     "undocument": true
   },
   {
@@ -5744,7 +5743,7 @@
     "longname": "lib/ecc/src/address.js~Address#addy",
     "access": "public",
     "description": null,
-    "lineNumber": 13,
+    "lineNumber": 12,
     "undocument": true,
     "type": {
       "types": [
@@ -5763,7 +5762,7 @@
     "longname": "lib/ecc/src/address.js~Address.fromBuffer",
     "access": "public",
     "description": null,
-    "lineNumber": 16,
+    "lineNumber": 15,
     "undocument": true,
     "params": [
       {
@@ -5790,7 +5789,7 @@
     "longname": "lib/ecc/src/address.js~Address.fromString",
     "access": "public",
     "description": null,
-    "lineNumber": 22,
+    "lineNumber": 21,
     "undocument": true,
     "params": [
       {
@@ -5824,7 +5823,7 @@
     "longname": "lib/ecc/src/address.js~Address.fromPublic",
     "access": "public",
     "description": null,
-    "lineNumber": 43,
+    "lineNumber": 42,
     "return": {
       "nullable": null,
       "types": [
@@ -5871,7 +5870,7 @@
     "longname": "lib/ecc/src/address.js~Address#toBuffer",
     "access": "public",
     "description": null,
-    "lineNumber": 55,
+    "lineNumber": 54,
     "undocument": true,
     "params": [],
     "return": {
@@ -5891,7 +5890,7 @@
     "longname": "lib/ecc/src/address.js~Address#toString",
     "access": "public",
     "description": null,
-    "lineNumber": 59,
+    "lineNumber": 58,
     "undocument": true,
     "params": [
       {

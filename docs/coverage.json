@@ -255,12 +255,12 @@
       "actualCount": 2,
       "undocumentLines": [
         6,
+        11,
         12,
-        13,
-        16,
-        22,
-        55,
-        59
+        15,
+        21,
+        54,
+        58
       ]
     },
     "lib/ecc/src/aes.js": {
