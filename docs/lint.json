@@ -1,0 +1,303 @@
+[
+  {
+    "name": "ChainStore#getAccountRefsOfKey",
+    "filePath": "lib/chain/src/ChainStore.js",
+    "lines": [
+      {
+        "lineNumber": 470,
+        "line": "    /**"
+      },
+      {
+        "lineNumber": 471,
+        "line": "     *  @param the public key to find accounts that reference it"
+      },
+      {
+        "lineNumber": 472,
+        "line": "     *"
+      },
+      {
+        "lineNumber": 473,
+        "line": "     *  @return Set of account ids that reference the given key"
+      },
+      {
+        "lineNumber": 474,
+        "line": "     *  @return a empty Set if no items are found"
+      },
+      {
+        "lineNumber": 475,
+        "line": "     *  @return undefined if the result is unknown"
+      },
+      {
+        "lineNumber": 476,
+        "line": "     *"
+      },
+      {
+        "lineNumber": 477,
+        "line": "     *  If this method returns undefined, then it will send a request to"
+      },
+      {
+        "lineNumber": 478,
+        "line": "     *  the server for the current set of accounts after which the"
+      },
+      {
+        "lineNumber": 479,
+        "line": "     *  server will notify us of any accounts that reference these keys"
+      },
+      {
+        "lineNumber": 480,
+        "line": "     */"
+      },
+      {
+        "lineNumber": 481,
+        "line": "    getAccountRefsOfKey(key) {"
+      }
+    ],
+    "codeParams": [
+      "key"
+    ],
+    "docParams": [
+      "the"
+    ]
+  },
+  {
+    "name": "ChainStore#getAccountRefsOfAccount",
+    "filePath": "lib/chain/src/ChainStore.js",
+    "lines": [
+      {
+        "lineNumber": 516,
+        "line": "    /**"
+      },
+      {
+        "lineNumber": 517,
+        "line": "     *  @param the account id to find accounts that reference it"
+      },
+      {
+        "lineNumber": 518,
+        "line": "     *"
+      },
+      {
+        "lineNumber": 519,
+        "line": "     *  @return Set of account ids that reference the given key"
+      },
+      {
+        "lineNumber": 520,
+        "line": "     *  @return a empty Set if no items are found"
+      },
+      {
+        "lineNumber": 521,
+        "line": "     *  @return undefined if the result is unknown"
+      },
+      {
+        "lineNumber": 522,
+        "line": "     *"
+      },
+      {
+        "lineNumber": 523,
+        "line": "     *  If this method returns undefined, then it will send a request to"
+      },
+      {
+        "lineNumber": 524,
+        "line": "     *  the server for the current set of accounts after which the"
+      },
+      {
+        "lineNumber": 525,
+        "line": "     *  server will notify us of any accounts that reference these keys"
+      },
+      {
+        "lineNumber": 526,
+        "line": "     */"
+      },
+      {
+        "lineNumber": 527,
+        "line": "    getAccountRefsOfAccount(account_id) {"
+      }
+    ],
+    "codeParams": [
+      "account_id"
+    ],
+    "docParams": [
+      "the"
+    ]
+  },
+  {
+    "name": "ChainStore#fetchFullAccount",
+    "filePath": "lib/chain/src/ChainStore.js",
+    "lines": [
+      {
+        "lineNumber": 858,
+        "line": "    /**"
+      },
+      {
+        "lineNumber": 859,
+        "line": "     *  Fetches an account and all of its associated data in a single query"
+      },
+      {
+        "lineNumber": 860,
+        "line": "     *"
+      },
+      {
+        "lineNumber": 861,
+        "line": "     *  @param an account name or account id"
+      },
+      {
+        "lineNumber": 862,
+        "line": "     *"
+      },
+      {
+        "lineNumber": 863,
+        "line": "     *  @return undefined if the account in question is in the process of being fetched"
+      },
+      {
+        "lineNumber": 864,
+        "line": "     *  @return the object if it has already been fetched"
+      },
+      {
+        "lineNumber": 865,
+        "line": "     *  @return null if the object has been queried and was not found"
+      },
+      {
+        "lineNumber": 866,
+        "line": "     */"
+      },
+      {
+        "lineNumber": 867,
+        "line": "    fetchFullAccount(name_or_id, autosubscribe = true) {"
+      }
+    ],
+    "codeParams": [
+      "name_or_id",
+      "autosubscribe"
+    ],
+    "docParams": [
+      "an"
+    ]
+  },
+  {
+    "name": "ChainStore#fetchRecentHistory",
+    "filePath": "lib/chain/src/ChainStore.js",
+    "lines": [
+      {
+        "lineNumber": 1048,
+        "line": "    /**"
+      },
+      {
+        "lineNumber": 1049,
+        "line": "     * There are two ways to extend the account history, add new more"
+      },
+      {
+        "lineNumber": 1050,
+        "line": "     * recent history, and extend historic hstory. This method will fetch"
+      },
+      {
+        "lineNumber": 1051,
+        "line": "     * the most recent account history and prepend it to the list of"
+      },
+      {
+        "lineNumber": 1052,
+        "line": "     * historic operations."
+      },
+      {
+        "lineNumber": 1053,
+        "line": "     *"
+      },
+      {
+        "lineNumber": 1054,
+        "line": "     *  @param account immutable account object"
+      },
+      {
+        "lineNumber": 1055,
+        "line": "     *  @return a promise with the account history"
+      },
+      {
+        "lineNumber": 1056,
+        "line": "     */"
+      },
+      {
+        "lineNumber": 1057,
+        "line": "    fetchRecentHistory(account, limit = 100) {"
+      }
+    ],
+    "codeParams": [
+      "account",
+      "limit"
+    ],
+    "docParams": [
+      "account"
+    ]
+  },
+  {
+    "name": "Signature.signBufferSha256",
+    "filePath": "lib/ecc/src/signature.js",
+    "lines": [
+      {
+        "lineNumber": 65,
+        "line": "    /** Sign a buffer of exactally 32 bytes in size (sha256(text))"
+      },
+      {
+        "lineNumber": 66,
+        "line": "        @param {Buffer} buf - 32 bytes binary"
+      },
+      {
+        "lineNumber": 67,
+        "line": "        @param {PrivateKey} private_key"
+      },
+      {
+        "lineNumber": 68,
+        "line": "        @return {Signature}"
+      },
+      {
+        "lineNumber": 69,
+        "line": "    */"
+      },
+      {
+        "lineNumber": 70,
+        "line": "    static signBufferSha256(buf_sha256, private_key) {"
+      }
+    ],
+    "codeParams": [
+      "buf_sha256",
+      "private_key"
+    ],
+    "docParams": [
+      "buf",
+      "private_key"
+    ]
+  },
+  {
+    "name": "Signature#verifyBuffer",
+    "filePath": "lib/ecc/src/signature.js",
+    "lines": [
+      {
+        "lineNumber": 106,
+        "line": "    /**"
+      },
+      {
+        "lineNumber": 107,
+        "line": "        @param {Buffer} un-hashed"
+      },
+      {
+        "lineNumber": 108,
+        "line": "        @param {./PublicKey}"
+      },
+      {
+        "lineNumber": 109,
+        "line": "        @return {boolean}"
+      },
+      {
+        "lineNumber": 110,
+        "line": "    */"
+      },
+      {
+        "lineNumber": 111,
+        "line": "    verifyBuffer(buf, public_key) {"
+      }
+    ],
+    "codeParams": [
+      "buf",
+      "public_key"
+    ],
+    "docParams": [
+      "un-hashed"
+    ]
+  }
+]

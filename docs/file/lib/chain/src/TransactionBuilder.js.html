@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">lib/chain/src/TransactionBuilder.js | BitsharesJS Docs</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Pure JavaScript Bitshares library for node.js and browsers."><meta property="twitter:card" content="summary"><meta property="twitter:title" content="BitsharesJS Docs"><meta property="twitter:description" content="Pure JavaScript Bitshares library for node.js and browsers."></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/bitshares/bitsharesjs"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#chain-src">chain/src</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/chain/src/AccountLogin.js~AccountLogin.html">AccountLogin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/chain/src/ChainStore.js~ChainStore.html">ChainStore</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/chain/src/ObjectId.js~ObjectId.html">ObjectId</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/chain/src/TransactionBuilder.js~TransactionBuilder.html">TransactionBuilder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-emitter">emitter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-get">get</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-set">set</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-accountLogin">accountLogin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-chain_store">chain_store</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ChainTypes">ChainTypes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-chainValidation">chainValidation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-NumberUtils">NumberUtils</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-helper">helper</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#ecc-src">ecc/src</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/ecc/src/PrivateKey.js~PrivateKey.html">PrivateKey</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/ecc/src/PublicKey.js~PublicKey.html">PublicKey</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/ecc/src/address.js~Address.html">Address</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/ecc/src/aes.js~Aes.html">Aes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/ecc/src/signature.js~Signature.html">Signature</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-normalize">normalize</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-calcPubKeyRecoveryParam">calcPubKeyRecoveryParam</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-deterministicGenerateK">deterministicGenerateK</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-recoverPubKey">recoverPubKey</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-sign">sign</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-verify">verify</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-verifyRaw">verifyRaw</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ECSignature">ECSignature</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-enforce">enforce</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-HmacSHA256">HmacSHA256</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ripemd160">ripemd160</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-sha256">sha256</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-sha512">sha512</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-key">key</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#serializer-src">serializer/src</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/serializer/src/FastParser.js~FastParser.html">FastParser</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/serializer/src/error_with_cause.js~ErrorWithCause.html">ErrorWithCause</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/serializer/src/serializer.js~Serializer.html">Serializer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convert">convert</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-template">template</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-_my">_my</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-account_create">account_create</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-account_create_operation_fee_parameters">account_create_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-account_name_eq_lit_predicate">account_name_eq_lit_predicate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-account_options">account_options</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-account_transfer">account_transfer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-account_transfer_operation_fee_parameters">account_transfer_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-account_update">account_update</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-account_update_operation_fee_parameters">account_update_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-account_upgrade">account_upgrade</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-account_upgrade_operation_fee_parameters">account_upgrade_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-account_whitelist">account_whitelist</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-account_whitelist_operation_fee_parameters">account_whitelist_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-assert">assert</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-assert_operation_fee_parameters">assert_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset">asset</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_claim_fees">asset_claim_fees</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_claim_fees_operation_fee_parameters">asset_claim_fees_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_create">asset_create</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_create_operation_fee_parameters">asset_create_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_fund_fee_pool">asset_fund_fee_pool</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_fund_fee_pool_operation_fee_parameters">asset_fund_fee_pool_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_global_settle">asset_global_settle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_global_settle_operation_fee_parameters">asset_global_settle_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_issue">asset_issue</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_issue_operation_fee_parameters">asset_issue_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_options">asset_options</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_publish_feed">asset_publish_feed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_publish_feed_operation_fee_parameters">asset_publish_feed_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_reserve">asset_reserve</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_reserve_operation_fee_parameters">asset_reserve_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_settle">asset_settle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_settle_cancel">asset_settle_cancel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_settle_cancel_operation_fee_parameters">asset_settle_cancel_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_settle_operation_fee_parameters">asset_settle_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_symbol_eq_lit_predicate">asset_symbol_eq_lit_predicate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_update">asset_update</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_update_bitasset">asset_update_bitasset</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_update_bitasset_operation_fee_parameters">asset_update_bitasset_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_update_feed_producers">asset_update_feed_producers</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_update_feed_producers_operation_fee_parameters">asset_update_feed_producers_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_update_operation_fee_parameters">asset_update_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-authority">authority</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-balance_claim">balance_claim</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-balance_claim_operation_fee_parameters">balance_claim_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-bitasset_options">bitasset_options</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-blind_input">blind_input</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-blind_output">blind_output</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-blind_transfer">blind_transfer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-blind_transfer_operation_fee_parameters">blind_transfer_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-block_header">block_header</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-block_id_predicate">block_id_predicate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-burn_worker_initializer">burn_worker_initializer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-call_order_update">call_order_update</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-call_order_update_operation_fee_parameters">call_order_update_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-cdd_vesting_policy_initializer">cdd_vesting_policy_initializer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-chain_parameters">chain_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-committee_member_create">committee_member_create</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-committee_member_create_operation_fee_parameters">committee_member_create_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-committee_member_update">committee_member_update</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-committee_member_update_global_parameters">committee_member_update_global_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-committee_member_update_global_parameters_operation_fee_parameters">committee_member_update_global_parameters_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-committee_member_update_operation_fee_parameters">committee_member_update_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-custom">custom</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-custom_operation_fee_parameters">custom_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fee_schedule">fee_schedule</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fill_order">fill_order</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fill_order_operation_fee_parameters">fill_order_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-limit_order_cancel">limit_order_cancel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-limit_order_cancel_operation_fee_parameters">limit_order_cancel_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-limit_order_create">limit_order_create</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-limit_order_create_operation_fee_parameters">limit_order_create_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-linear_vesting_policy_initializer">linear_vesting_policy_initializer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-memo_data">memo_data</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-op_wrapper">op_wrapper</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-operation">operation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-override_transfer">override_transfer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-override_transfer_operation_fee_parameters">override_transfer_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-price">price</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-price_feed">price_feed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-processed_transaction">processed_transaction</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-proposal_create">proposal_create</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-proposal_create_operation_fee_parameters">proposal_create_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-proposal_delete">proposal_delete</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-proposal_delete_operation_fee_parameters">proposal_delete_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-proposal_update">proposal_update</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-proposal_update_operation_fee_parameters">proposal_update_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-refund_worker_initializer">refund_worker_initializer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-signed_block">signed_block</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-signed_block_header">signed_block_header</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-signed_transaction">signed_transaction</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-stealth_confirmation">stealth_confirmation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-stealth_memo_data">stealth_memo_data</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-transaction">transaction</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-transfer">transfer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-transfer_from_blind">transfer_from_blind</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-transfer_from_blind_operation_fee_parameters">transfer_from_blind_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-transfer_operation_fee_parameters">transfer_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-transfer_to_blind">transfer_to_blind</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-transfer_to_blind_operation_fee_parameters">transfer_to_blind_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-vesting_balance_create">vesting_balance_create</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-vesting_balance_create_operation_fee_parameters">vesting_balance_create_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-vesting_balance_withdraw">vesting_balance_withdraw</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-vesting_balance_withdraw_operation_fee_parameters">vesting_balance_withdraw_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-vesting_balance_worker_initializer">vesting_balance_worker_initializer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-void_result">void_result</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-withdraw_permission_claim">withdraw_permission_claim</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-withdraw_permission_claim_operation_fee_parameters">withdraw_permission_claim_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-withdraw_permission_create">withdraw_permission_create</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-withdraw_permission_create_operation_fee_parameters">withdraw_permission_create_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-withdraw_permission_delete">withdraw_permission_delete</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-withdraw_permission_delete_operation_fee_parameters">withdraw_permission_delete_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-withdraw_permission_update">withdraw_permission_update</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-withdraw_permission_update_operation_fee_parameters">withdraw_permission_update_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-witness_create">witness_create</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-witness_create_operation_fee_parameters">witness_create_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-witness_update">witness_update</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-witness_update_operation_fee_parameters">witness_update_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-worker_create">worker_create</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-worker_create_operation_fee_parameters">worker_create_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Types">Types</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">lib/chain/src/TransactionBuilder.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import assert from &quot;assert&quot;;
+import {Signature, PublicKey, hash} from &quot;../../ecc&quot;;
+import {ops} from &quot;../../serializer&quot;;
+import {Apis, ChainConfig} from &quot;bitsharesjs-ws&quot;;
+import ChainTypes from &quot;./ChainTypes&quot;;
+const Buffer = require(&quot;safe-buffer&quot;).Buffer;
+
+var head_block_time_string, committee_min_review;
+
+class TransactionBuilder {
+    constructor() {
+        this.ref_block_num = 0;
+        this.ref_block_prefix = 0;
+        this.expiration = 0;
+        this.operations = [];
+        this.signatures = [];
+        this.signer_private_keys = [];
+
+        // semi-private method bindings
+        this._broadcast = _broadcast.bind(this);
+    }
+
+    /**
+        @arg {string} name - like &quot;transfer&quot;
+        @arg {object} operation - JSON matchching the operation&apos;s format
+    */
+    add_type_operation(name, operation) {
+        this.add_operation(this.get_type_operation(name, operation));
+        return;
+    }
+
+    /**
+        This does it all: set fees, finalize, sign, and broadcast (if wanted).
+
+        @arg {ConfidentialWallet} cwallet - must be unlocked, used to gather signing keys
+
+        @arg {array&lt;string&gt;} [signer_pubkeys = null] - Optional [&quot;GPHAbc9Def0...&quot;, ...].  These are additional signing keys.  Some balance claims require propritary address formats, the witness node can&apos;t tell us which ones are needed so they must be passed in.  If the witness node can figure out a signing key (mostly all other transactions), it should not be passed in here.
+
+        @arg {boolean} [broadcast = false]
+    */
+    process_transaction(cwallet, signer_pubkeys = null, broadcast = false) {
+        let wallet_object = cwallet.wallet.wallet_object;
+        if (Apis.instance().chain_id !== wallet_object.get(&quot;chain_id&quot;))
+            return Promise.reject(
+                &quot;Mismatched chain_id; expecting &quot; +
+                    wallet_object.get(&quot;chain_id&quot;) +
+                    &quot;, but got &quot; +
+                    Apis.instance().chain_id
+            );
+
+        return this.set_required_fees().then(() =&gt; {
+            var signer_pubkeys_added = {};
+            if (signer_pubkeys) {
+                // Balance claims are by address, only the private
+                // key holder can know about these additional
+                // potential keys.
+                var pubkeys = cwallet.getPubkeys_having_PrivateKey(
+                    signer_pubkeys
+                );
+                if (!pubkeys.length) throw new Error(&quot;Missing signing key&quot;);
+
+                for (let pubkey_string of pubkeys) {
+                    var private_key = cwallet.getPrivateKey(pubkey_string);
+                    this.add_signer(private_key, pubkey_string);
+                    signer_pubkeys_added[pubkey_string] = true;
+                }
+            }
+
+            return this.get_potential_signatures()
+                .then(({pubkeys, addys}) =&gt; {
+                    var my_pubkeys = cwallet.getPubkeys_having_PrivateKey(
+                        pubkeys,
+                        addys
+                    );
+
+                    //{//Testing only, don&apos;t send All public keys!
+                    //    var pubkeys_all = PrivateKeyStore.getPubkeys() // All public keys
+                    //    this.get_required_signatures(pubkeys_all).then( required_pubkey_strings =&gt;
+                    //        console.log(&apos;get_required_signatures all\t&apos;,required_pubkey_strings.sort(), pubkeys_all))
+                    //    this.get_required_signatures(my_pubkeys).then( required_pubkey_strings =&gt;
+                    //        console.log(&apos;get_required_signatures normal\t&apos;,required_pubkey_strings.sort(), pubkeys))
+                    //}
+
+                    return this.get_required_signatures(my_pubkeys).then(
+                        required_pubkeys =&gt; {
+                            for (let pubkey_string of required_pubkeys) {
+                                if (signer_pubkeys_added[pubkey_string])
+                                    continue;
+                                var private_key = cwallet.getPrivateKey(
+                                    pubkey_string
+                                );
+                                if (!private_key)
+                                    // This should not happen, get_required_signatures will only
+                                    // returned keys from my_pubkeys
+                                    throw new Error(
+                                        &quot;Missing signing key for &quot; +
+                                            pubkey_string
+                                    );
+                                this.add_signer(private_key, pubkey_string);
+                            }
+                        }
+                    );
+                })
+                .then(() =&gt; (broadcast ? this.broadcast() : this.serialize()));
+        });
+    }
+
+    /** Typically this is called automatically just prior to signing.  Once finalized this transaction can not be changed. */
+    finalize() {
+        return new Promise((resolve, reject) =&gt; {
+            if (this.tr_buffer) {
+                throw new Error(&quot;already finalized&quot;);
+            }
+
+            resolve(
+                Apis.instance()
+                    .db_api()
+                    .exec(&quot;get_objects&quot;, [[&quot;2.1.0&quot;]])
+                    .then(r =&gt; {
+                        head_block_time_string = r[0].time;
+                        if (this.expiration === 0)
+                            this.expiration =
+                                base_expiration_sec() +
+                                ChainConfig.expire_in_secs;
+                        this.ref_block_num = r[0].head_block_number &amp; 0xffff;
+                        this.ref_block_prefix = new Buffer(
+                            r[0].head_block_id,
+                            &quot;hex&quot;
+                        ).readUInt32LE(4);
+                        //DEBUG console.log(&quot;ref_block&quot;,@ref_block_num,@ref_block_prefix,r)
+
+                        var iterable = this.operations;
+                        for (var i = 0, op; i &lt; iterable.length; i++) {
+                            op = iterable[i];
+                            if (op[1][&quot;finalize&quot;]) {
+                                op[1].finalize();
+                            }
+                        }
+                        this.tr_buffer = ops.transaction.toBuffer(this);
+                    })
+            );
+        });
+    }
+
+    /** @return {string} hex transaction ID */
+    id() {
+        if (!this.tr_buffer) {
+            throw new Error(&quot;not finalized&quot;);
+        }
+        return hash
+            .sha256(this.tr_buffer)
+            .toString(&quot;hex&quot;)
+            .substring(0, 40);
+    }
+
+    /**
+        Typically one will use {@link this.add_type_operation} instead.
+        @arg {array} operation - [operation_id, operation]
+    */
+    add_operation(operation) {
+        if (this.tr_buffer) {
+            throw new Error(&quot;already finalized&quot;);
+        }
+        assert(operation, &quot;operation&quot;);
+        if (!Array.isArray(operation)) {
+            throw new Error(&quot;Expecting array [operation_id, operation]&quot;);
+        }
+        this.operations.push(operation);
+        return;
+    }
+
+    get_type_operation(name, operation) {
+        if (this.tr_buffer) {
+            throw new Error(&quot;already finalized&quot;);
+        }
+        assert(name, &quot;name&quot;);
+        assert(operation, &quot;operation&quot;);
+        var _type = ops[name];
+        assert(_type, `Unknown operation ${name}`);
+        var operation_id = ChainTypes.operations[_type.operation_name];
+        if (operation_id === undefined) {
+            throw new Error(`unknown operation: ${_type.operation_name}`);
+        }
+        if (!operation.fee) {
+            operation.fee = {amount: 0, asset_id: 0};
+        }
+        if (name === &quot;proposal_create&quot;) {
+            /*
+            * Proposals involving the committee account require a review
+            * period to be set, look for them here
+            */
+            let requiresReview = false,
+                extraReview = 0;
+            operation.proposed_ops.forEach(op =&gt; {
+                const COMMITTE_ACCOUNT = 0;
+                let key;
+
+                switch (op.op[0]) {
+                    case 0: // transfer
+                        key = &quot;from&quot;;
+                        break;
+
+                    case 6: //account_update
+                    case 17: // asset_settle
+                        key = &quot;account&quot;;
+                        break;
+
+                    case 10: // asset_create
+                    case 11: // asset_update
+                    case 12: // asset_update_bitasset
+                    case 13: // asset_update_feed_producers
+                    case 14: // asset_issue
+                    case 18: // asset_global_settle
+                    case 43: // asset_claim_fees
+                        key = &quot;issuer&quot;;
+                        break;
+
+                    case 15: // asset_reserve
+                        key = &quot;payer&quot;;
+                        break;
+
+                    case 16: // asset_fund_fee_pool
+                        key = &quot;from_account&quot;;
+                        break;
+
+                    case 22: // proposal_create
+                    case 23: // proposal_update
+                    case 24: // proposal_delete
+                        key = &quot;fee_paying_account&quot;;
+                        break;
+
+                    case 31: // committee_member_update_global_parameters
+                        requiresReview = true;
+                        extraReview = 60 * 60 * 24 * 13; // Make the review period 2 weeks total
+                        break;
+                }
+                if (key in op.op[1] &amp;&amp; op.op[1][key] === COMMITTE_ACCOUNT) {
+                    requiresReview = true;
+                }
+            });
+            operation.expiration_time ||
+                (operation.expiration_time =
+                    base_expiration_sec() +
+                    ChainConfig.expire_in_secs_proposal);
+            if (requiresReview) {
+                operation.review_period_seconds =
+                    extraReview +
+                    Math.max(
+                        committee_min_review,
+                        24 * 60 * 60 || ChainConfig.review_in_secs_committee
+                    );
+                /*
+                * Expiration time must be at least equal to
+                * now + review_period_seconds, so we add one hour to make sure
+                */
+                operation.expiration_time += 60 * 60 + extraReview;
+            }
+        }
+        var operation_instance = _type.fromObject(operation);
+        return [operation_id, operation_instance];
+    }
+
+    /* optional: fetch the current head block */
+
+    update_head_block() {
+        return Promise.all([
+            Apis.instance()
+                .db_api()
+                .exec(&quot;get_objects&quot;, [[&quot;2.0.0&quot;]]),
+            Apis.instance()
+                .db_api()
+                .exec(&quot;get_objects&quot;, [[&quot;2.1.0&quot;]])
+        ]).then(function(res) {
+            let [g, r] = res;
+            head_block_time_string = r[0].time;
+            committee_min_review =
+                g[0].parameters.committee_proposal_review_period;
+        });
+    }
+
+    /** optional: there is a deafult expiration */
+    set_expire_seconds(sec) {
+        if (this.tr_buffer) {
+            throw new Error(&quot;already finalized&quot;);
+        }
+        return (this.expiration = base_expiration_sec() + sec);
+    }
+
+    /* Wraps this transaction in a proposal_create transaction */
+    propose(proposal_create_options) {
+        if (this.tr_buffer) {
+            throw new Error(&quot;already finalized&quot;);
+        }
+        if (!this.operations.length) {
+            throw new Error(&quot;add operation first&quot;);
+        }
+
+        assert(proposal_create_options, &quot;proposal_create_options&quot;);
+        assert(
+            proposal_create_options.fee_paying_account,
+            &quot;proposal_create_options.fee_paying_account&quot;
+        );
+
+        let proposed_ops = this.operations.map(op =&gt; {
+            return {op: op};
+        });
+
+        this.operations = [];
+        this.signatures = [];
+        this.signer_private_keys = [];
+        proposal_create_options.proposed_ops = proposed_ops;
+        this.add_type_operation(&quot;proposal_create&quot;, proposal_create_options);
+        return this;
+    }
+
+    has_proposed_operation() {
+        let hasProposed = false;
+        for (var i = 0; i &lt; this.operations.length; i++) {
+            if (&quot;proposed_ops&quot; in this.operations[i][1]) {
+                hasProposed = true;
+                break;
+            }
+        }
+
+        return hasProposed;
+    }
+
+    /** optional: the fees can be obtained from the witness node */
+    set_required_fees(asset_id, removeDuplicates) {
+        if (this.tr_buffer) {
+            throw new Error(&quot;already finalized&quot;);
+        }
+        if (!this.operations.length) {
+            throw new Error(&quot;add operations first&quot;);
+        }
+
+        function isProposal(op) {
+            return op[0] === 22;
+        }
+
+        let operations = [];
+        let proposed_ops = [];
+        let feeAssets = [];
+        let proposalFeeAssets = [];
+        let potentialDuplicates = {};
+        function getDuplicateOriginalIndex(op, index) {
+            let key = getOperationKey(op);
+            let duplicate = potentialDuplicates[key];
+            if (!!duplicate) {
+                if (duplicate.original === index) return index;
+                else if (duplicate.duplicates.indexOf(index) !== -1) {
+                    return duplicate.original;
+                }
+            }
+        }
+        function getOperationKey(op) {
+            let key = null;
+            switch (op[0]) {
+                case 0: // transfer
+                    let memoDummy = new Array(
+                        op[1].memo.message.length + 1
+                    ).join(&quot;a&quot;);
+                    key = `${op[0]}_${op[1].amount.asset_id}_${memoDummy}`;
+                    break;
+                default:
+            }
+            return key;
+        }
+        for (let i = 0, op; i &lt; this.operations.length; i++) {
+            op = this.operations[i];
+            let opObject = ops.operation.toObject(op);
+            let isDuplicate = false;
+            if (removeDuplicates) {
+                let key = getOperationKey(opObject);
+                if (key) {
+                    if (!potentialDuplicates[key])
+                        potentialDuplicates[key] = {
+                            original: i,
+                            duplicates: []
+                        };
+                    else {
+                        potentialDuplicates[key].duplicates.push(i);
+                        isDuplicate = true;
+                    }
+                }
+            }
+            /*
+            * If the operation creates a proposal, we should check the fee pool
+            * of the suggested proposal fee assets to prevent users from creating
+            * proposals that will most likely fail due to empty fee pools
+            */
+            if (isProposal(op)) {
+                op[1].proposed_ops.forEach(prop =&gt; {
+                    // console.log(&quot;proposed op&quot;, prop.op[1].fee);
+                    proposed_ops.push(prop);
+                    if (
+                        proposalFeeAssets.indexOf(prop.op[1].fee.asset_id) ===
+                        -1
+                    )
+                        proposalFeeAssets.push(
+                            &quot;1.3.&quot; + prop.op[1].fee.asset_id
+                        );
+                });
+            }
+            if (!isDuplicate) {
+                operations.push(opObject);
+                if (feeAssets.indexOf(operations[i][1].fee.asset_id) === -1)
+                    feeAssets.push(operations[i][1].fee.asset_id);
+            }
+        }
+
+        if (!asset_id) {
+            let op1_fee = operations[0][1].fee;
+            if (op1_fee &amp;&amp; op1_fee.asset_id !== null) {
+                asset_id = op1_fee.asset_id;
+            } else {
+                asset_id = &quot;1.3.0&quot;;
+            }
+        }
+
+        let promises = [];
+        promises.push(
+            Promise.all(
+                feeAssets.map(id =&gt; {
+                    return Apis.instance()
+                        .db_api()
+                        .exec(&quot;get_required_fees&quot;, [operations, id]);
+                })
+            ).catch(err =&gt; {
+                console.error(&quot;get_required_fees API error: &quot;, err.message);
+            })
+        );
+
+        /*
+        * Add the proposal fee asset ids to feeAssets here to fetch their
+        * dynamic objects without calling get_required_fees with them as well
+        */
+        if (proposalFeeAssets.length) {
+            proposalFeeAssets.forEach(id =&gt; {
+                if (feeAssets.indexOf(id) === -1) feeAssets.push(id);
+            });
+        }
+
+        if (feeAssets.length &gt; 1 || feeAssets[0] !== &quot;1.3.0&quot;) {
+            /*
+            * If we&apos;re paying with any assets other than CORE, we need to fetch
+            * the dynamic asset object and check the fee pool of those assets.
+            * The dynamic asset object id is equal to the asset id but with
+            * 2.3.x instead of 1.3.x
+            */
+            let dynamicObjectIds = feeAssets.map(a =&gt; a.replace(/^1\./, &quot;2.&quot;));
+            promises.push(
+                Apis.instance()
+                    .db_api()
+                    .exec(&quot;get_required_fees&quot;, [operations, &quot;1.3.0&quot;])
+            );
+            promises.push(
+                Apis.instance()
+                    .db_api()
+                    .exec(&quot;get_objects&quot;, [dynamicObjectIds])
+            );
+        }
+
+        return Promise.all(promises).then(results =&gt; {
+            /*
+            * allFees and coreFees are arrays containg fee amounts grouped by
+            * asset and for each operation in operations
+            */
+            let [allFees, coreFees, dynamicObjects] = results;
+            /*
+            * If one of the desired fee assets has an invalid core exchange rate
+            * get_required_signatures will fail and the result for all assets
+            * will be undefined, if so we just default to coreFees
+            */
+            if (allFees === undefined) {
+                allFees = coreFees;
+            }
+            /*
+            * If the only desired fee asset is CORE, coreFees are not fetched
+            * but are equal to allFees
+            */
+            if (!coreFees) {
+                coreFees = allFees[0];
+            }
+
+            /* Create a map of fees and proposal fees by asset id */
+            let feesByAsset = {};
+            let proposalFeesByAsset = {};
+            allFees.forEach(feeSet =&gt; {
+                let filteredFeeSet = feeSet.map(f =&gt; {
+                    if (Array.isArray(f)) {
+                        // This operation includes a proposal
+                        proposalFeesByAsset[f[1][0].asset_id] = f[1];
+                        return f[0];
+                    }
+                    return f;
+                });
+                let currentAssetId = filteredFeeSet[0].asset_id;
+
+                feesByAsset[currentAssetId] = filteredFeeSet;
+            }, {});
+
+            /* Create a map of fee pools by asset id*/
+            let feePoolMap = !!dynamicObjects
+                ? dynamicObjects.reduce((map, object) =&gt; {
+                      map[object.id.replace(/^2\./, &quot;1.&quot;)] = object;
+                      return map;
+                  }, {})
+                : {};
+
+            let feeMap = {};
+            let proposalFeeMap = {};
+            function updateFeeMap(map, asset_id, opIndex, core_fees) {
+                if (!map[asset_id]) map[asset_id] = {total: 0, ops: []};
+                if (map[asset_id].propIdx) map[asset_id].propIdx.push(opIndex);
+                else map[asset_id].ops.push(opIndex);
+
+                if (asset_id !== &quot;1.3.0&quot;) {
+                    map[asset_id].total += core_fees.length
+                        ? core_fees[opIndex].amount
+                        : core_fees.amount;
+                }
+                return map;
+            }
+
+            for (let i = 0; i &lt; operations.length; i++) {
+                let op = operations[i];
+                let feeAssetId = op[1].fee.asset_id;
+
+                if (isProposal(op)) {
+                    feeMap = updateFeeMap(
+                        feeMap,
+                        feeAssetId,
+                        i,
+                        coreFees[i][0]
+                    );
+
+                    op[1].proposed_ops.forEach((prop, y) =&gt; {
+                        let propFeeAsset = prop.op[1].fee.asset_id;
+                        if (!proposalFeeMap[i]) proposalFeeMap[i] = {};
+                        if (!proposalFeeMap[i][propFeeAsset])
+                            proposalFeeMap[i][propFeeAsset] = {
+                                total: 0,
+                                ops: [i],
+                                propIdx: []
+                            };
+
+                        proposalFeeMap[i] = updateFeeMap(
+                            proposalFeeMap[i],
+                            propFeeAsset,
+                            y,
+                            coreFees[i][1]
+                        );
+                    });
+                } else {
+                    feeMap = updateFeeMap(feeMap, feeAssetId, i, coreFees[i]);
+                }
+            }
+
+            /* Check fee pool balances for regular ops */
+            function checkPoolBalance(map) {
+                if (!Object.keys(map).length) return [];
+                let final_fees = [];
+                for (let asset in map) {
+                    let feePool = feePoolMap[asset]
+                        ? parseInt(feePoolMap[asset].fee_pool, 10)
+                        : 0;
+                    /* Fee pool balance insufficient, default to core*/
+                    if (map[asset].total &gt; feePool) {
+                        map[asset].ops.forEach(opIndex =&gt; {
+                            if (
+                                coreFees[opIndex].length === 2 &amp;&amp;
+                                &quot;propIdx&quot; in map[asset]
+                            ) {
+                                /* Proposal op */
+                                map[asset].propIdx.forEach(prop_idx =&gt; {
+                                    final_fees[prop_idx] =
+                                        coreFees[opIndex][1][prop_idx];
+                                });
+                            } else if (coreFees[opIndex].length === 2) {
+                                final_fees[opIndex] = coreFees[opIndex][0];
+                            } else {
+                                final_fees[opIndex] = coreFees[opIndex];
+                            }
+                        });
+                        /* Use the desired fee asset */
+                    } else {
+                        map[asset].ops.forEach(opIndex =&gt; {
+                            if (
+                                coreFees[opIndex].length === 2 &amp;&amp;
+                                &quot;propIdx&quot; in map[asset]
+                            ) {
+                                map[asset].propIdx.forEach(prop_idx =&gt; {
+                                    final_fees[prop_idx] =
+                                        proposalFeesByAsset[asset][prop_idx];
+                                });
+                            } else {
+                                final_fees[opIndex] =
+                                    feesByAsset[asset][opIndex];
+                            }
+                        });
+                    }
+                }
+                return final_fees;
+            }
+
+            let finalFees = checkPoolBalance(feeMap);
+
+            let finalProposalFees = {};
+            for (let key in proposalFeeMap) {
+                finalProposalFees[key] = checkPoolBalance(proposalFeeMap[key]);
+            }
+
+            let set_fee = (operation, opIndex) =&gt; {
+                if (
+                    !operation.fee ||
+                    operation.fee.amount === 0 ||
+                    (operation.fee.amount.toString &amp;&amp;
+                        operation.fee.amount.toString() === &quot;0&quot;) // Long
+                ) {
+                    if (removeDuplicates) {
+                        let op = ops.operation.toObject(
+                            this.operations[opIndex]
+                        );
+                        let originalIndex = getDuplicateOriginalIndex(
+                            op,
+                            opIndex
+                        );
+                        if (originalIndex &gt;= 0) {
+                            // it&apos;s a duplicate
+                            operation.fee = finalFees[originalIndex];
+                        } else {
+                            operation.fee = finalFees[opIndex];
+                        }
+                    } else {
+                        operation.fee = finalFees[opIndex];
+                    }
+                }
+                if (operation.proposed_ops) {
+                    let result = [];
+                    /*
+                    * Loop over proposed_ops and assign fee asset ids as
+                    * determined by the fee pool balance check. If the balance
+                    * is sufficient the asset_id is kept, if not it defaults to
+                    * &quot;1.3.0&quot;
+                    */
+                    for (let y = 0; y &lt; operation.proposed_ops.length; y++) {
+                        operation.proposed_ops[y].op[1].fee.asset_id =
+                            finalProposalFees[opIndex][y].asset_id;
+                    }
+
+                    return result;
+                }
+            };
+            /* We apply the final fees the the operations */
+            for (let i = 0; i &lt; this.operations.length; i++) {
+                set_fee(this.operations[i][1], i);
+            }
+        });
+        //DEBUG console.log(&apos;... get_required_fees&apos;,operations,asset_id,flat_fees)
+    }
+
+    get_potential_signatures() {
+        var tr_object = ops.signed_transaction.toObject(this);
+        return Promise.all([
+            Apis.instance()
+                .db_api()
+                .exec(&quot;get_potential_signatures&quot;, [tr_object]),
+            Apis.instance()
+                .db_api()
+                .exec(&quot;get_potential_address_signatures&quot;, [tr_object])
+        ]).then(function(results) {
+            return {pubkeys: results[0], addys: results[1]};
+        });
+    }
+
+    get_required_signatures(available_keys) {
+        if (!available_keys.length) {
+            return Promise.resolve([]);
+        }
+        var tr_object = ops.signed_transaction.toObject(this);
+        //DEBUG console.log(&apos;... tr_object&apos;,tr_object)
+        return Apis.instance()
+            .db_api()
+            .exec(&quot;get_required_signatures&quot;, [tr_object, available_keys])
+            .then(function(required_public_keys) {
+                //DEBUG console.log(&apos;... get_required_signatures&apos;,required_public_keys)
+                return required_public_keys;
+            });
+    }
+
+    add_signer(private_key, public_key = private_key.toPublicKey()) {
+        assert(private_key.d, &quot;required PrivateKey object&quot;);
+
+        if (this.signed) {
+            throw new Error(&quot;already signed&quot;);
+        }
+        if (!public_key.Q) {
+            public_key = PublicKey.fromPublicKeyString(public_key);
+        }
+        // prevent duplicates
+        let spHex = private_key.toHex();
+        for (let sp of this.signer_private_keys) {
+            if (sp[0].toHex() === spHex) return;
+        }
+        this.signer_private_keys.push([private_key, public_key]);
+    }
+
+    sign(chain_id = Apis.instance().chain_id) {
+        if (!this.tr_buffer) {
+            throw new Error(&quot;not finalized&quot;);
+        }
+        if (this.signed) {
+            throw new Error(&quot;already signed&quot;);
+        }
+        if (!this.signer_private_keys.length) {
+            throw new Error(
+                &quot;Transaction was not signed. Do you have a private key? [no_signers]&quot;
+            );
+        }
+        var end = this.signer_private_keys.length;
+        for (var i = 0; 0 &lt; end ? i &lt; end : i &gt; end; 0 &lt; end ? i++ : i++) {
+            var [private_key, public_key] = this.signer_private_keys[i];
+            var sig = Signature.signBuffer(
+                Buffer.concat([new Buffer(chain_id, &quot;hex&quot;), this.tr_buffer]),
+                private_key,
+                public_key
+            );
+            this.signatures.push(sig.toBuffer());
+        }
+        this.signer_private_keys = [];
+        this.signed = true;
+        return;
+    }
+
+    serialize() {
+        return ops.signed_transaction.toObject(this);
+    }
+
+    toObject() {
+        return ops.signed_transaction.toObject(this);
+    }
+
+    broadcast(was_broadcast_callback) {
+        if (this.tr_buffer) {
+            return this._broadcast(was_broadcast_callback);
+        } else {
+            return this.finalize().then(() =&gt; {
+                return this._broadcast(was_broadcast_callback);
+            });
+        }
+    }
+}
+
+var base_expiration_sec = () =&gt; {
+    var head_block_sec = Math.ceil(getHeadBlockDate().getTime() / 1000);
+    var now_sec = Math.ceil(Date.now() / 1000);
+    // The head block time should be updated every 3 seconds.  If it isn&apos;t
+    // then help the transaction to expire (use head_block_sec)
+    if (now_sec - head_block_sec &gt; 30) {
+        return head_block_sec;
+    }
+    // If the user&apos;s clock is very far behind, use the head block time.
+    return Math.max(now_sec, head_block_sec);
+};
+
+function _broadcast(was_broadcast_callback) {
+    return new Promise((resolve, reject) =&gt; {
+        if (!this.signed) {
+            this.sign();
+        }
+        if (!this.tr_buffer) {
+            throw new Error(&quot;not finalized&quot;);
+        }
+        if (!this.signatures.length) {
+            throw new Error(&quot;not signed&quot;);
+        }
+        if (!this.operations.length) {
+            throw new Error(&quot;no operations&quot;);
+        }
+
+        var tr_object = ops.signed_transaction.toObject(this);
+        // console.log(&apos;... broadcast_transaction_with_callback !!!&apos;)
+        Apis.instance()
+            .network_api()
+            .exec(&quot;broadcast_transaction_with_callback&quot;, [
+                function(res) {
+                    return resolve(res);
+                },
+                tr_object
+            ])
+            .then(function() {
+                //console.log(&apos;... broadcast success, waiting for callback&apos;)
+                if (was_broadcast_callback) was_broadcast_callback();
+                return;
+            })
+            .catch(error =&gt; {
+                // console.log may be redundant for network errors, other errors could occur
+                console.log(error);
+                var message = error.message;
+                if (!message) {
+                    message = &quot;&quot;;
+                }
+                reject(
+                    new Error(
+                        message +
+                            &quot;\n&quot; +
+                            &quot;bitshares-crypto &quot; +
+                            &quot; digest &quot; +
+                            hash.sha256(this.tr_buffer).toString(&quot;hex&quot;) +
+                            &quot; transaction &quot; +
+                            this.tr_buffer.toString(&quot;hex&quot;) +
+                            &quot; &quot; +
+                            JSON.stringify(tr_object)
+                    )
+                );
+                return;
+            });
+        return;
+    });
+}
+
+function getHeadBlockDate() {
+    return timeStringToDate(head_block_time_string);
+}
+
+function timeStringToDate(time_string) {
+    if (!time_string) return new Date(&quot;1970-01-01T00:00:00.000Z&quot;);
+    if (!/Z$/.test(time_string))
+        //does not end in Z
+        // https://github.com/cryptonomex/graphene/issues/368
+        time_string = time_string + &quot;Z&quot;;
+    return new Date(time_string);
+}
+
+export default TransactionBuilder;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

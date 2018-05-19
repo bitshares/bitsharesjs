@@ -1,0 +1,1856 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">lib/chain/src/ChainStore.js | BitsharesJS Docs</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Pure JavaScript Bitshares library for node.js and browsers."><meta property="twitter:card" content="summary"><meta property="twitter:title" content="BitsharesJS Docs"><meta property="twitter:description" content="Pure JavaScript Bitshares library for node.js and browsers."></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/bitshares/bitsharesjs"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#chain-src">chain/src</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/chain/src/AccountLogin.js~AccountLogin.html">AccountLogin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/chain/src/ChainStore.js~ChainStore.html">ChainStore</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/chain/src/ObjectId.js~ObjectId.html">ObjectId</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/chain/src/TransactionBuilder.js~TransactionBuilder.html">TransactionBuilder</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-emitter">emitter</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-get">get</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-set">set</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-accountLogin">accountLogin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-chain_store">chain_store</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ChainTypes">ChainTypes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-chainValidation">chainValidation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-NumberUtils">NumberUtils</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-helper">helper</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#ecc-src">ecc/src</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/ecc/src/PrivateKey.js~PrivateKey.html">PrivateKey</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/ecc/src/PublicKey.js~PublicKey.html">PublicKey</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/ecc/src/address.js~Address.html">Address</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/ecc/src/aes.js~Aes.html">Aes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/ecc/src/signature.js~Signature.html">Signature</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-normalize">normalize</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-calcPubKeyRecoveryParam">calcPubKeyRecoveryParam</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-deterministicGenerateK">deterministicGenerateK</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-recoverPubKey">recoverPubKey</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-sign">sign</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-verify">verify</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-verifyRaw">verifyRaw</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ECSignature">ECSignature</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-enforce">enforce</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-HmacSHA256">HmacSHA256</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ripemd160">ripemd160</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-sha256">sha256</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-sha512">sha512</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-key">key</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#serializer-src">serializer/src</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/serializer/src/FastParser.js~FastParser.html">FastParser</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/serializer/src/error_with_cause.js~ErrorWithCause.html">ErrorWithCause</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/serializer/src/serializer.js~Serializer.html">Serializer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convert">convert</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-template">template</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-_my">_my</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-account_create">account_create</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-account_create_operation_fee_parameters">account_create_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-account_name_eq_lit_predicate">account_name_eq_lit_predicate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-account_options">account_options</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-account_transfer">account_transfer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-account_transfer_operation_fee_parameters">account_transfer_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-account_update">account_update</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-account_update_operation_fee_parameters">account_update_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-account_upgrade">account_upgrade</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-account_upgrade_operation_fee_parameters">account_upgrade_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-account_whitelist">account_whitelist</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-account_whitelist_operation_fee_parameters">account_whitelist_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-assert">assert</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-assert_operation_fee_parameters">assert_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset">asset</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_claim_fees">asset_claim_fees</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_claim_fees_operation_fee_parameters">asset_claim_fees_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_create">asset_create</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_create_operation_fee_parameters">asset_create_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_fund_fee_pool">asset_fund_fee_pool</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_fund_fee_pool_operation_fee_parameters">asset_fund_fee_pool_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_global_settle">asset_global_settle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_global_settle_operation_fee_parameters">asset_global_settle_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_issue">asset_issue</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_issue_operation_fee_parameters">asset_issue_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_options">asset_options</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_publish_feed">asset_publish_feed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_publish_feed_operation_fee_parameters">asset_publish_feed_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_reserve">asset_reserve</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_reserve_operation_fee_parameters">asset_reserve_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_settle">asset_settle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_settle_cancel">asset_settle_cancel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_settle_cancel_operation_fee_parameters">asset_settle_cancel_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_settle_operation_fee_parameters">asset_settle_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_symbol_eq_lit_predicate">asset_symbol_eq_lit_predicate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_update">asset_update</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_update_bitasset">asset_update_bitasset</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_update_bitasset_operation_fee_parameters">asset_update_bitasset_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_update_feed_producers">asset_update_feed_producers</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_update_feed_producers_operation_fee_parameters">asset_update_feed_producers_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asset_update_operation_fee_parameters">asset_update_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-authority">authority</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-balance_claim">balance_claim</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-balance_claim_operation_fee_parameters">balance_claim_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-bitasset_options">bitasset_options</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-blind_input">blind_input</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-blind_output">blind_output</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-blind_transfer">blind_transfer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-blind_transfer_operation_fee_parameters">blind_transfer_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-block_header">block_header</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-block_id_predicate">block_id_predicate</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-burn_worker_initializer">burn_worker_initializer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-call_order_update">call_order_update</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-call_order_update_operation_fee_parameters">call_order_update_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-cdd_vesting_policy_initializer">cdd_vesting_policy_initializer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-chain_parameters">chain_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-committee_member_create">committee_member_create</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-committee_member_create_operation_fee_parameters">committee_member_create_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-committee_member_update">committee_member_update</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-committee_member_update_global_parameters">committee_member_update_global_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-committee_member_update_global_parameters_operation_fee_parameters">committee_member_update_global_parameters_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-committee_member_update_operation_fee_parameters">committee_member_update_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-custom">custom</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-custom_operation_fee_parameters">custom_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fee_schedule">fee_schedule</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fill_order">fill_order</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fill_order_operation_fee_parameters">fill_order_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-limit_order_cancel">limit_order_cancel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-limit_order_cancel_operation_fee_parameters">limit_order_cancel_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-limit_order_create">limit_order_create</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-limit_order_create_operation_fee_parameters">limit_order_create_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-linear_vesting_policy_initializer">linear_vesting_policy_initializer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-memo_data">memo_data</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-op_wrapper">op_wrapper</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-operation">operation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-override_transfer">override_transfer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-override_transfer_operation_fee_parameters">override_transfer_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-price">price</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-price_feed">price_feed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-processed_transaction">processed_transaction</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-proposal_create">proposal_create</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-proposal_create_operation_fee_parameters">proposal_create_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-proposal_delete">proposal_delete</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-proposal_delete_operation_fee_parameters">proposal_delete_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-proposal_update">proposal_update</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-proposal_update_operation_fee_parameters">proposal_update_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-refund_worker_initializer">refund_worker_initializer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-signed_block">signed_block</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-signed_block_header">signed_block_header</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-signed_transaction">signed_transaction</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-stealth_confirmation">stealth_confirmation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-stealth_memo_data">stealth_memo_data</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-transaction">transaction</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-transfer">transfer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-transfer_from_blind">transfer_from_blind</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-transfer_from_blind_operation_fee_parameters">transfer_from_blind_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-transfer_operation_fee_parameters">transfer_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-transfer_to_blind">transfer_to_blind</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-transfer_to_blind_operation_fee_parameters">transfer_to_blind_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-vesting_balance_create">vesting_balance_create</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-vesting_balance_create_operation_fee_parameters">vesting_balance_create_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-vesting_balance_withdraw">vesting_balance_withdraw</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-vesting_balance_withdraw_operation_fee_parameters">vesting_balance_withdraw_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-vesting_balance_worker_initializer">vesting_balance_worker_initializer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-void_result">void_result</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-withdraw_permission_claim">withdraw_permission_claim</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-withdraw_permission_claim_operation_fee_parameters">withdraw_permission_claim_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-withdraw_permission_create">withdraw_permission_create</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-withdraw_permission_create_operation_fee_parameters">withdraw_permission_create_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-withdraw_permission_delete">withdraw_permission_delete</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-withdraw_permission_delete_operation_fee_parameters">withdraw_permission_delete_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-withdraw_permission_update">withdraw_permission_update</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-withdraw_permission_update_operation_fee_parameters">withdraw_permission_update_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-witness_create">witness_create</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-witness_create_operation_fee_parameters">witness_create_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-witness_update">witness_update</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-witness_update_operation_fee_parameters">witness_update_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-worker_create">worker_create</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-worker_create_operation_fee_parameters">worker_create_operation_fee_parameters</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Types">Types</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">lib/chain/src/ChainStore.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import Immutable from &quot;immutable&quot;;
+import {Apis} from &quot;bitsharesjs-ws&quot;;
+import ChainTypes from &quot;./ChainTypes&quot;;
+import ChainValidation from &quot;./ChainValidation&quot;;
+import BigInteger from &quot;bigi&quot;;
+import ee from &quot;./EmitterInstance&quot;;
+const {object_type, impl_object_type} = ChainTypes;
+let emitter = ee();
+
+let op_history = parseInt(object_type.operation_history, 10);
+let witness_object_type = parseInt(object_type.witness, 10);
+let committee_member_object_type = parseInt(object_type.committee_member, 10);
+let account_object_type = parseInt(object_type.account, 10);
+let witness_prefix = &quot;1.&quot; + witness_object_type + &quot;.&quot;;
+let committee_prefix = &quot;1.&quot; + committee_member_object_type + &quot;.&quot;;
+let account_prefix = &quot;1.&quot; + account_object_type + &quot;.&quot;;
+
+const DEBUG = JSON.parse(
+    process.env.npm_config__graphene_chain_chain_debug || false
+);
+
+const objectTypesArray = Object.keys(object_type);
+const implObjectTypesArray = Object.keys(impl_object_type);
+
+function getObjectType(id) {
+    let [one, two] = id.split(&quot;.&quot;);
+    two = parseInt(two, 10);
+    switch (one) {
+        case &quot;0&quot;:
+            return &quot;unknown&quot;;
+        case &quot;1&quot;:
+            return objectTypesArray[two];
+        case &quot;2&quot;:
+            return implObjectTypesArray[two];
+        case &quot;5&quot;:
+            return &quot;market&quot;;
+        default:
+    }
+}
+
+/**
+ *  @brief maintains a local cache of blockchain state
+ *
+ *  The ChainStore maintains a local cache of blockchain state and exposes
+ *  an API that makes it easy to query objects and receive updates when
+ *  objects are available.
+ */
+class ChainStore {
+    constructor() {
+        /** tracks everyone who wants to receive updates when the cache changes */
+        this.subscribers = new Set();
+        this.subscribed = false;
+
+        this.clearCache();
+        // this.progress = 0;
+        // this.chain_time_offset is used to estimate the blockchain time
+        this.chain_time_offset = [];
+        this.dispatchFrequency = 40;
+    }
+
+    /**
+     * Clears all cached state.  This should be called any time the network connection is
+     * reset.
+     */
+    clearCache() {
+        /*
+        * Tracks specific objects such as accounts that can trigger additional
+        * fetching that should only happen if we&apos;re actually interested in the account
+        */
+        this.subbed_accounts = new Set();
+        this.subbed_witnesses = new Set();
+        this.subbed_committee = new Set();
+
+        this.objects_by_id = new Map();
+        this.accounts_by_name = new Map();
+        this.assets_by_symbol = new Map();
+        this.account_ids_by_key = Immutable.Map();
+        this.account_ids_by_account = Immutable.Map();
+
+        this.balance_objects_by_address = new Map();
+        this.get_account_refs_of_keys_calls = new Set();
+        this.get_account_refs_of_accounts_calls = new Set();
+        this.account_history_requests = new Map(); ///&lt; tracks pending history requests
+        this.witness_by_account_id = new Map();
+        this.workers = new Set();
+        this.committee_by_account_id = new Map();
+        this.objects_by_vote_id = new Map();
+        this.fetching_get_full_accounts = new Map();
+        this.get_full_accounts_subscriptions = new Map();
+        clearTimeout(this.timeout);
+        this.dispatched = false;
+    }
+
+    resetCache(subscribe_to_new) {
+        this.subscribed = false;
+        this.subError = null;
+        this.clearCache();
+        this.head_block_time_string = null;
+        return this.init(subscribe_to_new).catch(err =&gt; {
+            console.log(&quot;resetCache init error:&quot;, err());
+        });
+    }
+
+    setDispatchFrequency(freq) {
+        this.dispatchFrequency = freq;
+    }
+
+    init(subscribe_to_new = true) {
+        let reconnectCounter = 0;
+        var _init = (resolve, reject) =&gt; {
+            if (this.subscribed) return resolve();
+            let db_api = Apis.instance().db_api();
+            if (!db_api) {
+                return reject(
+                    new Error(
+                        &quot;Api not found, please initialize the api instance before calling the ChainStore&quot;
+                    )
+                );
+            }
+            return db_api
+                .exec(&quot;get_objects&quot;, [[&quot;2.1.0&quot;]])
+                .then(optional_objects =&gt; {
+                    //if(DEBUG) console.log(&quot;... optional_objects&quot;,optional_objects ? optional_objects[0].id : null)
+                    for (let i = 0; i &lt; optional_objects.length; i++) {
+                        let optional_object = optional_objects[i];
+                        if (optional_object) {
+                            /*
+                        ** Because 2.1.0 gets fetched here before the set_subscribe_callback,
+                        ** the new witness_node subscription model makes it so we
+                        ** never get subscribed to that object, therefore
+                        ** this._updateObject is commented out here
+                        */
+                            // this._updateObject( optional_object, true );
+
+                            let head_time = new Date(
+                                optional_object.time + &quot;+00:00&quot;
+                            ).getTime();
+                            this.head_block_time_string = optional_object.time;
+                            this.chain_time_offset.push(
+                                new Date().getTime() -
+                                    timeStringToDate(
+                                        optional_object.time
+                                    ).getTime()
+                            );
+                            let now = new Date().getTime();
+                            let delta = (now - head_time) / 1000;
+                            // let start = Date.parse(&quot;Sep 1, 2015&quot;);
+                            // let progress_delta = head_time - start;
+                            // this.progress = progress_delta / (now-start);
+
+                            if (delta &lt; 60) {
+                                Apis.instance()
+                                    .db_api()
+                                    .exec(&quot;set_subscribe_callback&quot;, [
+                                        this.onUpdate.bind(this),
+                                        subscribe_to_new
+                                    ])
+                                    .then(() =&gt; {
+                                        console.log(
+                                            &quot;synced and subscribed, chainstore ready&quot;
+                                        );
+                                        this.subscribed = true;
+                                        this.subError = null;
+                                        this.notifySubscribers();
+                                        resolve();
+                                    })
+                                    .catch(error =&gt; {
+                                        this.subscribed = false;
+                                        this.subError = error;
+                                        this.notifySubscribers();
+                                        reject(error);
+                                        console.log(&quot;Error: &quot;, error);
+                                    });
+                            } else {
+                                console.log(&quot;not yet synced, retrying in 1s&quot;);
+                                this.subscribed = false;
+                                reconnectCounter++;
+                                this.notifySubscribers();
+                                if (reconnectCounter &gt; 5) {
+                                    this.subError = new Error(
+                                        &quot;ChainStore sync error, please check your system clock&quot;
+                                    );
+                                    return reject(this.subError);
+                                }
+                                setTimeout(
+                                    _init.bind(this, resolve, reject),
+                                    1000
+                                );
+                            }
+                        } else {
+                            setTimeout(_init.bind(this, resolve, reject), 1000);
+                        }
+                    }
+                })
+                .catch(error =&gt; {
+                    // in the event of an error clear the pending state for id
+                    console.log(&quot;!!! Chain API error&quot;, error);
+                    this.objects_by_id.delete(&quot;2.1.0&quot;);
+                    reject(error);
+                });
+        };
+
+        return new Promise((resolve, reject) =&gt; _init(resolve, reject));
+    }
+
+    _subTo(type, id) {
+        let key = &quot;subbed_&quot; + type;
+        if (!this[key].has(id)) this[key].add(id);
+    }
+
+    unSubFrom(type, id) {
+        let key = &quot;subbed_&quot; + type;
+        this[key].delete(id);
+        this.objects_by_id.delete(id);
+    }
+
+    _isSubbedTo(type, id) {
+        let key = &quot;subbed_&quot; + type;
+        return this[key].has(id);
+    }
+
+    onUpdate(
+        updated_objects /// map from account id to objects
+    ) {
+        let cancelledOrders = [];
+        let closedCallOrders = [];
+
+        for (let a = 0; a &lt; updated_objects.length; ++a) {
+            for (let i = 0; i &lt; updated_objects[a].length; ++i) {
+                let obj = updated_objects[a][i];
+                if (ChainValidation.is_object_id(obj)) {
+                    // An entry containing only an object ID means that object was removed
+
+                    // Check if the object exists in the ChainStore
+                    let old_obj = this.objects_by_id.get(obj);
+
+                    const objectType = getObjectType(obj);
+
+                    switch (objectType) {
+                        case &quot;limit_order&quot;:
+                            cancelledOrders.push(obj);
+                            if (old_obj) {
+                                let account = this.objects_by_id.get(
+                                    old_obj.get(&quot;seller&quot;)
+                                );
+                                if (account &amp;&amp; account.has(&quot;orders&quot;)) {
+                                    let limit_orders = account.get(&quot;orders&quot;);
+                                    if (account.get(&quot;orders&quot;).has(obj)) {
+                                        account = account.set(
+                                            &quot;orders&quot;,
+                                            limit_orders.delete(obj)
+                                        );
+                                        this.objects_by_id.set(
+                                            account.get(&quot;id&quot;),
+                                            account
+                                        );
+                                    }
+                                }
+                            }
+                            break;
+
+                        case &quot;call_order&quot;:
+                            closedCallOrders.push(obj);
+                            if (old_obj) {
+                                let account = this.objects_by_id.get(
+                                    old_obj.get(&quot;borrower&quot;)
+                                );
+                                if (account &amp;&amp; account.has(&quot;call_orders&quot;)) {
+                                    let call_orders = account.get(
+                                        &quot;call_orders&quot;
+                                    );
+                                    if (account.get(&quot;call_orders&quot;).has(obj)) {
+                                        account = account.set(
+                                            &quot;call_orders&quot;,
+                                            call_orders.delete(obj)
+                                        );
+                                        this.objects_by_id.set(
+                                            account.get(&quot;id&quot;),
+                                            account
+                                        );
+                                    }
+                                }
+                            }
+                            break;
+
+                        case &quot;proposal&quot;:
+                            this.subbed_accounts.forEach(acc =&gt; {
+                                let current = this.objects_by_id.get(acc);
+                                if (current) {
+                                    let proposals = current.get(
+                                        &quot;proposals&quot;,
+                                        Immutable.Set()
+                                    );
+
+                                    if (proposals.includes(obj)) {
+                                        proposals = proposals.delete(obj);
+                                        current = current.set(
+                                            &quot;proposals&quot;,
+                                            proposals
+                                        );
+                                        this.objects_by_id.set(
+                                            current.get(&quot;id&quot;),
+                                            current
+                                        );
+                                    }
+                                }
+                            });
+                            break;
+                    }
+
+                    // Remove the object (if it already exists), set to null to indicate it does not exist
+                    if (old_obj) this.objects_by_id.set(obj, null);
+                } else {
+                    this._updateObject(obj);
+                }
+            }
+        }
+
+        // Cancelled limit order(s), emit event for any listeners to update their state
+        if (cancelledOrders.length)
+            emitter.emit(&quot;cancel-order&quot;, cancelledOrders);
+        // Closed call order, emit event for any listeners to update their state
+        if (closedCallOrders.length)
+            emitter.emit(&quot;close-call&quot;, closedCallOrders);
+
+        // console.log(&quot;objects in store count:&quot;, this.objects_by_id.size, updated_objects[0].reduce((final, o) =&gt; {
+        //     if (o &amp;&amp; o.id) {
+        //         final.changed.push(o.id);
+        //     } else {
+        //         final.removed.push(o);
+        //     }
+        //     return final;
+        // }, {changed: [], removed: []}));
+        this.notifySubscribers();
+    }
+
+    notifySubscribers() {
+        // Dispatch at most only once every x milliseconds
+        if (!this.dispatched) {
+            this.dispatched = true;
+            this.timeout = setTimeout(() =&gt; {
+                this.dispatched = false;
+                this.subscribers.forEach(callback =&gt; {
+                    callback();
+                });
+            }, this.dispatchFrequency);
+        }
+    }
+
+    /**
+     *  Add a callback that will be called anytime any object in the cache is updated
+     */
+    subscribe(callback) {
+        if (this.subscribers.has(callback))
+            return console.error(&quot;Subscribe callback already exists&quot;, callback);
+        this.subscribers.add(callback);
+    }
+
+    /**
+     *  Remove a callback that was previously added via subscribe
+     */
+    unsubscribe(callback) {
+        if (!this.subscribers.has(callback))
+            return console.error(
+                &quot;Unsubscribe callback does not exists&quot;,
+                callback
+            );
+        this.subscribers.delete(callback);
+    }
+
+    /** Clear an object from the cache to force it to be fetched again. This may
+     * be useful if a query failed the first time and the wallet has reason to believe
+     * it may succeede the second time.
+     */
+    clearObjectCache(id) {
+        this.objects_by_id.delete(id);
+    }
+
+    /**
+     * There are three states an object id could be in:
+     *
+     * 1. undefined       - returned if a query is pending
+     * 3. defined         - return an object
+     * 4. null            - query return null
+     *
+     */
+    getObject(
+        id,
+        force = false,
+        autosubscribe = true,
+        no_full_account = false
+    ) {
+        if (!ChainValidation.is_object_id(id))
+            throw Error(&quot;argument is not an object id: &quot; + JSON.stringify(id));
+
+        let result = this.objects_by_id.get(id);
+        let subChange =
+            id.substring(0, account_prefix.length) == account_prefix &amp;&amp;
+            !this.get_full_accounts_subscriptions.get(id, false) &amp;&amp;
+            autosubscribe;
+
+        if (result === null &amp;&amp; !force) return result;
+        if (result === undefined || force || subChange)
+            return this.fetchObject(id, force, autosubscribe, no_full_account);
+        if (result === true) return undefined;
+
+        return result;
+    }
+
+    /**
+     *  @return undefined if a query is pending
+     *  @return null if id_or_symbol has been queired and does not exist
+     *  @return object if the id_or_symbol exists
+     */
+    getAsset(id_or_symbol) {
+        if (!id_or_symbol) return null;
+
+        if (ChainValidation.is_object_id(id_or_symbol)) {
+            let asset = this.getObject(id_or_symbol);
+
+            if (
+                asset &amp;&amp;
+                (asset.get(&quot;bitasset&quot;) &amp;&amp;
+                    !asset.getIn([&quot;bitasset&quot;, &quot;current_feed&quot;]))
+            ) {
+                return undefined;
+            }
+            return asset;
+        }
+
+        /// TODO: verify id_or_symbol is a valid symbol name
+
+        let asset_id = this.assets_by_symbol.get(id_or_symbol);
+
+        if (ChainValidation.is_object_id(asset_id)) {
+            let asset = this.getObject(asset_id);
+
+            if (
+                asset &amp;&amp;
+                (asset.get(&quot;bitasset&quot;) &amp;&amp;
+                    !asset.getIn([&quot;bitasset&quot;, &quot;current_feed&quot;]))
+            ) {
+                return undefined;
+            }
+            return asset;
+        }
+
+        if (asset_id === null) return null;
+
+        if (asset_id === true) return undefined;
+
+        Apis.instance()
+            .db_api()
+            .exec(&quot;lookup_asset_symbols&quot;, [[id_or_symbol]])
+            .then(asset_objects =&gt; {
+                if (asset_objects.length &amp;&amp; asset_objects[0])
+                    this._updateObject(asset_objects[0], true);
+                else {
+                    this.assets_by_symbol.set(id_or_symbol, null);
+                    this.notifySubscribers();
+                }
+            })
+            .catch(error =&gt; {
+                console.log(&quot;Error: &quot;, error);
+                this.assets_by_symbol.delete(id_or_symbol);
+            });
+
+        return undefined;
+    }
+
+    /**
+     *  @param the public key to find accounts that reference it
+     *
+     *  @return Set of account ids that reference the given key
+     *  @return a empty Set if no items are found
+     *  @return undefined if the result is unknown
+     *
+     *  If this method returns undefined, then it will send a request to
+     *  the server for the current set of accounts after which the
+     *  server will notify us of any accounts that reference these keys
+     */
+    getAccountRefsOfKey(key) {
+        if (this.get_account_refs_of_keys_calls.has(key))
+            return this.account_ids_by_key.get(key);
+        else {
+            this.get_account_refs_of_keys_calls.add(key);
+
+            Apis.instance()
+                .db_api()
+                .exec(&quot;get_key_references&quot;, [[key]])
+                .then(vec_account_id =&gt; {
+                    let refs = Immutable.Set();
+                    vec_account_id = vec_account_id[0];
+                    refs = refs.withMutations(r =&gt; {
+                        for (let i = 0; i &lt; vec_account_id.length; ++i) {
+                            r.add(vec_account_id[i]);
+                        }
+                    });
+                    this.account_ids_by_key = this.account_ids_by_key.set(
+                        key,
+                        refs
+                    );
+                    this.notifySubscribers();
+                })
+                .catch(err =&gt; {
+                    console.error(&quot;get_key_references&quot;, err);
+                    this.account_ids_by_key = this.account_ids_by_key.delete(
+                        key
+                    );
+                    this.get_account_refs_of_keys_calls.delete(key);
+                });
+            return undefined;
+        }
+        return undefined;
+    }
+
+    /**
+     *  @param the account id to find accounts that reference it
+     *
+     *  @return Set of account ids that reference the given key
+     *  @return a empty Set if no items are found
+     *  @return undefined if the result is unknown
+     *
+     *  If this method returns undefined, then it will send a request to
+     *  the server for the current set of accounts after which the
+     *  server will notify us of any accounts that reference these keys
+     */
+    getAccountRefsOfAccount(account_id) {
+        if (this.get_account_refs_of_accounts_calls.has(account_id))
+            return this.account_ids_by_account.get(account_id);
+        else {
+            this.get_account_refs_of_accounts_calls.add(account_id);
+
+            Apis.instance()
+                .db_api()
+                .exec(&quot;get_account_references&quot;, [account_id])
+                .then(vec_account_id =&gt; {
+                    let refs = Immutable.Set();
+                    refs = refs.withMutations(r =&gt; {
+                        for (let i = 0; i &lt; vec_account_id.length; ++i) {
+                            r.add(vec_account_id[i]);
+                        }
+                    });
+                    this.account_ids_by_account = this.account_ids_by_account.set(
+                        account_id,
+                        refs
+                    );
+                    this.notifySubscribers();
+                })
+                .catch(err =&gt; {
+                    console.error(&quot;get_account_references&quot;, err);
+                    this.account_ids_by_account = this.account_ids_by_account.delete(
+                        account_id
+                    );
+                    this.get_account_refs_of_accounts_calls.delete(account_id);
+                });
+            return undefined;
+        }
+        return undefined;
+    }
+
+    /**
+     * @return a Set of balance ids that are claimable with the given address
+     * @return undefined if a query is pending and the set is not known at this time
+     * @return a empty Set if no items are found
+     *
+     * If this method returns undefined, then it will send a request to the server for
+     * the current state after which it will be subscribed to changes to this set.
+     */
+    getBalanceObjects(address) {
+        let current = this.balance_objects_by_address.get(address);
+        if (current === undefined) {
+            /** because balance objects are simply part of the genesis state, there is no need to worry about
+             * having to update them / merge them or index them in updateObject.
+             */
+            this.balance_objects_by_address.set(address, Immutable.Set());
+            Apis.instance()
+                .db_api()
+                .exec(&quot;get_balance_objects&quot;, [[address]])
+                .then(
+                    balance_objects =&gt; {
+                        let set = new Set();
+                        for (let i = 0; i &lt; balance_objects.length; ++i) {
+                            this._updateObject(balance_objects[i]);
+                            set.add(balance_objects[i].id);
+                        }
+                        this.balance_objects_by_address.set(
+                            address,
+                            Immutable.Set(set)
+                        );
+                        this.notifySubscribers();
+                    },
+                    () =&gt; {
+                        this.balance_objects_by_address.delete(address);
+                    }
+                );
+        }
+        return this.balance_objects_by_address.get(address);
+    }
+
+    /**
+     *  If there is not already a pending request to fetch this object, a new
+     *  request will be made.
+     *
+     *  @return null if the object does not exist,
+     *  @return undefined if the object might exist but is not in cache
+     *  @return the object if it does exist and is in our cache
+     */
+    fetchObject(
+        id,
+        force = false,
+        autosubscribe = true,
+        no_full_account = false
+    ) {
+        if (typeof id !== &quot;string&quot;) {
+            let result = [];
+            for (let i = 0; i &lt; id.length; ++i)
+                result.push(this.fetchObject(id[i], force, autosubscribe));
+            return result;
+        }
+
+        if (DEBUG)
+            console.log(
+                &quot;!!! fetchObject: &quot;,
+                id,
+                this.subscribed,
+                !this.subscribed &amp;&amp; !force
+            );
+        if (!this.subscribed &amp;&amp; !force) return undefined;
+
+        if (DEBUG) console.log(&quot;maybe fetch object: &quot;, id);
+        if (!ChainValidation.is_object_id(id))
+            throw Error(&quot;argument is not an object id: &quot; + id);
+
+        if (id.search(&quot;1.2.&quot;) === 0 &amp;&amp; !no_full_account)
+            return this.fetchFullAccount(id, autosubscribe);
+        if (id.search(witness_prefix) === 0) this._subTo(&quot;witnesses&quot;, id);
+        if (id.search(committee_prefix) === 0) this._subTo(&quot;committee&quot;, id);
+
+        let result = this.objects_by_id.get(id);
+        if (result === undefined) {
+            // the fetch
+            if (DEBUG) console.log(&quot;fetching object: &quot;, id);
+            this.objects_by_id.set(id, true);
+            if (!Apis.instance().db_api()) return null;
+            Apis.instance()
+                .db_api()
+                .exec(&quot;get_objects&quot;, [[id]])
+                .then(optional_objects =&gt; {
+                    //if(DEBUG) console.log(&quot;... optional_objects&quot;,optional_objects ? optional_objects[0].id : null)
+                    for (let i = 0; i &lt; optional_objects.length; i++) {
+                        let optional_object = optional_objects[i];
+                        if (optional_object) {
+                            this._updateObject(optional_object, true);
+                        } else {
+                            this.objects_by_id.set(id, null);
+                            this.notifySubscribers();
+                        }
+                    }
+                })
+                .catch(error =&gt; {
+                    // in the event of an error clear the pending state for id
+                    console.log(&quot;!!! Chain API error&quot;, error);
+                    this.objects_by_id.delete(id);
+                });
+        } else if (result === true)
+            // then we are waiting a response
+            return undefined;
+        return result; // we have a response, return it
+    }
+
+    /**
+     *  @return null if no such account exists
+     *  @return undefined if such an account may exist, and fetch the the full account if not already pending
+     *  @return the account object if it does exist
+     */
+    getAccount(name_or_id, autosubscribe = true) {
+        if (!name_or_id) return null;
+
+        if (typeof name_or_id === &quot;object&quot;) {
+            if (name_or_id.id)
+                return this.getAccount(name_or_id.id, autosubscribe);
+            else if (name_or_id.get)
+                return this.getAccount(name_or_id.get(&quot;id&quot;), autosubscribe);
+            else return undefined;
+        }
+
+        if (ChainValidation.is_object_id(name_or_id)) {
+            let account = this.getObject(name_or_id, false, autosubscribe);
+            if (account === null) {
+                return null;
+            }
+            /* If sub status changes from false to true, force full fetch */
+            const currentSub = this.get_full_accounts_subscriptions.get(
+                name_or_id,
+                false
+            );
+            if (
+                (!currentSub &amp;&amp; autosubscribe) ||
+                account === undefined ||
+                account.get(&quot;name&quot;) === undefined
+            ) {
+                return this.fetchFullAccount(name_or_id, autosubscribe);
+            }
+            return account;
+        } else if (ChainValidation.is_account_name(name_or_id, true)) {
+            let account_id = this.accounts_by_name.get(name_or_id);
+            if (account_id === null) return null; // already fetched and it wasn&apos;t found
+            if (account_id === undefined)
+                // then no query, fetch it
+                return this.fetchFullAccount(name_or_id, autosubscribe);
+
+            return this.getObject(account_id, false, autosubscribe); // return it
+        } else {
+            console.log(&quot;!is_object_id &amp;&amp; !is_account_name&quot;);
+            return null;
+        }
+        //throw Error( `Argument is not an account name or id: ${name_or_id}` )
+    }
+
+    /**
+     *  @return undefined if the account name is not yet cached, and fetch the the full account if not already pending
+     *  @return null if the account name or id are unvalid, or the account does not exist
+     *  @return the account name
+     */
+    getAccountName(id) {
+        let account = this.objects_by_id.get(id);
+        if (account === true) return undefined;
+        if (!account) {
+            this.getObject(id, false, false, true);
+            return undefined;
+        }
+        return account.get(&quot;name&quot;);
+    }
+
+    /**
+     * This method will attempt to lookup witness by account_id.
+     * If witness doesn&apos;t exist it will return null, if witness is found it will return witness object,
+     * if it&apos;s not fetched yet it will return undefined.
+     * @param account_id - account id
+     */
+    getWitnessById(account_id) {
+        let witness_id = this.witness_by_account_id.get(account_id);
+        if (witness_id === undefined) {
+            this.fetchWitnessByAccount(account_id);
+            return undefined;
+        } else if (witness_id) {
+            this._subTo(&quot;witnesses&quot;, witness_id);
+        }
+
+        return witness_id ? this.getObject(witness_id) : null;
+    }
+
+    /**
+     * This method will attempt to lookup committee member by account_id.
+     * If committee member doesn&apos;t exist it will return null, if committee member is found it will return committee member object,
+     * if it&apos;s not fetched yet it will return undefined.
+     * @param account_id - account id
+     */
+    getCommitteeMemberById(account_id) {
+        let cm_id = this.committee_by_account_id.get(account_id);
+        if (cm_id === undefined) {
+            this.fetchCommitteeMemberByAccount(account_id);
+            return undefined;
+        } else if (cm_id) {
+            this._subTo(&quot;committee&quot;, cm_id);
+        }
+        return cm_id ? this.getObject(cm_id) : null;
+    }
+
+    /**
+     *
+     * @return a promise with the workers array
+     */
+    fetchAllWorkers() {
+        return new Promise((resolve, reject) =&gt; {
+            Apis.instance()
+                .db_api()
+                .exec(&quot;get_all_workers&quot;, [])
+                .then(workers_array =&gt; {
+                    if (workers_array &amp;&amp; workers_array.length) {
+                        workers_array.forEach(worker =&gt; {
+                            this._updateObject(worker, false);
+                        });
+                        resolve(workers_array);
+                        this.notifySubscribers();
+                    } else {
+                        resolve([]);
+                    }
+                }, reject);
+        });
+    }
+
+    /**
+     *
+     * @return a promise with the witness object
+     */
+    fetchWitnessByAccount(account_id) {
+        return new Promise((resolve, reject) =&gt; {
+            Apis.instance()
+                .db_api()
+                .exec(&quot;get_witness_by_account&quot;, [account_id])
+                .then(optional_witness_object =&gt; {
+                    if (optional_witness_object) {
+                        this._subTo(&quot;witnesses&quot;, optional_witness_object.id);
+                        this.witness_by_account_id = this.witness_by_account_id.set(
+                            optional_witness_object.witness_account,
+                            optional_witness_object.id
+                        );
+                        let witness_object = this._updateObject(
+                            optional_witness_object,
+                            true
+                        );
+                        resolve(witness_object);
+                    } else {
+                        this.witness_by_account_id = this.witness_by_account_id.set(
+                            account_id,
+                            null
+                        );
+                        this.notifySubscribers();
+                        resolve(null);
+                    }
+                }, reject);
+        });
+    }
+    /**
+     *
+     * @return a promise with the witness object
+     */
+    fetchCommitteeMemberByAccount(account_id) {
+        return new Promise((resolve, reject) =&gt; {
+            Apis.instance()
+                .db_api()
+                .exec(&quot;get_committee_member_by_account&quot;, [account_id])
+                .then(optional_committee_object =&gt; {
+                    if (optional_committee_object) {
+                        this._subTo(&quot;committee&quot;, optional_committee_object.id);
+                        this.committee_by_account_id = this.committee_by_account_id.set(
+                            optional_committee_object.committee_member_account,
+                            optional_committee_object.id
+                        );
+                        let committee_object = this._updateObject(
+                            optional_committee_object,
+                            true
+                        );
+                        resolve(committee_object);
+                    } else {
+                        this.committee_by_account_id = this.committee_by_account_id.set(
+                            account_id,
+                            null
+                        );
+                        this.notifySubscribers();
+                        resolve(null);
+                    }
+                }, reject);
+        });
+    }
+
+    /**
+     *  Fetches an account and all of its associated data in a single query
+     *
+     *  @param an account name or account id
+     *
+     *  @return undefined if the account in question is in the process of being fetched
+     *  @return the object if it has already been fetched
+     *  @return null if the object has been queried and was not found
+     */
+    fetchFullAccount(name_or_id, autosubscribe = true) {
+        if (DEBUG) console.log(&quot;Fetch full account: &quot;, name_or_id);
+
+        let fetch_account = false;
+        const subChanged =
+            this.get_full_accounts_subscriptions.has(name_or_id) &amp;&amp;
+            (this.get_full_accounts_subscriptions.get(name_or_id) === false &amp;&amp;
+                autosubscribe);
+
+        const is_object_id = ChainValidation.is_object_id(name_or_id);
+        const is_account_name =
+            !is_object_id &amp;&amp; ChainValidation.is_account_name(name_or_id, true);
+
+        if (is_object_id &amp;&amp; !subChanged) {
+            let current = this.objects_by_id.get(name_or_id);
+            fetch_account = current === undefined;
+            if (
+                !fetch_account &amp;&amp;
+                (current &amp;&amp; current.get(&quot;name&quot;) &amp;&amp; current.has(&quot;balances&quot;))
+            )
+                return current;
+        } else if (!subChanged) {
+            if (!is_account_name)
+                throw Error(&quot;argument is not an account name: &quot; + name_or_id);
+
+            let account_id = this.accounts_by_name.get(name_or_id);
+            if (ChainValidation.is_object_id(account_id))
+                return this.getAccount(account_id, autosubscribe);
+        }
+
+        /// only fetch once every 5 seconds if it wasn&apos;t found, or if the subscribe status changed to true
+        if (
+            subChanged ||
+            !this.fetching_get_full_accounts.has(name_or_id) ||
+            Date.now() - this.fetching_get_full_accounts.get(name_or_id) &gt; 5000
+        ) {
+            this.fetching_get_full_accounts.set(name_or_id, Date.now());
+            Apis.instance()
+                .db_api()
+                .exec(&quot;get_full_accounts&quot;, [[name_or_id], autosubscribe])
+                .then(results =&gt; {
+                    if (results.length === 0) {
+                        if (is_object_id) {
+                            this.objects_by_id.set(name_or_id, null);
+                            this.notifySubscribers();
+                        } else if (is_account_name) {
+                            this.accounts_by_name.set(name_or_id, null);
+                            this.notifySubscribers();
+                        }
+                        return;
+                    }
+                    let full_account = results[0][1];
+                    this.get_full_accounts_subscriptions.set(
+                        full_account.account.name,
+                        autosubscribe
+                    );
+                    this.get_full_accounts_subscriptions.set(
+                        full_account.account.id,
+                        autosubscribe
+                    );
+                    if (DEBUG) console.log(&quot;full_account: &quot;, full_account);
+                    /* Add this account to list of subbed accounts */
+                    this._subTo(&quot;accounts&quot;, full_account.account.id);
+                    let {
+                        account,
+                        assets,
+                        vesting_balances,
+                        statistics,
+                        call_orders,
+                        limit_orders,
+                        referrer_name,
+                        registrar_name,
+                        lifetime_referrer_name,
+                        votes,
+                        proposals
+                    } = full_account;
+
+                    this.accounts_by_name.set(account.name, account.id);
+                    account.assets = new Immutable.List(assets || []);
+                    account.referrer_name = referrer_name;
+                    account.lifetime_referrer_name = lifetime_referrer_name;
+                    account.registrar_name = registrar_name;
+                    account.balances = {};
+                    account.orders = new Immutable.Set();
+                    account.vesting_balances = new Immutable.Set();
+                    account.balances = new Immutable.Map();
+                    account.call_orders = new Immutable.Set();
+                    account.proposals = new Immutable.Set();
+                    account.vesting_balances = account.vesting_balances.withMutations(
+                        set =&gt; {
+                            vesting_balances.forEach(vb =&gt; {
+                                this._updateObject(vb);
+                                set.add(vb.id);
+                            });
+                        }
+                    );
+
+                    let sub_to_objects = [];
+
+                    votes.forEach(v =&gt; this._updateObject(v));
+
+                    account.balances = account.balances.withMutations(map =&gt; {
+                        full_account.balances.forEach(b =&gt; {
+                            this._updateObject(b);
+                            map.set(b.asset_type, b.id);
+                            if (autosubscribe) sub_to_objects.push(b.id);
+                        });
+                    });
+                    account.orders = account.orders.withMutations(set =&gt; {
+                        limit_orders.forEach(order =&gt; {
+                            this._updateObject(order);
+                            set.add(order.id);
+                            if (autosubscribe) sub_to_objects.push(order.id);
+                        });
+                    });
+                    account.call_orders = account.call_orders.withMutations(
+                        set =&gt; {
+                            call_orders.forEach(co =&gt; {
+                                this._updateObject(co);
+                                set.add(co.id);
+                                if (autosubscribe) sub_to_objects.push(co.id);
+                            });
+                        }
+                    );
+
+                    account.proposals = account.proposals.withMutations(set =&gt; {
+                        proposals.forEach(p =&gt; {
+                            this._updateObject(p);
+                            set.add(p.id);
+                            if (autosubscribe) sub_to_objects.push(p.id);
+                        });
+                    });
+
+                    /*
+                        * In order to receive notifications for these objects
+                        * we need to manually fetch them with get_objects. This
+                        * is only done if autosubscribe is true
+                        */
+                    if (sub_to_objects.length)
+                        Apis.instance()
+                            .db_api()
+                            .exec(&quot;get_objects&quot;, [sub_to_objects]);
+
+                    this._updateObject(statistics);
+                    let updated_account = this._updateObject(account);
+                    this.fetchRecentHistory(updated_account);
+                    this.notifySubscribers();
+                })
+                .catch(error =&gt; {
+                    console.log(&quot;Error: &quot;, error);
+                    if (ChainValidation.is_object_id(name_or_id))
+                        this.objects_by_id.delete(name_or_id);
+                    else this.accounts_by_name.delete(name_or_id);
+                });
+        }
+        return undefined;
+    }
+
+    getAccountMemberStatus(account) {
+        if (account === undefined) return undefined;
+        if (account === null) return &quot;unknown&quot;;
+        if (account.get(&quot;lifetime_referrer&quot;) == account.get(&quot;id&quot;))
+            return &quot;lifetime&quot;;
+        let exp = new Date(account.get(&quot;membership_expiration_date&quot;)).getTime();
+        let now = new Date().getTime();
+        if (exp &lt; now) return &quot;basic&quot;;
+        return &quot;annual&quot;;
+    }
+
+    getAccountBalance(account, asset_type) {
+        let balances = account.get(&quot;balances&quot;);
+        if (!balances) return 0;
+
+        let balance_obj_id = balances.get(asset_type);
+        if (balance_obj_id) {
+            let bal_obj = this.objects_by_id.get(balance_obj_id);
+            if (bal_obj) return bal_obj.get(&quot;balance&quot;);
+        }
+        return 0;
+    }
+
+    /**
+     * There are two ways to extend the account history, add new more
+     * recent history, and extend historic hstory. This method will fetch
+     * the most recent account history and prepend it to the list of
+     * historic operations.
+     *
+     *  @param account immutable account object
+     *  @return a promise with the account history
+     */
+    fetchRecentHistory(account, limit = 100) {
+        // console.log( &quot;get account history: &quot;, account )
+        /// TODO: make sure we do not submit a query if there is already one
+        /// in flight...
+        let account_id = account;
+        if (!ChainValidation.is_object_id(account_id) &amp;&amp; account.toJS)
+            account_id = account.get(&quot;id&quot;);
+
+        if (!ChainValidation.is_object_id(account_id)) return;
+
+        account = this.objects_by_id.get(account_id);
+        if (!account) return;
+
+        let pending_request = this.account_history_requests.get(account_id);
+        if (pending_request) {
+            pending_request.requests++;
+            return pending_request.promise;
+        } else pending_request = {requests: 0};
+
+        let most_recent = &quot;1.&quot; + op_history + &quot;.0&quot;;
+        let history = account.get(&quot;history&quot;);
+
+        if (history &amp;&amp; history.size) most_recent = history.first().get(&quot;id&quot;);
+
+        /// starting at 0 means start at NOW, set this to something other than 0
+        /// to skip recent transactions and fetch the tail
+        let start = &quot;1.&quot; + op_history + &quot;.0&quot;;
+
+        pending_request.promise = new Promise((resolve, reject) =&gt; {
+            Apis.instance()
+                .history_api()
+                .exec(&quot;get_account_history&quot;, [
+                    account_id,
+                    most_recent,
+                    limit,
+                    start
+                ])
+                .then(operations =&gt; {
+                    let current_account = this.objects_by_id.get(account_id);
+                    if (!current_account) return;
+                    let current_history = current_account.get(&quot;history&quot;);
+                    if (!current_history) current_history = Immutable.List();
+                    let updated_history = Immutable.fromJS(operations);
+                    updated_history = updated_history.withMutations(list =&gt; {
+                        for (let i = 0; i &lt; current_history.size; ++i)
+                            list.push(current_history.get(i));
+                    });
+                    let updated_account = current_account.set(
+                        &quot;history&quot;,
+                        updated_history
+                    );
+                    this.objects_by_id.set(account_id, updated_account);
+
+                    //if( current_history != updated_history )
+                    //   this._notifyAccountSubscribers( account_id )
+
+                    let pending_request = this.account_history_requests.get(
+                        account_id
+                    );
+                    this.account_history_requests.delete(account_id);
+                    if (pending_request.requests &gt; 0) {
+                        // it looks like some more history may have come in while we were
+                        // waiting on the result, lets fetch anything new before we resolve
+                        // this query.
+                        this.fetchRecentHistory(updated_account, limit).then(
+                            resolve,
+                            reject
+                        );
+                    } else resolve(updated_account);
+                }); // end then
+        });
+
+        this.account_history_requests.set(account_id, pending_request);
+        return pending_request.promise;
+    }
+
+    /**
+     *  Updates the object in place by only merging the set
+     *  properties of object.
+     *
+     *  This method will create an immutable object with the given ID if
+     *  it does not already exist.
+     *
+     *  This is a &quot;private&quot; method called when data is received from the
+     *  server and should not be used by others.
+     *
+     *  @pre object.id must be a valid object ID
+     *  @return an Immutable constructed from object and deep merged with the current state
+     */
+    _updateObject(object, notify_subscribers = false, emit = true) {
+        if (!(&quot;id&quot; in object)) {
+            console.log(&quot;object with no id:&quot;, object);
+            /* Settle order updates look different and need special handling */
+            if (
+                &quot;balance&quot; in object &amp;&amp;
+                &quot;owner&quot; in object &amp;&amp;
+                &quot;settlement_date&quot; in object
+            ) {
+                // Settle order object
+                emitter.emit(&quot;settle-order-update&quot;, object);
+            }
+            return;
+        }
+
+        const objectType = getObjectType(object.id);
+
+        /*
+        * A lot of objects get spammed by the API that we don&apos;t care about, filter these out here
+        */
+        // Transaction object
+
+        switch (objectType) {
+            case &quot;transaction&quot;:
+            case &quot;operation_history&quot;:
+            case &quot;block_summary&quot;:
+                return; // console.log(&quot;not interested in:&quot;, objectType, object);
+                break;
+
+            case &quot;account_transaction_history&quot;:
+            case &quot;limit_order&quot;:
+            case &quot;call_order&quot;:
+            case &quot;account_balance&quot;:
+            case &quot;account_stats&quot;:
+                if (
+                    !this._isSubbedTo(
+                        &quot;accounts&quot;,
+                        object.account ||
+                            object.seller ||
+                            object.borrower ||
+                            object.owner
+                    )
+                ) {
+                    return; // console.log(&quot;not interested in&quot;, objectType, object.account || object.seller || object.borrower || object.owner);
+                }
+                break;
+
+            case &quot;witness&quot;:
+                if (!this._isSubbedTo(&quot;witnesses&quot;, object.id)) {
+                    return;
+                }
+                break;
+
+            case &quot;committee_member&quot;:
+                if (!this._isSubbedTo(&quot;committee&quot;, object.id)) {
+                    return;
+                }
+                break;
+
+            case &quot;unknown&quot;:
+            case &quot;market&quot;:
+                return;
+                break;
+
+            default:
+        }
+
+        // DYNAMIC GLOBAL OBJECT
+        if (object.id == &quot;2.1.0&quot;) {
+            object.participation =
+                100 *
+                (BigInteger(object.recent_slots_filled).bitCount() / 128.0);
+            this.head_block_time_string = object.time;
+            this.chain_time_offset.push(
+                Date.now() - timeStringToDate(object.time).getTime()
+            );
+            if (this.chain_time_offset.length &gt; 10)
+                this.chain_time_offset.shift(); // remove first
+        }
+
+        let current = this.objects_by_id.get(object.id);
+        if (!current) {
+            // console.log(&quot;add object:&quot;, object.id);
+            current = Immutable.Map();
+        }
+        let prior = current;
+
+        /* New object */
+        if (current === undefined || current === true)
+            this.objects_by_id.set(
+                object.id,
+                (current = Immutable.fromJS(object))
+            );
+        /* Existing object */ else {
+            switch (objectType) {
+                /*
+                * These cases have additional data attached inside the chainstore,
+                * so we need to use mergeDeep to keep that data
+                */
+                case &quot;account&quot;:
+                case &quot;asset&quot;:
+                case &quot;asset_bitasset_data&quot;:
+                    this.objects_by_id.set(
+                        object.id,
+                        (current = current.mergeDeep(Immutable.fromJS(object)))
+                    );
+                    break;
+
+                /* Don&apos;t use merge deep to improve performance */
+                default:
+                    this.objects_by_id.set(
+                        object.id,
+                        (current = Immutable.fromJS(object))
+                    );
+            }
+        }
+
+        /* Special handling for various objects */
+
+        // BALANCE OBJECT
+
+        switch (objectType) {
+            case &quot;account_balance&quot;:
+                let owner = this.objects_by_id.get(object.owner);
+                if (owner === undefined || owner === null || owner === true) {
+                    return;
+                } else {
+                    let balances = owner.get(&quot;balances&quot;);
+                    if (!balances)
+                        owner = owner.set(&quot;balances&quot;, Immutable.Map());
+                    owner = owner.setIn(
+                        [&quot;balances&quot;, object.asset_type],
+                        object.id
+                    );
+                }
+                this.objects_by_id.set(object.owner, owner);
+                break;
+
+            case &quot;account_statistics&quot;:
+                try {
+                    let prior_most_recent_op = prior.get(
+                        &quot;most_recent_op&quot;,
+                        &quot;2.9.0&quot;
+                    );
+
+                    if (prior_most_recent_op != object.most_recent_op) {
+                        this.fetchRecentHistory(object.owner);
+                    }
+                } catch (err) {
+                    console.log(
+                        &quot;prior error:&quot;,
+                        &quot;object:&quot;,
+                        obj,
+                        &quot;prior&quot;,
+                        prior,
+                        &quot;err:&quot;,
+                        err
+                    );
+                }
+                break;
+
+            case &quot;witness&quot;:
+                if (this._isSubbedTo(&quot;witnesses&quot;, object.id)) {
+                    this.witness_by_account_id.set(
+                        object.witness_account,
+                        object.id
+                    );
+                    this.objects_by_vote_id.set(object.vote_id, object.id);
+                } else {
+                    return;
+                }
+                break;
+
+            case &quot;committee_member&quot;:
+                if (this._isSubbedTo(&quot;committee&quot;, object.id)) {
+                    this.committee_by_account_id.set(
+                        object.committee_member_account,
+                        object.id
+                    );
+                    this.objects_by_vote_id.set(object.vote_id, object.id);
+                } else {
+                    return;
+                }
+                break;
+
+            case &quot;worker&quot;:
+                this.objects_by_vote_id.set(object.vote_for, object.id);
+                this.objects_by_vote_id.set(object.vote_against, object.id);
+
+                if (!this.workers.has(object.id)) this.workers.add(object.id);
+                break;
+
+            case &quot;account&quot;:
+                current = current.set(
+                    &quot;active&quot;,
+                    Immutable.fromJS(object.active)
+                );
+                current = current.set(&quot;owner&quot;, Immutable.fromJS(object.owner));
+                current = current.set(
+                    &quot;options&quot;,
+                    Immutable.fromJS(object.options)
+                );
+                current = current.set(
+                    &quot;whitelisting_accounts&quot;,
+                    Immutable.fromJS(object.whitelisting_accounts)
+                );
+                current = current.set(
+                    &quot;blacklisting_accounts&quot;,
+                    Immutable.fromJS(object.blacklisting_accounts)
+                );
+                current = current.set(
+                    &quot;whitelisted_accounts&quot;,
+                    Immutable.fromJS(object.whitelisted_accounts)
+                );
+                current = current.set(
+                    &quot;blacklisted_accounts&quot;,
+                    Immutable.fromJS(object.blacklisted_accounts)
+                );
+                this.objects_by_id.set(object.id, current);
+                this.accounts_by_name.set(object.name, object.id);
+
+                break;
+
+            case &quot;asset&quot;:
+                this.assets_by_symbol.set(object.symbol, object.id);
+
+                // make sure we fetch the bitasset data object
+                let bitasset = current.get(&quot;bitasset&quot;);
+                if (!bitasset &amp;&amp; &quot;bitasset_data_id&quot; in object) {
+                    let bad = this.getObject(object.bitasset_data_id, true);
+                    if (!bad) bad = Immutable.Map();
+
+                    if (!bad.get(&quot;asset_id&quot;)) {
+                        bad = bad.set(&quot;asset_id&quot;, object.id);
+                    }
+                    this.objects_by_id.set(object.bitasset_data_id, bad);
+
+                    current = current.set(&quot;bitasset&quot;, bad);
+                    this.objects_by_id.set(object.id, current);
+                }
+                break;
+
+            case &quot;asset_bitasset_data&quot;:
+                let asset_id = current.get(&quot;asset_id&quot;);
+                if (asset_id) {
+                    let asset = this.getObject(asset_id);
+                    if (asset) {
+                        asset = asset.set(&quot;bitasset&quot;, current);
+                        emitter.emit(&quot;bitasset-update&quot;, asset);
+                        this.objects_by_id.set(asset_id, asset);
+                    }
+                }
+                break;
+
+            case &quot;call_order&quot;:
+                if (emit) {
+                    emitter.emit(&quot;call-order-update&quot;, object);
+                }
+
+                let call_account = this.objects_by_id.get(object.borrower);
+                if (call_account) {
+                    if (!call_account.has(&quot;call_orders&quot;))
+                        call_account = call_account.set(
+                            &quot;call_orders&quot;,
+                            new Immutable.Set()
+                        );
+                    let call_orders = call_account.get(&quot;call_orders&quot;);
+                    if (!call_orders.has(object.id)) {
+                        call_account = call_account.set(
+                            &quot;call_orders&quot;,
+                            call_orders.add(object.id)
+                        );
+                        this.objects_by_id.set(
+                            call_account.get(&quot;id&quot;),
+                            call_account
+                        );
+                        Apis.instance()
+                            .db_api()
+                            .exec(&quot;get_objects&quot;, [[object.id]]); // Force subscription to the object in the witness node by calling get_objects
+                    }
+                }
+                break;
+
+            case &quot;limit_order&quot;:
+                let limit_account = this.objects_by_id.get(object.seller);
+                if (limit_account) {
+                    if (!limit_account.has(&quot;orders&quot;))
+                        limit_account = limit_account.set(
+                            &quot;orders&quot;,
+                            new Immutable.Set()
+                        );
+                    let limit_orders = limit_account.get(&quot;orders&quot;);
+                    if (!limit_orders.has(object.id)) {
+                        limit_account = limit_account.set(
+                            &quot;orders&quot;,
+                            limit_orders.add(object.id)
+                        );
+                        this.objects_by_id.set(
+                            limit_account.get(&quot;id&quot;),
+                            limit_account
+                        );
+                        Apis.instance()
+                            .db_api()
+                            .exec(&quot;get_objects&quot;, [[object.id]]); // Force subscription to the object in the witness node by calling get_objects
+                    }
+                }
+                break;
+
+            case &quot;proposal&quot;:
+                /*
+                * Make sure notify_subscribers is set to true if a proposal is
+                * added to an account
+                */
+                notify_subscribers =
+                    notify_subscribers ||
+                    this.addProposalData(
+                        object.required_active_approvals,
+                        object.id
+                    );
+                notify_subscribers =
+                    notify_subscribers ||
+                    this.addProposalData(
+                        object.required_owner_approvals,
+                        object.id
+                    );
+                break;
+
+            default:
+        }
+
+        if (notify_subscribers) {
+            this.notifySubscribers();
+        }
+        return current;
+    }
+
+    getObjectsByVoteIds(vote_ids) {
+        let result = [];
+        let missing = [];
+        for (let i = 0; i &lt; vote_ids.length; ++i) {
+            let obj = this.objects_by_vote_id.get(vote_ids[i]);
+            if (obj) result.push(this.getObject(obj));
+            else {
+                result.push(null);
+                missing.push(vote_ids[i]);
+            }
+        }
+
+        if (missing.length) {
+            // we may need to fetch some objects
+            Apis.instance()
+                .db_api()
+                .exec(&quot;lookup_vote_ids&quot;, [missing])
+                .then(vote_obj_array =&gt; {
+                    // console.log(&quot;missing ===========&gt; &quot;, missing);
+                    // console.log(
+                    //     &quot;vote objects ===========&gt; &quot;,
+                    //     vote_obj_array
+                    // );
+                    for (let i = 0; i &lt; vote_obj_array.length; ++i) {
+                        if (vote_obj_array[i]) {
+                            let isWitness =
+                                vote_obj_array[i].id.substring(
+                                    0,
+                                    witness_prefix.length
+                                ) == witness_prefix;
+                            this._subTo(
+                                isWitness ? &quot;witnesses&quot; : &quot;committee&quot;,
+                                vote_obj_array[i].id
+                            );
+                            this._updateObject(vote_obj_array[i]);
+                        }
+                    }
+                })
+                .catch(error =&gt; {
+                    console.log(&quot;Error looking up vote ids: &quot;, error);
+                });
+        }
+        return result;
+    }
+
+    getObjectByVoteID(vote_id) {
+        let obj_id = this.objects_by_vote_id.get(vote_id);
+        if (obj_id) return this.getObject(obj_id);
+        return undefined;
+    }
+
+    getHeadBlockDate() {
+        return timeStringToDate(this.head_block_time_string);
+    }
+
+    getEstimatedChainTimeOffset() {
+        if (this.chain_time_offset.length === 0) return 0;
+        // Immutable is fast, sorts numbers correctly, and leaves the original unmodified
+        // This will fix itself if the user changes their clock
+        var median_offset = Immutable.List(this.chain_time_offset)
+            .sort()
+            .get(Math.floor((this.chain_time_offset.length - 1) / 2));
+        // console.log(&quot;median_offset&quot;, median_offset)
+        return median_offset;
+    }
+
+    addProposalData(approvals, objectId) {
+        let didImpact = false;
+        approvals.forEach(id =&gt; {
+            let impactedAccount = this.objects_by_id.get(id);
+            if (impactedAccount) {
+                didImpact = true;
+                let proposals = impactedAccount.get(
+                    &quot;proposals&quot;,
+                    Immutable.Set()
+                );
+
+                if (!proposals.includes(objectId)) {
+                    proposals = proposals.add(objectId);
+                    impactedAccount = impactedAccount.set(
+                        &quot;proposals&quot;,
+                        proposals
+                    );
+                    this.objects_by_id.set(
+                        impactedAccount.get(&quot;id&quot;),
+                        impactedAccount
+                    );
+                }
+            }
+        });
+        return didImpact;
+    }
+}
+
+let chain_store = new ChainStore();
+
+function FetchChainObjects(method, object_ids, timeout, subMap) {
+    let get_object = method.bind(chain_store);
+
+    return new Promise((resolve, reject) =&gt; {
+        let timeout_handle = null;
+
+        function onUpdate(not_subscribed_yet = false) {
+            let res = object_ids.map(id =&gt; {
+                if (method.name === &quot;getAccount&quot;)
+                    return get_object(id, subMap[id]);
+                if (method.name === &quot;getObject&quot;)
+                    return get_object(id, false, subMap[id]);
+                return get_object(id);
+            });
+            if (res.findIndex(o =&gt; o === undefined) === -1) {
+                if (timeout_handle) clearTimeout(timeout_handle);
+                if (!not_subscribed_yet) chain_store.unsubscribe(onUpdate);
+                resolve(res);
+                return true;
+            }
+            return false;
+        }
+
+        let resolved = onUpdate(true);
+        if (!resolved) chain_store.subscribe(onUpdate);
+
+        if (timeout &amp;&amp; !resolved)
+            timeout_handle = setTimeout(() =&gt; {
+                chain_store.unsubscribe(onUpdate);
+                reject(
+                    `${
+                        method.name
+                    } request timed out after ${timeout}ms with object ids: ${JSON.stringify(
+                        object_ids
+                    )}`
+                );
+            }, timeout);
+    });
+}
+chain_store.FetchChainObjects = FetchChainObjects;
+
+function FetchChain(methodName, objectIds, timeout = 3000, subMap = {}) {
+    let method = chain_store[methodName];
+    if (!method)
+        throw new Error(&quot;ChainStore does not have method &quot; + methodName);
+
+    let arrayIn = Array.isArray(objectIds);
+    if (!arrayIn) objectIds = [objectIds];
+
+    return chain_store
+        .FetchChainObjects(method, Immutable.List(objectIds), timeout, subMap)
+        .then(res =&gt; (arrayIn ? res : res.get(0)));
+}
+
+chain_store.FetchChain = FetchChain;
+
+function timeStringToDate(time_string) {
+    if (!time_string) return new Date(&quot;1970-01-01T00:00:00.000Z&quot;);
+    if (!/Z$/.test(time_string)) {
+        //does not end in Z
+        // https://github.com/cryptonomex/graphene/issues/368
+        time_string = time_string + &quot;Z&quot;;
+    }
+    return new Date(time_string);
+}
+
+export default chain_store;
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

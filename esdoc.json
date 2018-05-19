@@ -1,9 +1,18 @@
 {
-  "source": ".",
-  "includes": ["\\.(js|es6)$"],
-  "excludes": ["node_modules"],
-  "destination": "./out/esdoc",
-  "index": "./README.md",
-  "package": "./package.json",
-  "title": "BitsharesJS Docs"
+    "source": "./lib",
+    "includes": ["\\.(js|es6)$"],
+    "excludes": ["node_modules"],
+    "destination": "./docs",
+    "plugins": [
+        {
+            "name": "esdoc-standard-plugin",
+            "option": {
+                "brand": {
+                    "title": "BitsharesJS Docs"
+                }
+            }
+        }
+    ],
+    "index": "./README.md",
+    "package": "./package.json"
 }
