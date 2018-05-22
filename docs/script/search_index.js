@@ -2728,11 +2728,5 @@ window.esdocSearchIndex = [
     "file/lib/serializer/src/types.js.html",
     "lib/serializer/src/types.js",
     "file"
-  ],
-  [
-    "lib/serializer/temp.js",
-    "file/lib/serializer/temp.js.html",
-    "lib/serializer/temp.js",
-    "file"
   ]
 ]
