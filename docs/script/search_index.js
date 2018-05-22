@@ -216,6 +216,18 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "bitsharesjs/lib/serializer/src/operations.js~asset_claim_pool",
+    "variable/index.html#static-variable-asset_claim_pool",
+    "<span>asset_claim_pool</span> <span class=\"search-result-import-path\">bitsharesjs/lib/serializer/src/operations.js</span>",
+    "variable"
+  ],
+  [
+    "bitsharesjs/lib/serializer/src/operations.js~asset_claim_pool_operation_fee_parameters",
+    "variable/index.html#static-variable-asset_claim_pool_operation_fee_parameters",
+    "<span>asset_claim_pool_operation_fee_parameters</span> <span class=\"search-result-import-path\">bitsharesjs/lib/serializer/src/operations.js</span>",
+    "variable"
+  ],
+  [
     "bitsharesjs/lib/serializer/src/operations.js~asset_create",
     "variable/index.html#static-variable-asset_create",
     "<span>asset_create</span> <span class=\"search-result-import-path\">bitsharesjs/lib/serializer/src/operations.js</span>",
@@ -354,6 +366,18 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "bitsharesjs/lib/serializer/src/operations.js~asset_update_issuer",
+    "variable/index.html#static-variable-asset_update_issuer",
+    "<span>asset_update_issuer</span> <span class=\"search-result-import-path\">bitsharesjs/lib/serializer/src/operations.js</span>",
+    "variable"
+  ],
+  [
+    "bitsharesjs/lib/serializer/src/operations.js~asset_update_issuer_operation_fee_parameters",
+    "variable/index.html#static-variable-asset_update_issuer_operation_fee_parameters",
+    "<span>asset_update_issuer_operation_fee_parameters</span> <span class=\"search-result-import-path\">bitsharesjs/lib/serializer/src/operations.js</span>",
+    "variable"
+  ],
+  [
     "bitsharesjs/lib/serializer/src/operations.js~asset_update_operation_fee_parameters",
     "variable/index.html#static-variable-asset_update_operation_fee_parameters",
     "<span>asset_update_operation_fee_parameters</span> <span class=\"search-result-import-path\">bitsharesjs/lib/serializer/src/operations.js</span>",
@@ -375,6 +399,18 @@ window.esdocSearchIndex = [
     "bitsharesjs/lib/serializer/src/operations.js~balance_claim_operation_fee_parameters",
     "variable/index.html#static-variable-balance_claim_operation_fee_parameters",
     "<span>balance_claim_operation_fee_parameters</span> <span class=\"search-result-import-path\">bitsharesjs/lib/serializer/src/operations.js</span>",
+    "variable"
+  ],
+  [
+    "bitsharesjs/lib/serializer/src/operations.js~bid_collateral",
+    "variable/index.html#static-variable-bid_collateral",
+    "<span>bid_collateral</span> <span class=\"search-result-import-path\">bitsharesjs/lib/serializer/src/operations.js</span>",
+    "variable"
+  ],
+  [
+    "bitsharesjs/lib/serializer/src/operations.js~bid_collateral_operation_fee_parameters",
+    "variable/index.html#static-variable-bid_collateral_operation_fee_parameters",
+    "<span>bid_collateral_operation_fee_parameters</span> <span class=\"search-result-import-path\">bitsharesjs/lib/serializer/src/operations.js</span>",
     "variable"
   ],
   [
@@ -538,6 +574,30 @@ window.esdocSearchIndex = [
     "function/index.html#static-function-enforce",
     "<span>enforce</span> <span class=\"search-result-import-path\">bitsharesjs/lib/ecc/src/enforce_types.js</span>",
     "function"
+  ],
+  [
+    "bitsharesjs/lib/serializer/src/operations.js~execute_bid",
+    "variable/index.html#static-variable-execute_bid",
+    "<span>execute_bid</span> <span class=\"search-result-import-path\">bitsharesjs/lib/serializer/src/operations.js</span>",
+    "variable"
+  ],
+  [
+    "bitsharesjs/lib/serializer/src/operations.js~execute_bid_operation_fee_parameters",
+    "variable/index.html#static-variable-execute_bid_operation_fee_parameters",
+    "<span>execute_bid_operation_fee_parameters</span> <span class=\"search-result-import-path\">bitsharesjs/lib/serializer/src/operations.js</span>",
+    "variable"
+  ],
+  [
+    "bitsharesjs/lib/serializer/src/operations.js~fba_distribute",
+    "variable/index.html#static-variable-fba_distribute",
+    "<span>fba_distribute</span> <span class=\"search-result-import-path\">bitsharesjs/lib/serializer/src/operations.js</span>",
+    "variable"
+  ],
+  [
+    "bitsharesjs/lib/serializer/src/operations.js~fba_distribute_operation_fee_parameters",
+    "variable/index.html#static-variable-fba_distribute_operation_fee_parameters",
+    "<span>fba_distribute_operation_fee_parameters</span> <span class=\"search-result-import-path\">bitsharesjs/lib/serializer/src/operations.js</span>",
+    "variable"
   ],
   [
     "bitsharesjs/lib/serializer/src/operations.js~fee_schedule",
@@ -2667,6 +2727,12 @@ window.esdocSearchIndex = [
     "lib/serializer/src/types.js",
     "file/lib/serializer/src/types.js.html",
     "lib/serializer/src/types.js",
+    "file"
+  ],
+  [
+    "lib/serializer/temp.js",
+    "file/lib/serializer/temp.js.html",
+    "lib/serializer/temp.js",
     "file"
   ]
 ]
