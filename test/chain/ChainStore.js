@@ -1,7 +1,7 @@
 import assert from "assert";
 import {Apis, ChainConfig} from "bitsharesjs-ws";
 import {ChainStore} from "../../lib";
-var objs = require("./testObjects.json");
+// var objs = require("./testObjects.json");
 
 var coreAsset;
 
