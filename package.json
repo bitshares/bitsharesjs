@@ -1,6 +1,6 @@
 {
     "name": "bitsharesjs",
-    "version": "1.7.5",
+    "version": "1.7.6",
     "description": "Pure JavaScript Bitshares library for node.js and browsers.",
     "browser": {
         "ws": false,
@@ -22,7 +22,7 @@
         "prebrowserify": "mkdirp build",
         "browserify": "cross-env NODE_ENV=production browserify --full-paths dist/browser.js --standalone bitshares_js -o build/bitsharesjs.js -d",
         "postbrowserify": "cross-env NODE_ENV=production uglifyjs --compress --mangle --sequences --drop_console --output build/bitsharesjs.min.js -- build/bitsharesjs.js",
-        "precommit": "npm run doc && git add docs && pretty-quick --staged && npm run test",
+        "precommit": "pretty-quick --staged && npm run test",
         "prepublish": "npm run build && npm run test",
         "doc": "esdoc -c esdoc.json",
         "example:transfer": "babel-node examples/transfer",
