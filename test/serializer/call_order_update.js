@@ -108,10 +108,15 @@ describe("call_order_update serialization", function() {
     describe("same as backend", function() {
         before(function() {
             return Apis.instance(
-                "wss://bts.open.icowallet.net/ws",
+                "wss://eu.nodes.bitshares.ws",
                 true
             ).init_promise;
         });
+
+        after(function() {
+            return Apis.close();
+        });
+
         it("with extensions", equalTrans(trans1));
         it("empty extensions", equalTrans(trans2));
         it("without extensions", equalTrans(trans3));
