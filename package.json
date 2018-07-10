@@ -26,6 +26,8 @@
         "prepublish": "npm run build && npm run test",
         "doc": "esdoc -c esdoc.json",
         "example:transfer": "babel-node examples/transfer",
+        "example:feed": "babel-node examples/publishFeed",
+        "example:co-update": "babel-node examples/callOrderUpdate",
         "example:chainStore": "babel-node examples/chainStore",
         "example:privKey": "babel-node examples/privKey"
     },
