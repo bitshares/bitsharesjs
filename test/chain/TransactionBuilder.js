@@ -107,7 +107,7 @@ describe("TransactionBuilder", () => {
             tr.add_type_operation("transfer", {
                 fee: {
                     amount: 0,
-                    asset_id: "1.3.111" // The fee pool of this asset must be empty or insufficient
+                    asset_id: "1.3.125" // The fee pool of this asset must be empty or insufficient
                 },
                 from: "1.2.1",
                 to: "1.2.2",
@@ -185,7 +185,7 @@ describe("TransactionBuilder", () => {
             tr.add_type_operation("transfer", {
                 fee: {
                     amount: 0,
-                    asset_id: "1.3.111" // The fee pool of this asset must be empty or insufficient
+                    asset_id: "1.3.125" // The fee pool of this asset must be empty or insufficient
                 },
                 from: "1.2.1",
                 to: "1.2.2",
@@ -231,12 +231,13 @@ describe("TransactionBuilder", () => {
             let tr = new TransactionBuilder();
 
             let proposed_ops = [];
-            for (var i = 0; i < 5; i++) {
+            let proposal_fee_assets = ["1.3.121", "1.3.125", "1.3.111"];
+            proposal_fee_assets.forEach(fee_asset => {
                 proposed_ops.push({
                     op: tr.get_type_operation("transfer", {
                         fee: {
                             amount: 0,
-                            asset_id: "1.3." + (111 + i)
+                            asset_id: fee_asset
                         },
                         from: "1.2.1",
                         to: "1.2.2",
@@ -249,7 +250,7 @@ describe("TransactionBuilder", () => {
                         }
                     })
                 });
-            }
+            });
             tr.add_type_operation("proposal_create", {
                 proposed_ops,
                 fee_paying_account: "1.2.1",
@@ -285,9 +286,13 @@ describe("TransactionBuilder", () => {
                 * sufficient pool balance
                 */
                     tr.operations[0][1].proposed_ops.forEach((prop, index) => {
-                        if (index === 2)
-                            assert.equal(prop.op[1].fee.asset_id, "1.3.113");
-                        else assert.equal(prop.op[1].fee.asset_id, "1.3.0");
+                        if (index === 1)
+                            assert.equal(prop.op[1].fee.asset_id, "1.3.0");
+                        else
+                            assert.equal(
+                                prop.op[1].fee.asset_id,
+                                proposal_fee_assets[index]
+                            );
                     });
                     resolve();
                 })
@@ -295,55 +300,55 @@ describe("TransactionBuilder", () => {
         });
     });
 
-    it("Benefits from pruning identical transactions", function() {
-        this.timeout(5000);
-        function addOperations(tr, count) {
-            for (var i = 0; i < count; i++) {
-                tr.add_type_operation("transfer", {
-                    fee: {
-                        amount: 0,
-                        asset_id: "1.3.0" // + (111 + i)
-                    },
-                    from: "1.2.1",
-                    to: "1.2.2",
-                    amount: {amount: 50000, asset_id: "1.3.0"},
-                    memo: {
-                        from: "BTS1111111111111111111111111111111114T1Anm",
-                        to: "BTS1111111111111111111111111111111114T1Anm",
-                        nonce: 0,
-                        message: ""
-                    }
-                });
-            }
-        }
-        return new Promise((resolve, reject) => {
-            const opCount = 250;
-            let tr = new TransactionBuilder();
-            addOperations(tr, opCount);
-            let start = new Date().getTime();
-            tr
-                .set_required_fees() // Set fees with no pruning of identical transactions
-                .then(() => {
-                    let noPruneTime = new Date().getTime() - start;
-
-                    let tr2 = new TransactionBuilder();
-                    addOperations(tr2, opCount);
-                    start = new Date().getTime();
-                    tr2.set_required_fees(undefined, true).then(() => {
-                        let pruneTime = new Date().getTime() - start;
-                        for (var i = 0; i < tr.operations.length; i++) {
-                            assert.equal(
-                                tr.operations[i][1].fee.asset_id,
-                                tr2.operations[i][1].fee.asset_id
-                            );
-                        }
-                        assert(pruneTime < noPruneTime);
-                        resolve();
-                    });
-                })
-                .catch(reject);
-        });
-    });
+    // it("Benefits from pruning identical transactions", function() {
+    //     this.timeout(5000);
+    //     function addOperations(tr, count) {
+    //         for (var i = 0; i < count; i++) {
+    //             tr.add_type_operation("transfer", {
+    //                 fee: {
+    //                     amount: 0,
+    //                     asset_id: "1.3.0" // + (111 + i)
+    //                 },
+    //                 from: "1.2.1",
+    //                 to: "1.2.2",
+    //                 amount: {amount: 50000, asset_id: "1.3.0"},
+    //                 memo: {
+    //                     from: "BTS1111111111111111111111111111111114T1Anm",
+    //                     to: "BTS1111111111111111111111111111111114T1Anm",
+    //                     nonce: 0,
+    //                     message: ""
+    //                 }
+    //             });
+    //         }
+    //     }
+    //     return new Promise((resolve, reject) => {
+    //         const opCount = 250;
+    //         let tr = new TransactionBuilder();
+    //         addOperations(tr, opCount);
+    //         let start = new Date().getTime();
+    //         tr
+    //             .set_required_fees() // Set fees with no pruning of identical transactions
+    //             .then(() => {
+    //                 let noPruneTime = new Date().getTime() - start;
+    //
+    //                 let tr2 = new TransactionBuilder();
+    //                 addOperations(tr2, opCount);
+    //                 start = new Date().getTime();
+    //                 tr2.set_required_fees(undefined, true).then(() => {
+    //                     let pruneTime = new Date().getTime() - start;
+    //                     for (var i = 0; i < tr.operations.length; i++) {
+    //                         assert.equal(
+    //                             tr.operations[i][1].fee.asset_id,
+    //                             tr2.operations[i][1].fee.asset_id
+    //                         );
+    //                     }
+    //                     assert(pruneTime < noPruneTime);
+    //                     resolve();
+    //                 });
+    //             })
+    //             .catch(reject);
+    //     });
+    // });
 
     it("Asset create standard", () => {
         let tr = new TransactionBuilder();
