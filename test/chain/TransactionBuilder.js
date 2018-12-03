@@ -1,6 +1,6 @@
 import assert from "assert";
 import {Apis} from "bitsharesjs-ws";
-import {TransactionBuilder} from "../../lib";
+import {TransactionBuilder, ops} from "../../lib";
 
 describe("TransactionBuilder", () => {
     // Connect once for all tests
@@ -226,7 +226,56 @@ describe("TransactionBuilder", () => {
         });
     });
 
-    it("Resolves fees for proposed operations", () => {
+    it("Sets non-zero fee for proposed operations", () => {
+        return new Promise((resolve, reject) => {
+            let tr = new TransactionBuilder();
+
+            let proposal = {
+                op: tr.get_type_operation("transfer", {
+                    fee: {
+                        amount: 0,
+                        asset_id: "1.3.0"
+                    },
+                    from: "1.2.1057595",
+                    to: "1.2.802379",
+                    amount: {amount: 100000, asset_id: "1.3.0"},
+                    memo: {
+                        from: "BTS1111111111111111111111111111111114T1Anm",
+                        to: "BTS1111111111111111111111111111111114T1Anm",
+                        nonce: 0,
+                        message: ""
+                    }
+                })
+            };
+
+            let proposed_ops = [proposal];
+
+            tr.add_type_operation("proposal_create", {
+                proposed_ops,
+                fee_paying_account: "1.2.1",
+                fee: {
+                    amount: 0,
+                    asset_id: "1.3.0"
+                }
+            });
+
+            tr
+                .set_required_fees()
+                .then(() => {
+                    assert.equal(
+                        tr.operations[0][1].proposed_ops[0].op[1].fee.asset_id,
+                        "1.3.0"
+                    );
+                    assert(
+                        tr.operations[0][1].proposed_ops[0].op[1].fee.amount > 0
+                    );
+                    resolve();
+                })
+                .catch(reject);
+        });
+    });
+
+    it("Resolves fees for multiple proposed operations", () => {
         return new Promise((resolve, reject) => {
             let tr = new TransactionBuilder();
 
@@ -256,43 +305,34 @@ describe("TransactionBuilder", () => {
                 fee_paying_account: "1.2.1",
                 fee: {
                     amount: 0,
-                    asset_id: "1.3.121"
+                    asset_id: "1.3.0"
                 }
             });
 
-            tr.add_type_operation("account_upgrade", {
-                fee: {
-                    amount: 0,
-                    asset_id: "1.3.113"
-                },
-                account_to_upgrade: "1.2.1",
-                upgrade_to_lifetime_member: true
-            });
-
-            //
             tr
                 .set_required_fees()
                 .then(() => {
-                    assert.equal(tr.operations[0][1].fee.asset_id, "1.3.121");
-                    assert.equal(tr.operations[1][1].fee.asset_id, "1.3.113");
-                    assert(
-                        tr.operations[0][1].fee.amount <
-                            tr.operations[1][1].fee.amount
-                    );
+                    assert.equal(tr.operations[0][1].fee.asset_id, "1.3.0");
+
                     /*
-                * This test might break as fee pools are replenished, check and
-                * update assets used if necessary. At least one asset should
-                * have an insufficient pool balance, and one should have a
-                * sufficient pool balance
-                */
+                    * This test might break as fee pools are replenished, check and
+                    * update assets used if necessary. At least one asset should
+                    * have an insufficient pool balance, and one should have a
+                    * sufficient pool balance. The current iteration assumes the
+                    * asset 1.3.125 has an insufficient fee pool balance
+                    */
                     tr.operations[0][1].proposed_ops.forEach((prop, index) => {
                         if (index === 1)
+                            // asset "1.3.125 with insufficient fee pool balance"
                             assert.equal(prop.op[1].fee.asset_id, "1.3.0");
-                        else
+                        else {
                             assert.equal(
                                 prop.op[1].fee.asset_id,
                                 proposal_fee_assets[index]
                             );
+                        }
+                        /* All ops should have a non-zero fee assigned */
+                        assert(prop.op[1].fee.amount > 0);
                     });
                     resolve();
                 })
