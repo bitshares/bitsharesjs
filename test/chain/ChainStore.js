@@ -159,7 +159,7 @@ describe("ChainStore", () => {
     it("Non-existant account fetched by id returns null", function() {
         return new Promise(function(resolve) {
             ChainStore.subscribe(function() {
-                let account = ChainStore.getAccount("1.2.98798798798798798");
+                let account = ChainStore.getAccount("1.2.98798798798798");
                 if (account !== undefined) {
                     assert(account === null);
                     resolve();
