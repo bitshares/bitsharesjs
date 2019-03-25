@@ -1,6 +1,6 @@
 {
     "name": "bitsharesjs",
-    "version": "1.8.3",
+    "version": "1.9.0",
     "description": "Pure JavaScript Bitshares library for node.js and browsers.",
     "browser": {
         "ws": false,
@@ -83,6 +83,8 @@
         "prettier": "^1.11.1",
         "pretty-quick": "^1.4.1",
         "rimraf": "^2.6.1",
-        "uglify-js": "^3.3.10"
+        "uglify-js": "^3.3.10",
+        "webpack": "^4.29.6",
+        "webpack-cli": "^3.3.0"
     }
 }

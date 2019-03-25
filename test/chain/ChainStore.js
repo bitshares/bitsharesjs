@@ -148,6 +148,9 @@ describe("ChainStore", () => {
                 if (account !== undefined) {
                     assert(account === null);
                     resolve();
+                } else {
+                    assert(false);
+                    resolve();
                 }
             });
             assert(
@@ -159,15 +162,17 @@ describe("ChainStore", () => {
     it("Non-existant account fetched by id returns null", function() {
         return new Promise(function(resolve) {
             ChainStore.subscribe(function() {
-                let account = ChainStore.getAccount("1.2.98798798798798");
+                let account = ChainStore.getAccount("1.2.987987987");
+                console.log(account);
                 if (account !== undefined) {
                     assert(account === null);
                     resolve();
+                } else {
+                    assert(false);
+                    resolve();
                 }
             });
-            assert(
-                ChainStore.getAccount("1.2.98798798798798798") === undefined
-            );
+            assert(ChainStore.getAccount("1.2.987987987") === undefined);
         });
     });
 });
