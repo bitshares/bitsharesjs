@@ -12,6 +12,7 @@ Security issues might be eligible for a bounty through the [HackTheDex](https://
 ## Setup
 
 This library can be obtained through npm:
+
 ```
 npm install bitsharesjs
 ```
@@ -21,9 +22,11 @@ npm install bitsharesjs
 Three sub-libraries are included: `ECC`, `Chain` and `Serializer`. Generally only the `ECC` and `Chain` libraries need to be used directly.
 
 ### Chain
+
 This library provides utility functions to handle blockchain state as well as a login class that can be used for simple login functionality using a specific key seed.
 
 #### Login
+
 The login class uses the following format for keys:
 
 ```
@@ -51,6 +54,7 @@ The auths object should contain the auth arrays from the account object. An exam
 If checkKeys is successful, you can use signTransaction to sign a TransactionBuilder transaction using the private keys for that account.
 
 #### State container
+
 The Chain library contains a complete state container called the ChainStore. The ChainStore will automatically configure the `set_subscribe_callback` and handle any incoming state changes appropriately. It uses Immutable.js for storing the state, so all objects are return as immutable objects. It has its own `subscribe` method that can be used to register a callback that will be called whenever a state change happens.
 
 The ChainStore has several useful methods to retrieve, among other things, objects, assets and accounts using either object ids or asset/account names. These methods are synchronous and will return `undefined` to indicate fetching in progress, and `null` to indicate that the object does not exist.
@@ -71,13 +75,14 @@ function updateState(object) {
     dynamicGlobal = ChainStore.getObject("2.1.0");
     console.log("ChainStore object update\n", dynamicGlobal ? dynamicGlobal.toJS() : dynamicGlobal);
 }
-
 ```
 
 ### ECC
+
 The ECC library contains all the crypto functions for private and public keys as well as transaction creation/signing.
 
 #### Private keys
+
 As a quick example, here's how to generate a new private key from a seed (a brainkey for example):
 
 ```
@@ -91,11 +96,23 @@ console.log("Public key :", pkey.toPublicKey().toString(), "\n");
 ```
 
 #### Transactions
+
 TODO transaction signing example
 
 ## ESDoc (beta)
+
 ```bash
 npm i -g esdoc esdoc-es7-plugin
 esdoc -c ./esdoc.json
 open out/esdoc/index.html
 ```
+
+## Bundle
+
+To bundle the entire library into a single javascript file, use:
+
+```
+webpack --config webpack.config.js
+```
+
+The compile `bitshares.js` will be located in `build/`.
