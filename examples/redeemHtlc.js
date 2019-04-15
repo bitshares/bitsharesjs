@@ -30,7 +30,7 @@ Apis.instance("wss://node.testnet.bitshares.eu", true).init_promise.then(
                         amount: 0,
                         asset_id: "1.3.0"
                     },
-                    htlc_id: "1.16.40",
+                    htlc_id: "1.16.43",
                     redeemer: toAccount.get("id"),
                     extensions: null
                 };
