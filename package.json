@@ -1,7 +1,7 @@
 {
     "name": "bitsharesjs",
-    "version": "1.9.0",
-    "description": "Pure JavaScript Bitshares library for node.js and browsers.",
+    "version": "3.0.0-rc1",
+    "description": "Pure JavaScript BitShares library for node.js and browsers.",
     "browser": {
         "ws": false,
         "crypto": false
@@ -72,7 +72,7 @@
         "babel-plugin-add-module-exports": "^0.2.1",
         "babel-preset-env": "^1.7.0",
         "babel-preset-stage-1": "^6.24.1",
-        "browserify": "^16.2.2",
+        "browserify": "^16.2.3",
         "cross-env": "^5.0.1",
         "esdoc": "^1.1.0",
         "esdoc-standard-plugin": "^1.0.0",
