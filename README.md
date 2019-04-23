@@ -63,7 +63,7 @@ The ChainStore has several useful methods to retrieve, among other things, objec
 import {Apis} from "bitsharesjs-ws";
 var {ChainStore} = require("bitsharesjs");
 
-Apis.instance("wss://bitshares.openledger.info/ws", true).init_promise.then((res) => {
+Apis.instance("wss://eu.nodes.bitshares.ws", true).init_promise.then((res) => {
     console.log("connected to:", res[0].network);
     ChainStore.init().then(() => {
         ChainStore.subscribe(updateState);
