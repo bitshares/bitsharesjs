@@ -420,7 +420,7 @@ describe("TransactionBuilder", () => {
                 whitelist_markets: [],
                 blacklist_markets: [],
                 description: JSON.stringify({main: "", market: ""}),
-                extensions: null
+                extensions: {}
             },
             is_prediction_market: false,
             extensions: null
@@ -528,7 +528,7 @@ describe("TransactionBuilder", () => {
                 whitelist_markets: [],
                 blacklist_markets: [],
                 description: JSON.stringify({main: "", market: ""}),
-                extensions: null
+                extensions: {}
             },
             bitasset_opts: {
                 feed_lifetime_sec: 864000,
