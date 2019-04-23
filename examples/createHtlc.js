@@ -37,7 +37,7 @@ Apis.instance("wss://node.testnet.bitshares.eu", true).init_promise.then(
                         asset_id: "1.3.0"
                     },
                     amount: {
-                        amount: 10000,
+                        amount: 5000000,
                         asset_id: "1.3.0"
                     },
                     preimage_hash: [2, preimage_hash_calculated],

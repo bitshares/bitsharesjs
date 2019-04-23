@@ -13,10 +13,10 @@
 
 <header>
   <a href="./">Home</a>
-  
+
   <a href="identifiers.html">Reference</a>
   <a href="source.html">Source</a>
-  
+
   <div class="search-box">
   <span>
     <img src="./image/search.png">
@@ -28,7 +28,7 @@
 
 <nav class="navigation" data-ice="nav"><div>
   <ul>
-    
+
   <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#chain-src">chain/src</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/chain/src/AccountLogin.js~AccountLogin.html">AccountLogin</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/chain/src/ChainStore.js~ChainStore.html">ChainStore</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/lib/chain/src/ObjectId.js~ObjectId.html">ObjectId</a></span></span></li>
@@ -227,7 +227,7 @@ signTransaction(tr)</code>
 <pre><code><code class="source-code prettyprint">import {Apis} from &quot;bitsharesjs-ws&quot;;
 var {ChainStore} = require(&quot;bitsharesjs&quot;);
 
-Apis.instance(&quot;wss://bitshares.openledger.info/ws&quot;, true).init_promise.then((res) =&gt; {
+Apis.instance(&quot;wss://eu.nodes.bitshares.ws&quot;, true).init_promise.then((res) =&gt; {
     console.log(&quot;connected to:&quot;, res[0].network);
     ChainStore.init().then(() =&gt; {
         ChainStore.subscribe(updateState);

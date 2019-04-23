@@ -29,7 +29,9 @@
         "example:feed": "babel-node examples/publishFeed",
         "example:co-update": "babel-node examples/callOrderUpdate",
         "example:chainStore": "babel-node examples/chainStore",
-        "example:privKey": "babel-node examples/privKey"
+        "example:privKey": "babel-node examples/privKey",
+        "example:createHtlc": "babel-node examples/createHtlc",
+        "example:redeemHtlc": "babel-node examples/redeemHtlc"
     },
     "repository": {
         "type": "git",

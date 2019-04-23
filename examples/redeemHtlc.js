@@ -1,11 +1,5 @@
 import {Apis} from "bitsharesjs-ws";
-import {
-    TransactionBuilder,
-    ChainStore,
-    FetchChain,
-    PrivateKey,
-    hash
-} from "../lib";
+import {TransactionBuilder, ChainStore, FetchChain, PrivateKey} from "../lib";
 
 const wifKey = "5JjjMBUHUecV8nHvgKXdjRi9oqD8h382qQrAEAdLQ4oYAoEeSv2";
 const pKey = PrivateKey.fromWif(wifKey);
@@ -24,13 +18,18 @@ Apis.instance("wss://node.testnet.bitshares.eu", true).init_promise.then(
 
                 let preimageValue = "My preimage value";
 
+                // Right now you need know the htlc_id,
+                // it is returned in the create_htlc operation.
+                // In the future there will be a "get all htlc for account" call
+                // in the backend
+
                 let operationJSON = {
-                    preimage: preimageValue,
+                    preimage: new Buffer(preimageValue).toString("hex"),
                     fee: {
                         amount: 0,
                         asset_id: "1.3.0"
                     },
-                    htlc_id: "1.16.43",
+                    htlc_id: "1.16.61",
                     redeemer: toAccount.get("id"),
                     extensions: null
                 };
