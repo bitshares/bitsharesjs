@@ -1,13 +1,12 @@
 import assert from "assert";
 import {Apis} from "bitsharesjs-ws";
-import {TransactionBuilder, ops} from "../../lib";
+import {TransactionBuilder, ops, hash} from "../../lib";
 
 describe("TransactionBuilder", () => {
     // Connect once for all tests
     before(function() {
-        /* use wss://bitshares.openledger.info/ws if no local node is available */
         return new Promise(function(resolve, reject) {
-            Apis.instance("wss://bitshares.openledger.info/ws", true)
+            Apis.instance("wss://eu.nodes.bitshares.ws", true)
                 .init_promise.then(resolve)
                 .catch(reject);
         });
@@ -468,6 +467,72 @@ describe("TransactionBuilder", () => {
 
         assert.doesNotThrow(function() {
             tr.add_type_operation("asset_create", operationJSON);
+        });
+    });
+
+    it("Htlc create", () => {
+        let tr = new TransactionBuilder();
+
+        let preimageValue = "My preimage value";
+        let preimage_hash_calculated = hash.sha256(preimageValue);
+
+        let operationJSON = {
+            from: "1.2.680",
+            to: "1.2.17",
+            fee: {
+                amount: 0,
+                asset_id: "1.3.0"
+            },
+            amount: {
+                amount: 1,
+                asset_id: "1.3.0"
+            },
+            preimage_hash: [1, preimage_hash_calculated],
+            preimage_size: preimageValue.length,
+            claim_period_seconds: 86400
+        };
+
+        assert.doesNotThrow(function() {
+            tr.add_type_operation("htlc_create", operationJSON);
+        });
+    });
+
+    it("Htlc redeem", () => {
+        let tr = new TransactionBuilder();
+        let preimageValue = "My preimage value";
+
+        let operationJSON = {
+            fee: {
+                amount: 0,
+                asset_id: "1.3.0"
+            },
+            htlc_id: "1.16.1",
+            redeemer: "1.2.283",
+            preimage: preimageValue,
+            extensions: null
+        };
+
+        assert.doesNotThrow(function() {
+            tr.add_type_operation("htlc_redeem", operationJSON);
+        });
+    });
+
+    it("Htlc extend", () => {
+        let tr = new TransactionBuilder();
+
+        let operationJSON = {
+            fee: {
+                amount: 0,
+                asset_id: "1.3.0"
+            },
+            htlc_id: "1.16.1",
+            update_issuer: "1.2.283",
+            seconds_to_add: 60,
+            extensions: null
+        };
+
+        assert.doesNotThrow(function() {
+            tr.add_type_operation("htlc_extend", operationJSON);
         });
     });
 

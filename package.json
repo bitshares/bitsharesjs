@@ -1,17 +1,17 @@
 {
     "name": "bitsharesjs",
-    "version": "1.8.3",
-    "description": "Pure JavaScript Bitshares library for node.js and browsers.",
+    "version": "3.0.0-rc1",
+    "description": "Pure JavaScript BitShares library for node.js and browsers.",
     "browser": {
         "ws": false,
         "crypto": false
     },
     "scripts": {
-        "test": "cross-env BABEL_ENV=test mocha --compilers js:babel-register --recursive",
-        "test:chain": "cross-env BABEL_ENV=test mocha --compilers js:babel-register ./test/chain --recursive --watch",
-        "test:trxbuilder": "cross-env BABEL_ENV=test mocha --compilers js:babel-register ./test/chain/TransactionBuilder.js --watch",
-        "test:ecc": "cross-env BABEL_ENV=test mocha --compilers js:babel-register ./test/ecc --recursive --watch",
-        "test:serializer": "cross-env BABEL_ENV=test mocha --compilers js:babel-register ./test/serializer --recursive",
+        "test": "cross-env BABEL_ENV=test mocha --require babel-register --recursive",
+        "test:chain": "cross-env BABEL_ENV=test mocha --require babel-register ./test/chain --recursive --watch",
+        "test:trxbuilder": "cross-env BABEL_ENV=test mocha --require babel-register ./test/chain/TransactionBuilder.js --watch",
+        "test:ecc": "cross-env BABEL_ENV=test mocha --require babel-register ./test/ecc --recursive --watch",
+        "test:serializer": "cross-env BABEL_ENV=test mocha --require babel-register ./test/serializer --recursive",
         "test:watch": "npm test -- --watch",
         "clean": "rimraf dist build es",
         "prebuild": "npm run clean",
@@ -29,7 +29,9 @@
         "example:feed": "babel-node examples/publishFeed",
         "example:co-update": "babel-node examples/callOrderUpdate",
         "example:chainStore": "babel-node examples/chainStore",
-        "example:privKey": "babel-node examples/privKey"
+        "example:privKey": "babel-node examples/privKey",
+        "example:createHtlc": "babel-node examples/createHtlc",
+        "example:redeemHtlc": "babel-node examples/redeemHtlc"
     },
     "repository": {
         "type": "git",
@@ -72,7 +74,7 @@
         "babel-plugin-add-module-exports": "^0.2.1",
         "babel-preset-env": "^1.7.0",
         "babel-preset-stage-1": "^6.24.1",
-        "browserify": "^16.2.2",
+        "browserify": "^16.2.3",
         "cross-env": "^5.0.1",
         "esdoc": "^1.1.0",
         "esdoc-standard-plugin": "^1.0.0",
@@ -83,6 +85,8 @@
         "prettier": "^1.11.1",
         "pretty-quick": "^1.4.1",
         "rimraf": "^2.6.1",
-        "uglify-js": "^3.3.10"
+        "uglify-js": "^3.3.10",
+        "webpack": "^4.29.6",
+        "webpack-cli": "^3.3.0"
     }
 }
