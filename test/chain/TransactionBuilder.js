@@ -19,6 +19,45 @@ describe("TransactionBuilder", () => {
         });
     });
 
+    it("Preload Transaction Signer", () => {
+        var tx = {
+            expiration: "2019-05-02T11:05:25",
+            extensions: [],
+            operations: [
+                [
+                    0,
+                    {
+                        amount: {
+                            amount: 100000,
+                            asset_id: "1.3.0"
+                        },
+                        extensions: [],
+                        fee: {
+                            amount: 45468,
+                            asset_id: "1.3.0"
+                        },
+                        from: "1.2.100",
+                        to: "1.2.90742"
+                    }
+                ]
+            ],
+            ref_block_num: 58580,
+            ref_block_prefix: 2618414547,
+            signatures: [
+                "20214e0193c3b54e0c16349b2b7230f9bb83af9cb3ac7a28b2e5f292f425ad67582fa640cff74c9f702f6740cdb2f54269a7ea1419d58a20405deda1306f1d3fc8"
+            ]
+        };
+        let tr = new TransactionBuilder(tx);
+
+        assert.equal(tr.expiration, tx.expiration);
+        assert.equal(tr.signatures, tx.signatures);
+        assert.equal(tr.ref_block_num, tx.ref_block_num);
+        assert.equal(tr.ref_block_prefix, tx.ref_block_prefix);
+        assert.equal(tr.operations.length, tx.operations.length);
+        assert.equal(tr.operations[0][0], tx.operations[0][0]);
+        assert.equal(tr.operations[0][1], tx.operations[0][1]);
+    });
+
     it("Transfer", () => {
         let tr = new TransactionBuilder();
 
