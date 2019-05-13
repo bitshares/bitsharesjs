@@ -459,7 +459,7 @@ describe("TransactionBuilder", () => {
                 whitelist_markets: [],
                 blacklist_markets: [],
                 description: JSON.stringify({main: "", market: ""}),
-                extensions: null
+                extensions: {}
             },
             is_prediction_market: false,
             extensions: null
@@ -567,7 +567,7 @@ describe("TransactionBuilder", () => {
                 whitelist_markets: [],
                 blacklist_markets: [],
                 description: JSON.stringify({main: "", market: ""}),
-                extensions: null
+                extensions: {}
             },
             bitasset_opts: {
                 feed_lifetime_sec: 864000,
@@ -578,6 +578,51 @@ describe("TransactionBuilder", () => {
                 short_backing_asset: "1.3.0"
             },
             is_prediction_market: true,
+            extensions: null
+        };
+
+        assert.doesNotThrow(function() {
+            tr.add_type_operation("asset_create", operationJSON);
+        });
+    });
+
+    it("Asset create with extension", () => {
+        let tr = new TransactionBuilder();
+        let operationJSON = {
+            fee: {
+                amount: 0,
+                asset_id: 0
+            },
+            issuer: "1.2.1",
+            symbol: "TESTTEST",
+            precision: 5,
+            common_options: {
+                max_supply: "10000000000",
+                market_fee_percent: 0,
+                max_market_fee: "0",
+                issuer_permissions: 79,
+                flags: 0,
+                core_exchange_rate: {
+                    base: {
+                        amount: 100000,
+                        asset_id: "1.3.0"
+                    },
+                    quote: {
+                        amount: 100000,
+                        asset_id: "1.3.1"
+                    }
+                },
+                whitelist_authorities: [],
+                blacklist_authorities: [],
+                whitelist_markets: [],
+                blacklist_markets: [],
+                description: JSON.stringify({main: "", market: ""}),
+                extensions: {
+                    reward_percent: 100, // 1 percent
+                    whitelist_market_fee_sharing: ["1.2.680", "1.2.679"]
+                }
+            },
+            is_prediction_market: false,
             extensions: null
         };
 
