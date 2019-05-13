@@ -1,6 +1,6 @@
 {
     "name": "bitsharesjs",
-    "version": "3.0.0-rc3",
+    "version": "3.0.0-rc4",
     "description": "Pure JavaScript BitShares library for node.js and browsers.",
     "browser": {
         "ws": false,
@@ -37,8 +37,9 @@
         "type": "git",
         "url": "git+https://github.com/bitshares/bitsharesjs.git"
     },
-    "author": "Sigve Kvalsvik <bitsharesblocks@gmail.com> (https://github.com/svk31)",
+    "author": "BitShares UI Team <ui-dev@bitshares.org>",
     "contributors": [
+        "Sigve Kvalsvik <bitsharesblocks@gmail.com> (https://github.com/svk31)",
         "James Calfee <james@jcalfee.info> (https://github.com/jcalfee/)",
         "Daniel Larimer <dan@cryptonomex.com> (https://github.com/bytemaster/)",
         "Valentine Zavgorodnev <valentine.zavgorodnev@gmail.com> (https://github.com/valzav/)"
