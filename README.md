@@ -112,7 +112,7 @@ open out/esdoc/index.html
 To bundle the entire library into a single javascript file, use:
 
 ```
-webpack --config webpack.config.js
+npm run webpack
 ```
 
-The compile `bitshares.js` will be located in `build/`.
+The compile `bitshares.cjs` will be located in `build/`.
