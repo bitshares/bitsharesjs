@@ -25,6 +25,7 @@
         "precommit": "pretty-quick --staged && npm run test",
         "prepublish": "npm run build && npm run test",
         "doc": "esdoc -c esdoc.json",
+        "example:asset": "babel-node examples/updateAsset",
         "example:transfer": "babel-node examples/transfer",
         "example:feed": "babel-node examples/publishFeed",
         "example:co-update": "babel-node examples/callOrderUpdate",
