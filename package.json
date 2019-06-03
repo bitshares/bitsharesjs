@@ -18,7 +18,7 @@
         "build": "cross-env BABEL_ENV=cjs babel lib -d dist",
         "webpack": "webpack --config webpack.config.js",
         "build-es": "cross-env BABEL_ENV=es babel lib -d es",
-        "postbuild": "npm run browserify && npm run build-es",
+        "postbuild": "npm run browserify && npm run build-es && npm run webpack",
         "build:watch": "babel lib -d dist --watch",
         "prebrowserify": "mkdirp build",
         "browserify": "cross-env NODE_ENV=production browserify --full-paths dist/browser.js --standalone bitshares_js -o build/bitsharesjs.js -d",

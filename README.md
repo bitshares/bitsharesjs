@@ -107,12 +107,12 @@ esdoc -c ./esdoc.json
 open out/esdoc/index.html
 ```
 
-## Bundle
+## Binaries / Browserified bundles
 
-To bundle the entire library into a single javascript file, use:
+Please have a [look here](https://github.com/bitshares/bitsharesjs/releases) to find your desired release.
+If you want to build the binaries yourself you can clone this repository and run `npm install`. It will
+create
 
-```
-npm run webpack
-```
-
-The compile `bitshares.cjs` will be located in `build/`.
+-   Browserified version `build/bitsharesjs.js`
+-   Browserified and minified (babel) version `build/bitsharesjs.min.js`
+-   CommonJS version using wepback `build/bitsharesjs.cjs`
