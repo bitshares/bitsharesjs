@@ -1,13 +1,12 @@
 import assert from "assert";
 import {Apis} from "bitsharesjs-ws";
-import {TransactionBuilder, ops} from "../../lib";
+import {TransactionBuilder, ops, hash} from "../../lib";
 
 describe("TransactionBuilder", () => {
     // Connect once for all tests
     before(function() {
-        /* use wss://bitshares.openledger.info/ws if no local node is available */
         return new Promise(function(resolve, reject) {
-            Apis.instance("wss://bitshares.openledger.info/ws", true)
+            Apis.instance("wss://eu.nodes.bitshares.ws", true)
                 .init_promise.then(resolve)
                 .catch(reject);
         });
@@ -17,6 +16,45 @@ describe("TransactionBuilder", () => {
         return new Promise(function(resolve) {
             Apis.close().then(resolve);
         });
+    });
+
+    it("Preload Transaction Signer", () => {
+        var tx = {
+            expiration: "2019-05-02T11:05:25",
+            extensions: [],
+            operations: [
+                [
+                    0,
+                    {
+                        amount: {
+                            amount: 100000,
+                            asset_id: "1.3.0"
+                        },
+                        extensions: [],
+                        fee: {
+                            amount: 45468,
+                            asset_id: "1.3.0"
+                        },
+                        from: "1.2.100",
+                        to: "1.2.90742"
+                    }
+                ]
+            ],
+            ref_block_num: 58580,
+            ref_block_prefix: 2618414547,
+            signatures: [
+                "20214e0193c3b54e0c16349b2b7230f9bb83af9cb3ac7a28b2e5f292f425ad67582fa640cff74c9f702f6740cdb2f54269a7ea1419d58a20405deda1306f1d3fc8"
+            ]
+        };
+        let tr = new TransactionBuilder(tx);
+
+        assert.equal(tr.expiration, tx.expiration);
+        assert.equal(tr.signatures, tx.signatures);
+        assert.equal(tr.ref_block_num, tx.ref_block_num);
+        assert.equal(tr.ref_block_prefix, tx.ref_block_prefix);
+        assert.equal(tr.operations.length, tx.operations.length);
+        assert.equal(tr.operations[0][0], tx.operations[0][0]);
+        assert.equal(tr.operations[0][1], tx.operations[0][1]);
     });
 
     it("Transfer", () => {
@@ -421,7 +459,7 @@ describe("TransactionBuilder", () => {
                 whitelist_markets: [],
                 blacklist_markets: [],
                 description: JSON.stringify({main: "", market: ""}),
-                extensions: null
+                extensions: {}
             },
             is_prediction_market: false,
             extensions: null
@@ -429,6 +467,72 @@ describe("TransactionBuilder", () => {
 
         assert.doesNotThrow(function() {
             tr.add_type_operation("asset_create", operationJSON);
+        });
+    });
+
+    it("Htlc create", () => {
+        let tr = new TransactionBuilder();
+
+        let preimageValue = "My preimage value";
+        let preimage_hash_calculated = hash.sha256(preimageValue);
+
+        let operationJSON = {
+            from: "1.2.680",
+            to: "1.2.17",
+            fee: {
+                amount: 0,
+                asset_id: "1.3.0"
+            },
+            amount: {
+                amount: 1,
+                asset_id: "1.3.0"
+            },
+            preimage_hash: [1, preimage_hash_calculated],
+            preimage_size: preimageValue.length,
+            claim_period_seconds: 86400
+        };
+
+        assert.doesNotThrow(function() {
+            tr.add_type_operation("htlc_create", operationJSON);
+        });
+    });
+
+    it("Htlc redeem", () => {
+        let tr = new TransactionBuilder();
+        let preimageValue = "My preimage value";
+
+        let operationJSON = {
+            fee: {
+                amount: 0,
+                asset_id: "1.3.0"
+            },
+            htlc_id: "1.16.1",
+            redeemer: "1.2.283",
+            preimage: preimageValue,
+            extensions: null
+        };
+
+        assert.doesNotThrow(function() {
+            tr.add_type_operation("htlc_redeem", operationJSON);
+        });
+    });
+
+    it("Htlc extend", () => {
+        let tr = new TransactionBuilder();
+
+        let operationJSON = {
+            fee: {
+                amount: 0,
+                asset_id: "1.3.0"
+            },
+            htlc_id: "1.16.1",
+            update_issuer: "1.2.283",
+            seconds_to_add: 60,
+            extensions: null
+        };
+
+        assert.doesNotThrow(function() {
+            tr.add_type_operation("htlc_extend", operationJSON);
         });
     });
 
@@ -463,7 +567,7 @@ describe("TransactionBuilder", () => {
                 whitelist_markets: [],
                 blacklist_markets: [],
                 description: JSON.stringify({main: "", market: ""}),
-                extensions: null
+                extensions: {}
             },
             bitasset_opts: {
                 feed_lifetime_sec: 864000,
@@ -474,6 +578,51 @@ describe("TransactionBuilder", () => {
                 short_backing_asset: "1.3.0"
             },
             is_prediction_market: true,
+            extensions: null
+        };
+
+        assert.doesNotThrow(function() {
+            tr.add_type_operation("asset_create", operationJSON);
+        });
+    });
+
+    it("Asset create with extension", () => {
+        let tr = new TransactionBuilder();
+        let operationJSON = {
+            fee: {
+                amount: 0,
+                asset_id: 0
+            },
+            issuer: "1.2.1",
+            symbol: "TESTTEST",
+            precision: 5,
+            common_options: {
+                max_supply: "10000000000",
+                market_fee_percent: 0,
+                max_market_fee: "0",
+                issuer_permissions: 79,
+                flags: 0,
+                core_exchange_rate: {
+                    base: {
+                        amount: 100000,
+                        asset_id: "1.3.0"
+                    },
+                    quote: {
+                        amount: 100000,
+                        asset_id: "1.3.1"
+                    }
+                },
+                whitelist_authorities: [],
+                blacklist_authorities: [],
+                whitelist_markets: [],
+                blacklist_markets: [],
+                description: JSON.stringify({main: "", market: ""}),
+                extensions: {
+                    reward_percent: 100, // 1 percent
+                    whitelist_market_fee_sharing: ["1.2.680", "1.2.679"]
+                }
+            },
+            is_prediction_market: false,
             extensions: null
         };
 

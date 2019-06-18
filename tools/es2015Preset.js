@@ -1,13 +1,13 @@
 const BABEL_ENV = process.env.BABEL_ENV;
 
-module.exports = {
+module.exports = () => ({
     presets: [
         [
-            "env",
+            "@babel/preset-env",
             {
                 loose: true,
                 modules: BABEL_ENV === "es" ? false : "commonjs"
             }
         ]
     ]
-};
+});
