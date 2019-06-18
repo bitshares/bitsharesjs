@@ -21,7 +21,7 @@
         "postbuild": "npm run browserify && npm run build-es && npm run webpack",
         "build:watch": "babel lib -d dist --watch",
         "prebrowserify": "mkdirp build",
-        "browserify": "cross-env NODE_ENV=production browserify --full-paths dist/browser.js --standalone bitshares_js -o build/bitsharesjs.js -d",
+        "browserify": "cross-env NODE_ENV=production browserify --full-paths false dist/browser.js --standalone bitshares_js -o build/bitsharesjs.js -d",
         "postbrowserify": "cross-env NODE_ENV=production minify build/bitsharesjs.js --mangle --outFile build/bitsharesjs.min.js",
         "precommit": "pretty-quick --staged && npm run test",
         "prepublish": "npm run build && npm run test",
