@@ -1,6 +1,6 @@
 {
     "name": "bitsharesjs",
-    "version": "3.1.0-rc2",
+    "version": "3.1.1",
     "description": "Pure JavaScript BitShares library for node.js and browsers.",
     "browser": {
         "ws": false,
@@ -57,7 +57,7 @@
     "jsnext:main": "./es/index.js",
     "dependencies": {
         "bigi": "1.4.2",
-        "bitsharesjs-ws": "3.1.0-rc1",
+        "bitsharesjs-ws": "^3.1.1",
         "bs58": "4.0.1",
         "bytebuffer": "5.0.1",
         "create-hash": "1.2.0",
