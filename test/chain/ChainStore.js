@@ -125,6 +125,18 @@ describe("ChainStore", () => {
         });
     });
 
+    it("Full Account", function() {
+        return new Promise(function(resolve) {
+            ChainStore.subscribe(function() {
+                if (ChainStore.getAccount("1.2.0") !== undefined) {
+                    assert(ChainStore.getAccount("1.2.0") != null);
+                    resolve();
+                }
+            });
+            assert(ChainStore.getAccount("1.2.0") === undefined);
+        });
+    });
+
     it("Account name by id", function() {
         return new Promise(function(resolve) {
             ChainStore.subscribe(function() {
