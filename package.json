@@ -1,6 +1,6 @@
 {
     "name": "bitsharesjs",
-    "version": "3.2.0-rc2",
+    "version": "3.2.1-rc1",
     "description": "Pure JavaScript BitShares library for node.js and browsers.",
     "browser": {
         "ws": false,
@@ -8,10 +8,10 @@
     },
     "scripts": {
         "test": "cross-env BABEL_ENV=test mocha --require @babel/register --recursive",
-        "test:chain": "cross-env BABEL_ENV=test mocha --require babel-register ./test/chain --recursive --watch",
-        "test:trxbuilder": "cross-env BABEL_ENV=test mocha --require babel-register ./test/chain/TransactionBuilder.js --watch",
-        "test:ecc": "cross-env BABEL_ENV=test mocha --require babel-register ./test/ecc --recursive --watch",
-        "test:serializer": "cross-env BABEL_ENV=test mocha --require babel-register ./test/serializer --recursive",
+        "test:chain": "cross-env BABEL_ENV=test mocha --require @babel/register ./test/chain --recursive --watch",
+        "test:trxbuilder": "cross-env BABEL_ENV=test mocha --require @babel/register ./test/chain/TransactionBuilder.js --watch",
+        "test:ecc": "cross-env BABEL_ENV=test mocha --require @babel/register ./test/ecc --recursive --watch",
+        "test:serializer": "cross-env BABEL_ENV=test mocha --require @babel/register ./test/serializer --recursive",
         "test:watch": "npm test -- --watch",
         "clean": "rimraf dist build es",
         "prebuild": "npm run clean",
