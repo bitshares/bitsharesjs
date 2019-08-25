@@ -5,13 +5,13 @@ import {ChainStore} from "../../lib";
 
 var coreAsset;
 
-describe("ChainStore", () => {
+describe.only("ChainStore", () => {
     // Connect once for all tests
     before(function() {
         return Apis.instance(
             "wss://eu.nodes.bitshares.ws",
             true
-        ).init_promise.then(function(result) {
+        ).init_promise.then(result => {
             coreAsset = result[0].network.core_asset;
             return ChainStore.init();
         });
@@ -19,7 +19,7 @@ describe("ChainStore", () => {
 
     // Unsubscribe everything after each test
     afterEach(function() {
-        ChainStore.subscribers = new Set();
+        ChainStore.clearSubscirbers();
         ChainStore.clearCache();
     });
 
@@ -27,7 +27,7 @@ describe("ChainStore", () => {
         return new Promise(function(resolve) {
             ChainConfig.reset();
             ChainStore.clearCache();
-            ChainStore.subscribers.clear();
+            ChainStore.clearSubscirbers();
             Apis.close().then(resolve);
         });
     });
