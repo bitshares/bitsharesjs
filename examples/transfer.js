@@ -5,8 +5,8 @@ var witness_node = "wss://node.testnet.bitshares.eu"
 var nobroadcast = false
 var amount_to_send = 10000
 var asset_to_send = "TEST"
-var from_account = "test-889873905669"
-var to_account = "block-basis"
+var from_account = "bob"
+var to_account = "alice"
 var memo_text = "Your memo goes in here.."
 
 let pKeyActive = PrivateKey.fromWif("5KBuq5WmHvgePmB7w3onYsqLM8ESomM2Ae7SigYuuwg8MDHW7NN");  // Replace with your own Active Private Key
