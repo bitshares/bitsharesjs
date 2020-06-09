@@ -1,6 +1,6 @@
 {
     "name": "bitsharesjs",
-    "version": "3.3.0-rc1",
+    "version": "3.3.0",
     "description": "Pure JavaScript BitShares library for node.js and browsers.",
     "browser": {
         "ws": false,
@@ -68,26 +68,26 @@
         "ecurve": "1.0.6",
         "event-emitter": "0.3.5",
         "immutable": "3.8.2",
-        "safe-buffer": "^5.1.2",
+        "safe-buffer": "^5.2.1",
         "secure-random": "1.1.1"
     },
     "devDependencies": {
-        "@babel/cli": "^7.4.4",
-        "@babel/core": "^7.4.4",
-        "@babel/node": "^7.5.5",
-        "@babel/preset-env": "^7.4.4",
-        "@babel/register": "^7.4.4",
+        "@babel/cli": "^7.10.1",
+        "@babel/core": "^7.10.2",
+        "@babel/node": "^7.10.1",
+        "@babel/preset-env": "^7.10.2",
+        "@babel/register": "^7.10.1",
         "assert": "^2.0.0",
-        "babel-minify": "^0.5.0",
+        "babel-minify": "^0.5.1",
         "babel-plugin-add-module-exports": "^1.0.2",
-        "babel-preset-minify": "^0.5.0",
-        "browserify": "^16.2.3",
-        "cross-env": "^5.2.0",
-        "mocha": "^6.1.4",
-        "prettier": "^1.17.1",
-        "pretty-quick": "^1.10.0",
-        "rimraf": "^2.6.3",
-        "webpack": "^4.31.0",
-        "webpack-cli": "^3.3.2"
+        "babel-preset-minify": "^0.5.1",
+        "browserify": "^16.5.1",
+        "cross-env": "^5.2.1",
+        "mocha": "^6.2.3",
+        "prettier": "^1.19.1",
+        "pretty-quick": "^1.11.1",
+        "rimraf": "^2.7.1",
+        "webpack": "^4.43.0",
+        "webpack-cli": "^3.3.11"
     }
 }
