@@ -34,7 +34,8 @@
         "example:privKey": "babel-node examples/privKey",
         "example:createHtlc": "babel-node examples/createHtlc",
         "example:redeemHtlc": "babel-node examples/redeemHtlc",
-        "example:anything": "babel-node examples/anything"
+        "example:anything": "babel-node examples/anything",
+        "prepare": "npm run build"
     },
     "repository": {
         "type": "git",
