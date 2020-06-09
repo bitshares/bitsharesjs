@@ -1,6 +1,6 @@
 {
     "name": "bitsharesjs",
-    "version": "3.2.0-rc1",
+    "version": "3.3.0-rc1",
     "description": "Pure JavaScript BitShares library for node.js and browsers.",
     "browser": {
         "ws": false,
@@ -8,10 +8,10 @@
     },
     "scripts": {
         "test": "cross-env BABEL_ENV=test mocha --require @babel/register --recursive",
-        "test:chain": "cross-env BABEL_ENV=test mocha --require babel-register ./test/chain --recursive --watch",
-        "test:trxbuilder": "cross-env BABEL_ENV=test mocha --require babel-register ./test/chain/TransactionBuilder.js --watch",
-        "test:ecc": "cross-env BABEL_ENV=test mocha --require babel-register ./test/ecc --recursive --watch",
-        "test:serializer": "cross-env BABEL_ENV=test mocha --require babel-register ./test/serializer --recursive",
+        "test:chain": "cross-env BABEL_ENV=test mocha --require @babel/register ./test/chain --recursive --watch",
+        "test:trxbuilder": "cross-env BABEL_ENV=test mocha --require @babel/register ./test/chain/TransactionBuilder.js --watch",
+        "test:ecc": "cross-env BABEL_ENV=test mocha --require @babel/register ./test/ecc --recursive --watch",
+        "test:serializer": "cross-env BABEL_ENV=test mocha --require @babel/register ./test/serializer --recursive",
         "test:watch": "npm test -- --watch",
         "clean": "rimraf dist build es",
         "prebuild": "npm run clean",
@@ -33,7 +33,8 @@
         "example:chainStore": "babel-node examples/chainStore",
         "example:privKey": "babel-node examples/privKey",
         "example:createHtlc": "babel-node examples/createHtlc",
-        "example:redeemHtlc": "babel-node examples/redeemHtlc"
+        "example:redeemHtlc": "babel-node examples/redeemHtlc",
+        "example:anything": "babel-node examples/anything"
     },
     "repository": {
         "type": "git",
@@ -73,6 +74,7 @@
     "devDependencies": {
         "@babel/cli": "^7.4.4",
         "@babel/core": "^7.4.4",
+        "@babel/node": "^7.5.5",
         "@babel/preset-env": "^7.4.4",
         "@babel/register": "^7.4.4",
         "assert": "^2.0.0",
