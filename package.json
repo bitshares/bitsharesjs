@@ -1,6 +1,6 @@
 {
     "name": "bitsharesjs",
-    "version": "3.3.0",
+    "version": "4.0.0-rc1",
     "description": "Pure JavaScript BitShares library for node.js and browsers.",
     "browser": {
         "ws": false,
@@ -35,6 +35,7 @@
         "example:createHtlc": "babel-node examples/createHtlc",
         "example:redeemHtlc": "babel-node examples/redeemHtlc",
         "example:anything": "babel-node examples/anything",
+        "example:broadcast": "babel-node examples/broadcast",
         "prepare": "npm run build"
     },
     "repository": {

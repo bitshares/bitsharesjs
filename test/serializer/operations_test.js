@@ -14,7 +14,6 @@ describe("operation test", function() {
 })
 
 function template(op) {
-
     assert(op.toObject({}, {use_default: true}))
     assert(op.toObject({}, {use_default: true, annotate: true}))
 
