@@ -115,4 +115,4 @@ create
 
 -   Browserified version `build/bitsharesjs.js`
 -   Browserified and minified (babel) version `build/bitsharesjs.min.js`
--   CommonJS version using wepback `build/bitsharesjs.cjs`
+-   CommonJS version using webpack `build/bitsharesjs.cjs`
