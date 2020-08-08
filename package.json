@@ -40,7 +40,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/bitshares/bitsharesjs.git"
+        "url": "git+https://github.com/iobanker/bitsharesjs.git"
     },
     "author": "BitShares UI Team <ui-dev@bitshares.org>",
     "contributors": [
@@ -51,7 +51,7 @@
     ],
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/bitshares/bitsharesjs/issues"
+        "url": "https://github.com/iobanker/bitsharesjs/issues"
     },
     "engines": {
         "node": ">= 6.0.0"
