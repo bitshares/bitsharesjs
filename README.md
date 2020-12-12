@@ -7,7 +7,7 @@ Most of this code was written by [jcalfee](https://github.com/jcalfee), my work 
 [![npm version](https://img.shields.io/npm/v/bitsharesjs.svg?style=flat-square)](https://www.npmjs.com/package/bitsharesjs)
 [![npm downloads](https://img.shields.io/npm/dm/bitsharesjs.svg?style=flat-square)](https://www.npmjs.com/package/bitsharesjs)
 
-Security issues might be eligible for a bounty through the [HackTheDex](https://hackthedex.io) program.
+Security issues might be eligible for a bounty.
 
 ## Setup
 
