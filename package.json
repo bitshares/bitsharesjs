@@ -58,7 +58,7 @@
     "jsnext:main": "./es/index.js",
     "dependencies": {
         "bigi": "1.4.2",
-        "bitsharesjs-ws": "git+https://github.com/iobanker/bitsharesjs-ws.git#6c8190c5b52bc4f30414ee2d959a6e5f890326c2",
+        "bitsharesjs-ws": "git+https://github.com/iobanker/bitsharesjs-ws.git#28b91f95c33bb5f0ec65527eb320568ee3f103d8",
         "bs58": "4.0.1",
         "bytebuffer": "5.0.1",
         "create-hash": "1.2.0",
