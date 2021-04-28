@@ -1,0 +1,13 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "browsers": "> 5%",
+          "node": "10"
+        }
+      }
+    ]
+  ]
+}
