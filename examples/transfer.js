@@ -1,24 +1,31 @@
 import {Apis} from "bitsharesjs-ws";
 import {ChainStore, FetchChain, PrivateKey, TransactionHelper, Aes, TransactionBuilder} from "../lib";
 
-var privKey = "5KBuq5WmHvgePmB7w3onYsqLM8ESomM2Ae7SigYuuwg8MDHW7NN";
-let pKey = PrivateKey.fromWif(privKey);
+var witness_node = "wss://node.testnet.bitshares.eu"
+var nobroadcast = false
+var amount_to_send = 10000
+var asset_to_send = "TEST"
+var from_account = "bob"
+var to_account = "alice"
+var memo_text = "Your memo goes in here.."
 
-Apis.instance("wss://node.testnet.bitshares.eu", true)
-.init_promise.then((res) => {
-    console.log("connected to:", res[0].network_name, "network");
+let pKeyActive = PrivateKey.fromWif("5KBuq5WmHvgePmB7w3onYsqLM8ESomM2Ae7SigYuuwg8MDHW7NN");  // Replace with your own Active Private Key
+let pKeyMemo = PrivateKey.fromWif("5KBuq5WmHvgePmB7w3onYsqLM8ESomM2Ae7SigYuuwg8MDHW7NN");  // Replace with your own Memo Private Key
 
-    ChainStore.init().then(() => {
+Apis.instance(witness_node, true).init_promise.then(res => {
+   console.log("connected to:", res[0].network);
 
-        let fromAccount = "bitsharesjs";
+    ChainStore.init(nobroadcast).then(() => {
+
+        let fromAccount = from_account;
         let memoSender = fromAccount;
-        let memo = "Testing transfer from node.js";
+        let memo = memo_text;
 
-        let toAccount = "faucet";
+        let toAccount = to_account;
 
         let sendAmount = {
-            amount: 10000,
-            asset: "TEST"
+            amount: amount_to_send,
+            asset: asset_to_send
         }
 
         Promise.all([
@@ -42,7 +49,7 @@ Apis.instance("wss://node.testnet.bitshares.eu", true)
                     to: memoToKey,
                     nonce,
                     message: Aes.encrypt_with_checksum(
-                        pKey,
+                        pKeyMemo,
                         memoToKey,
                         nonce,
                         memo
@@ -63,7 +70,7 @@ Apis.instance("wss://node.testnet.bitshares.eu", true)
                 } )
 
                 tr.set_required_fees().then(() => {
-                    tr.add_signer(pKey, pKey.toPublicKey().toPublicKeyString());
+                    tr.add_signer(pKeyActive, pKeyActive.toPublicKey().toPublicKeyString());
                     console.log("serialized transaction:", tr.serialize());
                     tr.broadcast();
                 })
