@@ -1,6 +1,6 @@
 {
     "name": "bitsharesjs",
-    "version": "4.0.0",
+    "version": "5.0.0",
     "description": "Pure JavaScript BitShares library for node.js and browsers.",
     "browser": {
         "ws": false,
@@ -73,7 +73,7 @@
         "secure-random": "1.1.1"
     },
     "devDependencies": {
-        "@babel/cli": "^7.11.6",
+        "@babel/cli": "^7.14.8",
         "@babel/core": "^7.11.6",
         "@babel/node": "^7.10.5",
         "@babel/preset-env": "^7.11.5",
