@@ -1,0 +1,22 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' blob:; connect-src 'self' *; script-src * null 'unsafe-eval' 'unsafe-inline'; style-src *;">
+    <title>Mocha Tests</title>
+    <link href="https://unpkg.com/mocha@^2.3.4/mocha.css" rel="stylesheet" />
+</head>
+<body>
+<div id="mocha"></div>
+
+<script src="https://unpkg.com/mocha@^2.3.4/mocha.js"></script>
+
+<script>mocha.setup('bdd')</script>
+<script src="browser-test.js"></script>
+<script>
+    console.log("*** Starting mocha tests now");
+    mocha.checkLeaks();
+    mocha.globals(['jQuery']);
+    mocha.run();
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <div>Hello bitsharesjs-ws</div>
+
+    <div style="padding-top: 20px" id="success"></div>
+
+    <div style="padding-top: 20px">
+        <table>
+            <tbody id="dynamic_global"></tbody>
+        </table>
+    </div>
+
+    <script type="text/javascript" src="../build/bitsharesjs-ws.js"></script>
+    <script type="text/javascript">
+        var { Apis: Api } = window.bitshares_ws;
+
+        let server = "wss://bitshares.openledger.info/ws";
+
+        Api.instance(server, true).init_promise.then((res) => {
+            console.log("Api ready:", res);
+            var sucessDiv = document.getElementById("success");
+            sucessDiv.innerText = "Successfully connected to the Openledger API, now fetching the global properties:"
+
+            function updateObject() {
+              Api.instance().db_api().exec( "get_objects", [ ["2.1.0"] ] ).then(response => {
+                  sucessDiv.innerText = "Successfully connected to the Openledger API";
+                  console.log("get_object", response);
+                  var globalTable = document.getElementById("dynamic_global");
+
+                  for (var key in response[0]) {
+                    if (!document.getElementById("td_" + key)) {
+                      var tr = document.createElement("tr");
+                      var keyTd = document.createElement("td");
+                      keyTd.innerText = key;
+                      var definitionTd = document.createElement("td");
+                      definitionTd.innerText = response[0][key];
+                      definitionTd.id = "td_" + key;
+                      definitionTd.style = "font-weight: bold; padding-left: 20px;";
+                      tr.appendChild(keyTd);
+                      tr.appendChild(definitionTd);
+                      globalTable.appendChild(tr);
+                    } else {
+                      var definitionTd = document.getElementById("td_" + key);
+                      definitionTd.innerText = response[0][key];
+                    }
+                  }
+              })
+            }
+            updateObject();
+            setInterval(updateObject, 3000);
+        });
+
+    </script>
+</body>
+</html>
