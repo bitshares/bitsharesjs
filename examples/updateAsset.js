@@ -46,11 +46,11 @@ Apis.instance("wss://node.testnet.bitshares.eu", true).init_promise.then(
                     }),
                     extensions: {
                         reward_percent: 10000,
-                        taker_fee_percent: 10000,
                         whitelist_market_fee_sharing: [
                             "1.2.24913",
                             "1.2.982379739"
-                        ]
+                        ],
+                        taker_fee_percent: 10000
                     }
                 },
                 is_prediction_market: false,
