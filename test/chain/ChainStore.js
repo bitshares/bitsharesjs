@@ -1,4 +1,4 @@
-import assert from "assert";
+import assert, { doesNotMatch } from "assert";
 import {Apis, ChainConfig} from "bitsharesjs-ws";
 import {ChainStore} from "../../lib";
 // var objs = require("./testObjects.json");
@@ -37,8 +37,8 @@ describe("ChainStore", () => {
             ChainStore.subscribe(function() {
                 if (ChainStore.getAsset(coreAsset) !== undefined) {
                     assert(ChainStore.getAsset("NOTFOUND") === null);
-                    resolve();
                 }
+                resolve();
             });
             assert(ChainStore.getAsset("NOTFOUND") === undefined);
         });

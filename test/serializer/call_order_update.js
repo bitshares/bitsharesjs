@@ -93,7 +93,7 @@ function equalTrans(trans) {
             .exec("get_transaction_hex", [trans])
             .then(r => {
                 //console.log(r);
-                var b2 = new Buffer(r, "hex");
+                var b2 = Buffer.from(r, "hex");
                 // console.log(b2.length);
                 assert.equal(b2.length, b.length + 1);
                 assert.equal(b.toString("hex"), r.slice(0, b2.length * 2 - 2));
