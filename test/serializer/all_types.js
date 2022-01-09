@@ -104,12 +104,12 @@ let allTypes = {
         .toPublicKey()
         .toString(),
     key_auths: [
-        ["GPH6agpGeRkc1zHD9MTbHaK9CKR1Pt8aU4v2GTxF6tRtf3ZC3TnU6", 1],
-        ["GPH8DZinV1rFkdgs2sMMhUrk6wAyq1fTB8eLKQzcYihkgrjiv3tLn", 1]
+        ["CBA6agpGeRkc1zHD9MTbHaK9CKR1Pt8aU4v2GTxF6tRtf3ZC3TnU6", 1],
+        ["CBA8DZinV1rFkdgs2sMMhUrk6wAyq1fTB8eLKQzcYihkgrjiv3tLn", 1]
     ],
     key_auths_2: [
-        ["GPH8DZinV1rFkdgs2sMMhUrk6wAyq1fTB8eLKQzcYihkgrjiv3tLn", 1],
-        ["GPH6agpGeRkc1zHD9MTbHaK9CKR1Pt8aU4v2GTxF6tRtf3ZC3TnU6", 1]
+        ["CBA8DZinV1rFkdgs2sMMhUrk6wAyq1fTB8eLKQzcYihkgrjiv3tLn", 1],
+        ["CBA6agpGeRkc1zHD9MTbHaK9CKR1Pt8aU4v2GTxF6tRtf3ZC3TnU6", 1]
     ],
     address: Address.fromPublic(
         PrivateKey.fromSeed("").toPublicKey()

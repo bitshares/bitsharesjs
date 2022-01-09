@@ -45,7 +45,7 @@ describe("ECC", function() {
             var private_key = PrivateKey.fromSeed("1");
             assert.equal(
                 private_key.toPublicKey().toString(),
-                "GPH8m5UgaFAAYQRuaNejYdS8FVLVp9Ss3K1qAVk5de6F8s3HnVbvA",
+                "CBA8m5UgaFAAYQRuaNejYdS8FVLVp9Ss3K1qAVk5de6F8s3HnVbvA",
                 "private key does not match"
             );
         });
@@ -57,7 +57,7 @@ describe("ECC", function() {
                 var result = [];
                 for (var i = 0; i < 10; i++) {
                     result.push(
-                        Signature.signBuffer(new Buffer(i), private_key)
+                        Signature.signBuffer(Buffer.alloc(i), private_key)
                     );
                 }
                 return result;
@@ -74,7 +74,7 @@ describe("ECC", function() {
                 sender,
                 receiver.toPublicKey(),
                 nonce,
-                new Buffer("\xff\x00", "binary")
+                Buffer.from("\xff\x00", "binary")
             );
             //console.log '... ciphertext',ciphertext
             var plaintext = Aes.decrypt_with_checksum(
@@ -181,7 +181,7 @@ describe("ECC", function() {
             "8fdfdde486f696fd7c6313325e14d3ff0c34b6e2c390d1944cbfe150f4457168"
         );
         let to_public = PublicKey.fromStringOrThrow(
-            "GPH7vbxtK1WaZqXsiCHPcjVFBewVj8HFRd5Z5XZDpN6Pvb2dZcMqK"
+            "CBA7vbxtK1WaZqXsiCHPcjVFBewVj8HFRd5Z5XZDpN6Pvb2dZcMqK"
         );
         let secret = one_time_private.get_shared_secret(to_public);
         let child = hash.sha256(secret);
@@ -201,7 +201,7 @@ describe("ECC", function() {
         it("child from public", function() {
             assert.equal(
                 to_public.child(child).toString(),
-                "GPH6XA72XARQCain961PCJnXiKYdEMrndNGago2PV5bcUiVyzJ6iL",
+                "CBA6XA72XARQCain961PCJnXiKYdEMrndNGago2PV5bcUiVyzJ6iL",
                 "derive child public key"
             );
         });
@@ -213,7 +213,7 @@ describe("ECC", function() {
                     .child(child)
                     .toPublicKey()
                     .toString(),
-                "GPH6XA72XARQCain961PCJnXiKYdEMrndNGago2PV5bcUiVyzJ6iL",
+                "CBA6XA72XARQCain961PCJnXiKYdEMrndNGago2PV5bcUiVyzJ6iL",
                 "derive child from private key"
             );
         });

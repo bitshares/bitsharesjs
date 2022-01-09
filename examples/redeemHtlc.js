@@ -24,7 +24,7 @@ Apis.instance("wss://node.testnet.bitshares.eu", true).init_promise.then(
                 // in the backend
 
                 let operationJSON = {
-                    preimage: new Buffer(preimageValue).toString("hex"),
+                    preimage: Buffer.from(preimageValue).toString("hex"),
                     fee: {
                         amount: 0,
                         asset_id: "1.3.0"
