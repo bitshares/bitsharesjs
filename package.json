@@ -1,6 +1,6 @@
 {
     "name": "bitsharesjs",
-    "version": "5.0.0",
+    "version": "6.0.0-rc1",
     "description": "Pure JavaScript BitShares library for node.js and browsers.",
     "browser": {
         "ws": false,
