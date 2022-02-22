@@ -1538,10 +1538,10 @@ binary-extensions@^2.0.0:
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-2.2.0.tgz#75f502eeaf9ffde42fc98829645be4ea76bd9e2d"
   integrity sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==
 
-bitsharesjs-ws@^6.0.0-rc1:
-  version "6.0.0-rc1"
-  resolved "https://registry.yarnpkg.com/bitsharesjs-ws/-/bitsharesjs-ws-6.0.0-rc1.tgz#1ea2a312a15f2411563c81b4c9cb615269413bc2"
-  integrity sha512-0/FUxfKNew/LK/ZK/US7cTnWC0T7ThoydBXK5lL/Yk1pTxXuNbv0S1Snz2+XBX1Fp/RBZz4HLwmPQAjI5HFIUw==
+bitsharesjs-ws@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/bitsharesjs-ws/-/bitsharesjs-ws-6.0.0.tgz#88f5f2014b355ea20ddfdcee6494a8db0596ad15"
+  integrity sha512-hIsFcGggV6jkgCKrVE7Pmm8AgJMbBc2pthOx1/9he436gfehtbMvjn7J5G3rWhPu0VONROI//LAX/qhhhIieaA==
   dependencies:
     isomorphic-ws "^4.0.1"
     ws "^8.4.0"

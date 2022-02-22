@@ -1,3 +1,3 @@
-npm login
-npm pack
-npm publish bitsharesjs-$1.tgz
+yarn login
+yarn pack
+yarn publish bitsharesjs-$1.tgz
