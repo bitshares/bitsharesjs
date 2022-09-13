@@ -1,5 +1,5 @@
 
-# Specify a non-default branch for pull requests for pip
+# Specify a non-default branch for pull requests
 
 version: 2
 updates:
