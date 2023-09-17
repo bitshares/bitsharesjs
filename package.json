@@ -51,6 +51,7 @@
     "bugs": {
         "url": "https://github.com/bitshares/bitsharesjs/issues"
     },
+    "files": ["examples/*", "lib/*", "test/*", "tools/*", ".babelrc", ".eslintrc", ".prettierignore", ".prettierrc", "esdoc.json", "webpack.config.js", "yarn.lock"],
     "engines": {
         "node": ">= 16.13.0"
     },
