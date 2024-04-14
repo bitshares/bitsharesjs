@@ -48,7 +48,7 @@ Apis.instance("wss://node.testnet.bitshares.eu", true).init_promise.then(
                         .broadcast()
                         .then(result => {
                             console.log(
-                                "hltc was succesfully redeeemed!" +
+                                "hltc was successfully redeeemed!" +
                                     JSON.stringify(result)
                             );
                         })

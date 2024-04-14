@@ -69,7 +69,7 @@ Apis.instance("wss://node.testnet.bitshares.eu", true).init_promise.then(
                     .broadcast()
                     .then(result => {
                         console.log(
-                            "asset was succesfully updated. result raw tx: \n" +
+                            "asset was successfully updated. result raw tx: \n" +
                                 JSON.stringify(result)
                         );
                     })

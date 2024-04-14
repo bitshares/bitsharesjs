@@ -57,7 +57,7 @@ Apis.instance("wss://node.testnet.bitshares.eu", true).init_promise.then(
                         .broadcast()
                         .then(result => {
                             console.log(
-                                "hltc was succesfully created!" +
+                                "hltc was successfully created!" +
                                     JSON.stringify(result)
                             );
                         })

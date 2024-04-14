@@ -225,7 +225,7 @@ class PrivateKey {
 
     static fromBuffer(buf) {
         if (!Buffer.isBuffer(buf)) {
-            throw new Error(&quot;Expecting paramter to be a Buffer type&quot;);
+            throw new Error(&quot;Expecting parameter to be a Buffer type&quot;);
         }
         if (32 !== buf.length) {
             console.log(
